@@ -1,0 +1,236 @@
+
+
+body {
+  background-color: rgb(52, 55, 77);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.carritoCompra {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  background-color: rgb(19, 19, 19);
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.carritoCompra .textoCarritoCompra {
+  border: 2px solid grey;
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 15px;
+  color: darkgrey;
+  display: block;
+  transition: 0.3s;
+}
+
+.carritoCompra .textoCarritoCompra:hover {
+  color: #f1f1f1;
+}
+
+#botonCerrarCarritoCompra {
+  border: 0px;
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+  
+}
+
+.finalizarCompra{
+  border-radius: 5px;
+  position: absolute;
+  text-decoration: none;
+  font-size: 20px;
+  color: white;
+  bottom: 100px;
+  right: 25px;
+  width: 200px;
+  background-color: transparent;
+  border: 2px solid yellow;
+  transition: .5s;
+}
+
+.finalizarCompra:hover{
+  color: black;
+  background-color: yellow;
+}
+
+
+.container {
+  position: relative;
+  width: 25vw;
+}
+
+.container img {
+border: 1px solid grey; /* Gray border */
+width: 25vw; /* Set a small width */
+margin-top: 8px;
+}
+
+.overlay {
+  position: absolute; 
+  bottom: 0; 
+  background: rgba(0, 0, 0, 0.5); /* Black see-through */
+  color: #f1f1f1; 
+  width: 25vw;
+  transition: .5s ease;
+  opacity:0;
+  color: white;
+  font-size: 2vw;
+  margin-bottom: 3px;
+  padding-right: 2px;
+  text-align: center;
+}
+
+.container:hover .overlay {
+  opacity: 1;
+}
+
+.row {
+  margin-top: 20vh;
+  width: 100%;
+  display: flex;
+}
+
+
+/* Create two equal columns that sits next to each other */
+.column {
+  flex: 25%;
+  padding: 0 4px;
+}
+
+
+.textoBlanco{
+  color:beige;
+  float: left;
+}
+
+.añadirCarrito {
+  width:80px;
+  background-color: rgb(178, 253, 134);
+  border: 5px solid rgb(47, 42, 42);
+  border-radius: 10px;
+}
+
+
+/* Navigation bar*/
+
+.navbar {
+  z-index: 1;
+  position: fixed;
+  top:0%;
+  left: 0;
+  width: 100%;
+  background-color: rgb(87, 87, 87);
+  overflow: auto;
+}
+
+
+.navbar a {
+  float: left;
+  padding: 12px;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.navbar a:hover {
+  background-color: #000;
+}
+
+.navFirst {
+  background-color: #2d4174;
+}
+
+/* Movie details */
+/* Actors */
+.actorsDisplay  {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.actor  {
+  flex: 1 1 150px;
+}
+
+.actorCharacter {
+  width: 250px; /* Set a small width */
+  margin-top: 8px;
+  float: left;
+  padding: 12px 0px 0px 0px;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  font-size: 18px;
+  text-align: center;
+}
+
+/* Register page */
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+.registerButton {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.registerButton:hover {
+  opacity: 0.8;
+}
+
+/*
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+*/
+td {
+  color: white;
+  border: 2px solid wheat;
+}
+
+.containerCheckout {
+  background-color: #f2f2f2;
+  padding: 5px 20px 15px 20px;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+  float: right;
+  width: 30vw;
+}
+
+span.price {
+  float: right;
+  color: grey; 
+}
+
+#discount:checked~*.newPrice{
+  opacity: 1;
+}
+
+.newPrice {
+  opacity: 0;
+}
+
+span a{
+  text-decoration: none;
+
+}
