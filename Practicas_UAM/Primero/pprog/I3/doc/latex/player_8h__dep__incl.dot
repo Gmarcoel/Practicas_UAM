@@ -1,0 +1,22 @@
+digraph "player.h"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node8 [label="player.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node8 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node9 [label="game.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$game_8h.html",tooltip="It defines the game interface for each command. "];
+  Node9 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node10 [label="game.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$game_8c.html",tooltip="It implements the game interface and all the associated callbacks for each command. "];
+  Node9 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node11 [label="game_reader.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$game__reader_8h.html",tooltip="It loads the game space from a file. "];
+  Node11 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node9 -> Node12 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node12 [label="graphic_engine.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$graphic__engine_8h.html",tooltip="It defines a textual graphic engine. "];
+  Node12 -> Node13 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node13 [label="game_loop.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$game__loop_8c.html",tooltip="It defines the game loop. "];
+  Node12 -> Node14 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node14 [label="graphic_engine.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$graphic__engine_8c.html",tooltip="It defines a textual graphic engine. "];
+  Node9 -> Node13 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node8 -> Node15 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node15 [label="player.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$player_8c.html",tooltip="It defines a player. "];
+}

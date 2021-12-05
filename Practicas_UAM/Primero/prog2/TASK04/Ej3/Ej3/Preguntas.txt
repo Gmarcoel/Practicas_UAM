@@ -1,0 +1,44 @@
+• Analice la salida de los dos programas anteriores teniendo en cuenta la
+estructura de los árboles generados. Para ello es interesante ejecutar el
+programa p4_e3b con valores grandes de n (n > 1000). Para evitar repetir
+muchos números, genérelos entre 0 y INT_MAX (para ello deberá incluir en
+su programa la biblioteca <limits.h>).
+
+    Los programas consiguen ordenar de mayor a menor los elementos generados tanto en preorder, inorder y postorder.
+
+• Proporcione el pseudocódigo de un algoritmo que ordene los elementos de
+un BST de mayor a menor.
+    
+Element * funOrdenar(tree)
+    integer orden
+    element *array
+    array alloc
+    orden = 0
+    funOrdenar(tree->root,n)
+    return array
+
+    int funOrdenarRec(node,n):
+        if(!node) return 0;
+        n = n + funOrdenarRec(node->left,n)
+        array[n]=node->info
+        n++;
+        n = n + funOrdenarRec(node->right,n)
+        return n
+
+
+
+• ¿Cual sería la complejidad algorítmica en tiempo de ejecución de la función
+para buscar un elemento en los árboles BST generados en el ejercicio
+p4_e3_b.c? Justifique brevemente su respuesta.
+
+    El tiempo de ejecucion seria Od siendo d la profundiad del árbol, ya que al estar ordenados los elementos solo es necesario recorrer una rama para encontrar el elemento buscado
+
+• Suponiendo que no pudiese modificar la funcionalidad de los TAD Node
+y Graph, esto es los ficheros .h, proporcione una estructura de datos
+(EdD) eficiente para el TAD Graph. Se considerará que la EdD es efi-
+ciente cuando la complejidad algorítmica (en tiempo de ejecución) de las
+funciones de la interfaz fuese igual o inferior, en promedio, a O(log n) (ex-
+cepto, obviamente, para aquellas funciones que impliquen recorrer todo los
+nodos del grafo como graph_print o graph_free). Justifique su respuesta.
+
+La estructura de datos Binary Search Tree sería la más eficiente ya que se pueden localizar elementos de manera muy rápida sin necesidad de requerir de un índice, simplemente conociendo el contenido del nodo que se quiere encontrar, ya que ordena los elementos. En el resto de estructuras de datos los elementos no están ordenados y cuanto mayor sea el grafo mayor es el tiemp de ejecución (el crecimiento del tiempo es constante, en el caso del BSTree es logarítmico).

@@ -1,0 +1,47 @@
+digraph "game_reader.h"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node0 [label="game_reader.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node0 -> Node1 [color="midnightblue",fontsize="10",style="solid"];
+  Node1 [label="command.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$command_8h.html",tooltip="It implements the command interpreter. "];
+  Node0 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="types.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$types_8h.html",tooltip="It defines common types. "];
+  Node0 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="game.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$game_8h.html",tooltip="It defines the game interface for each command. "];
+  Node3 -> Node1 [color="midnightblue",fontsize="10",style="solid"];
+  Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="space.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$space_8h.html",tooltip="It defines a space. "];
+  Node4 -> Node5 [color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="set.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$set_8h_source.html"];
+  Node5 -> Node6 [color="midnightblue",fontsize="10",style="solid"];
+  Node6 [label="stdio.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node5 -> Node7 [color="midnightblue",fontsize="10",style="solid"];
+  Node7 [label="stdlib.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node5 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
+  Node4 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
+  Node4 -> Node8 [color="midnightblue",fontsize="10",style="solid"];
+  Node8 [label="link.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$link_8h_source.html"];
+  Node8 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
+  Node3 -> Node9 [color="midnightblue",fontsize="10",style="solid"];
+  Node9 [label="player.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$player_8h.html",tooltip="It defines a player. "];
+  Node9 -> Node6 [color="midnightblue",fontsize="10",style="solid"];
+  Node9 -> Node7 [color="midnightblue",fontsize="10",style="solid"];
+  Node9 -> Node10 [color="midnightblue",fontsize="10",style="solid"];
+  Node10 [label="string.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node9 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
+  Node9 -> Node11 [color="midnightblue",fontsize="10",style="solid"];
+  Node11 [label="inventory.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$inventory_8h_source.html"];
+  Node11 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
+  Node11 -> Node5 [color="midnightblue",fontsize="10",style="solid"];
+  Node9 -> Node12 [color="midnightblue",fontsize="10",style="solid"];
+  Node12 [label="object.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$object_8h_source.html"];
+  Node12 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
+  Node3 -> Node12 [color="midnightblue",fontsize="10",style="solid"];
+  Node3 -> Node13 [color="midnightblue",fontsize="10",style="solid"];
+  Node13 [label="die.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$die_8h.html",tooltip="it defines a die "];
+  Node13 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
+  Node3 -> Node8 [color="midnightblue",fontsize="10",style="solid"];
+  Node0 -> Node4 [color="midnightblue",fontsize="10",style="solid"];
+  Node0 -> Node8 [color="midnightblue",fontsize="10",style="solid"];
+}

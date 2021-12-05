@@ -1,0 +1,1 @@
+Private functions shouldn't be public because the user sholdn't use them or know the the program works by using those functions.

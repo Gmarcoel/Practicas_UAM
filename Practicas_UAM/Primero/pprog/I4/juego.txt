@@ -1,0 +1,19 @@
+OBJETOS:20
+-Farolillo (empieza encendido)
+-Aceite
+-Piedra (distraccion)
+-Llave de guardia
+-Puerta de celda
+
+HISTORIA: 
+ESPACIOS:10
+- Celda (inicio) 
+- Pasillo (hay mas guardias) --> Habitacion (armeria)
+- Escaleras -1(hacia arriba vestibulo, hacia abajo foso = muerte)
+- Escaleras 0
+- Vestíbulo (subiendo escaleras)
+- Cocina --> Comedor (con ventana a jardines)
+         --> Cuarto de servicio (escalera de mano)
+- Jardines (verja salida)
+
+

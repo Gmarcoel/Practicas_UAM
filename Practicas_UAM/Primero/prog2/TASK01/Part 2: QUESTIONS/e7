@@ -1,0 +1,1 @@
+The type return from the function node_copy could be a *Node pointer because it always returns a node type pointer (even if it is NULL).

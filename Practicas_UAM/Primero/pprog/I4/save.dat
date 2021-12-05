@@ -1,0 +1,52 @@
+#s:1|Jail|-1|-1|-1|1|-1|-1|1|You are in a jail|There is a key on the floor, and a stone| IIIII | IIII+ | IIIII |
+#s:2|Corridor|-1|1|3|2|-1|-1|1|You are in a corridor|There is a jaildoor, an armory, and a stairsroom|       |       |       |
+#s:3|Armoury|-1|2|-1|-1|-1|-1|1|You are in an armory|There is a bottle of oil and an armorydoor to the corridor|       |       |       |
+#s:4|Stairs|3|-1|-1|-1|5|4|1|You are in the stairs|There is a door and stairs, you can move upstairs, or downstairs|      _|   __/ |__/    |
+#s:5|Pit|-1|-1|-1|-1|-1|-1|1|You fall into a pit|Impossible, you can't scape from here|  ___  | (O O) |  \m/  |
+#s:6|Stairs|6|-1|-1|-1|-1|5|1|You are up the stairs|You can see the maindoor and you can go downstairs|      _|   __/ |__/    |
+#s:7|Hall|7|-1|6|13|-1|-1|1|You are in the main hall|You can see two guards not far from here. Yo can cross the maindoor or go to the kitchen|       |       |       |
+#s:8|Kitchen|-1|9|7|8|-1|-1|1|You are in the kitchen|You can see the service room, a huge dinning room and a guard|       |       |       |
+#s:9|Dng.Room|-1|8|-1|10|-1|-1|1|You are in the dinning room|There are large windows to the gardens but they are closed| , , , |_______| \___/ |
+#s:10|Svc.Room|-1|-1|-1|9|-1|-1|0|You are in the service room|There is an old ladder that you could use to climb the gate|     / |    /  |  mmm  |
+#s:11|Gardens|-1|10|-1|11|-1|-1|1|You are in the gardens|You can see the gate but there is a guard around|       |       |       |
+#s:12|Gate|-1|11|-1|12|-1|-1|1|You are in the gate|It seems that it is low enough to climb...| /III\ | III+I | IIIII |
+#s:13|Exit|-1|-1|-1|-1|-1|-1|1|U WIN|You completed the game|  You  |   R   | CHAMP |
+#s:14|Entrance|-1|-1|-1|-1|-1|-1|1|U LOOSE|You facecheck two guards, you are dead|  ___  | (O O) |  \m/  |
+
+#o:1|O1|1|A key that opens a        jaildoor|1|0|0|1|1|-1|-1|
+#o:2|O2|3|A stone you can use to    force the armoury|1|0|0|1|2|-1|-1|
+#o:3|O3|-1|A lantern with no fuel|1|0|1|1|-1|-1|-1|
+#o:4|O4|-1|You need this oil to      light up the lantern|1|0|0|1|-1|3|-1|
+#o:5|O5|9|A key that opens the      servicedoor|1|0|0|1|9|-1|-1|
+#o:6|O6|-1|A slingshot without       ammunition|1|0|0|1|8|-1|-1|
+#o:7|O7|-1|Pile of stones for the    slingshot|1|0|0|1|-1|6|-1|
+#o:8|O8|10|Ladder that could        serve to scape...|1|0|0|1|12|-1|-1|
+#o:9|O9|9|Fork that could open      the window...|1|0|0|1|10|-1|-1|
+#o:10|OA|10|With this clothes you   could seem like a real guard|1|0|0|1|11|-1|-1|
+#o:11|OB|8|I could try to persuade  a guard with this sandwich, it seems delicious|1|0|0|1|11|-1|-1|
+#o:12|OC|7|A giant painting of      the castle's owner|0|0|0|1|-1|-1|-1|
+#o:13|OD|7|A statue of the castle   owner|0|0|0|1|-1|-1|-1|
+#o:14|OE|3|A main desk with some     papers and documents|0|0|0|1|-1|-1|-1|
+#o:15|OF|8|A kitchen cupboard with  nothing inside|0|0|0|1|-1|-1|-1|
+#o:16|OG|11|A beautiful fountain    with some coins inside|0|0|0|1|-1|-1|-1|
+#o:17|OH|6|A huge carpet, there     is nothing below|0|0|0|1|-1|-1|-1|
+#o:18|S1|2|You can rest and save     your progress here|0|0|0|1|-1|-1|-1|
+#o:19|S2|7|You can rest and save     your progress here|0|0|0|1|-1|-1|-1|
+#o:20|S3|9|You can rest and save     your progress here|0|0|0|1|-1|-1|-1|
+
+#p:1|player 1|7
+
+#l:1|jaildoor|1|2|1
+#l:2|armourydoor|2|3|1
+#l:3|corridor|2|4|1
+#l:4|downstairs|4|5|1
+#l:5|upstairs|4|6|1
+#l:6|hall|6|7|1
+#l:7|kitchendoor|7|8|1
+#l:8|guard|8|9|1
+#l:9|servicedoor|8|10|0
+#l:10|window|9|11|0
+#l:11|hungryguard|11|12|0
+#l:12|gate|12|13|0
+#l:13|mainentrance|7|14|1
+

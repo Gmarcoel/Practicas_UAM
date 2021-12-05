@@ -1,0 +1,36 @@
+Status infix2postfix (String suf, String in) :
+ret = TRUE
+s = stack_ini ()
+while in[i] <> EoS :
+// if the symbol being read is an operator
+if isOperator (in[i]) == TRUE :
+    if in[i]=='^' AND stack_top(s)=='^'
+        stack_push(stack,in[i]    
+    else
+    while stack_isEmpty (s) == FALSE AND prec (stack_top (s)) >= prec (in[i]) :
+        ele = stack_pop (s)
+        suf [j] = ele
+        j = j + 1
+    stack_push (stack, in[i])
+// else if the symbol being read is a left parenthesis
+else if in[i] == '('
+    stack_push (stack, in[i])
+// else if the symbol being read is a right parenthesis
+else if in[i] == ')' :
+    while stack_isEmpty (s) == FALSE AND stack_top (stack) <> '(' :
+        ele = stack_pop (stack)
+        suf [j] = ele
+        j = j + 1
+// pop the open paranthesis
+stack_pop (stack)
+// else if the symbol being read is an operand, put it in suffix expression
+else :
+suf[j] = in[i]
+j = j + 1
+5i = i + 1
+while stack_isEmpty (s) == FALSE :
+ele = stack_pop (stack)
+suf [j] = ele
+j = j + 1
+stack_free (s)
+return TRUE

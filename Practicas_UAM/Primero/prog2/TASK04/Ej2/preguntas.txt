@@ -1,0 +1,12 @@
+Teniendo en cuenta que la estructura utilizada para almacenar nodos esuna lista enlazada (cada nodo tiene la referencia del siguiente), ¿es más eficiente el uso que hace de la memoria que en el caso del array de nodos?.Justifique su respuesta
+
+    Teniendo en cuenta que la estructura utilizada para almacenar nodos esuna lista enlazada es nas eficiente el uso que hace de la memoria ya que no reserva espacio de memoria para los punteros a los nodos al inicializar sino que va creando esos punteros conforme se incorporan elementos al grafo.
+
+
+Si se quiere buscar un nodo concreto, ¿qué estructura sería mejor en cuanto a coste temporal, el array de nodos o la lista de nodos? Justifique su re-spuesta. Asímismo, conocido el índice i que indica la posición de un nodo dentro de la estructura, ¿qué coste temporal tendría en cada estructura(array o lista de nodos) obtener ese nodo?
+
+    Si se quiere buscar un nodo concreto, en cuanto a coste temporal sería mejor estructura la lista de nodos ya que al ser una lista tiene coste 0. Si se concoe el índice i que indica el nodo dentro de la estructura sería mejor la estructura el array de nodos ya que no habría que pasar por otros elementos antes de llegar a éste.
+
+Considerando las 4 estructuras planteadas hasta ahora para el TAD Graph(la de la P1, y las 3 descritas en este ejercicio), discute para qué situacionespuede ser cada una de ellas más adecuada, considerando tanto los costes de memoria como los de tiempo (y no sólo en el acceso a los nodos sinotambién a sus conexiones y, si se desea, otras operaciones no planteadas hasta ahora, como podría ser el borrado de nodos)
+
+    Las estructuras planteadas con arrays de grafos mejoran la velocidad para modificar elementos concretos del grafo o eliminarlos. La estructura del último apartado es muy útil para no malgastar memoria ya que reserva memoria dependiendo del tamaó del grafo, pero sería más lenta. utilizar listas para almacenar los nodos es bueno para la velocidad en la que se recorre el grafo completo, por ejemplo para imprimirlo.

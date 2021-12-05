@@ -1,0 +1,1 @@
+It would be very hard to muse the ADT stack from exercise 3 to make Exercise 0b because the elements used in exercise 0b are of tipe node, and element.h is not made to implement node type elements.

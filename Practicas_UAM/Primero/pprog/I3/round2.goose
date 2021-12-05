@@ -1,0 +1,26 @@
+take O1
+take O2
+inspect O3
+move south
+move south
+drop O2
+move south
+move south
+move west
+move east
+move east
+move south
+move south
+inspect s
+move south
+inspect s
+move south
+inspect O1
+move south
+drop O1
+move south
+move south
+move south
+move south
+move west
+exit

@@ -1,0 +1,1 @@
+STATUS node_copy (Node nDest, const Node nOrigin); is not a valid implementation for the node_copy because it uses local variables for the nodes and the changes would not be saved.

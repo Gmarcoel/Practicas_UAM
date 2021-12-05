@@ -1,0 +1,73 @@
+Iteration 3:
+    TASKS:
+        1. Make game.h private
+        2. Create links and inventory modules
+        3. Change game reader to load players and links
+        4. Implement links to work
+        5. Test creation
+        6. Create move
+        7. Create inspect
+        8. Comment everything
+        9. New drop & take callbacks
+        10. Minor tasks
+        11. More test creation
+        12. Solve existing errors
+    
+    RESOURCES:
+        1. Javier López
+        2. Gabriela Trabajo
+        3. Guillermo Martín
+        4. Gonzalo Mejías
+        5. Doxygen
+
+    CALENDAR:
+        We divided all work in 4 weeks, and we had a meeting after each of them to check what was done and how to face the new tasks
+    
+    PLANNING:
+
+        MEETING 1:  We chose tasks for each person based on our skills
+            Gabriela: module creation
+            Javier: callbacks manipulation
+            Guillermo: graphic engine tasks
+            Gonzalo: comment functions
+
+        WEEK 1: 
+            TASK 2: Gabriela Trabajo
+            TASK 7: Javier López
+
+        MEETING 2: Links are a long job, Gabriela will continiue making them this week
+                    After that, we will start link implementation
+                    We also start working in the new version on the callbacks
+
+        WEEK 2:
+            TASK 2: Gabriela Trabajo
+            TASK 3: Guillermo Martín & Javier López
+            TASK 9: Javier López
+
+        MEETING 3:
+            We can finally start with links implementation
+            Its time to start working and learning how the test files work
+
+
+        WEEK 3:
+            TASK 5: Gabriela Trabajo
+            TASK 1: Guillermo Martín
+            TASK 4: Javier López, Guillermo Martín & Gabriela Trabajo
+
+        MEETING 4: We have a ton of work left to do and not as many time.
+                    We decided to have a less organised week were we worked together to finish all the tasks
+                    Its time for commenting, creating move and less important tasks
+
+        WEEK 4:
+            TASK 6: Guillermo Martín & Javier López
+            TASK 8: Guillermo Martín
+            TASK 10, 11 & 12: All team
+
+        MEETING 5: The deadline was extended so we had more time to finish the remaining tasks and solving the remaining problems.
+
+
+
+
+        
+    
+

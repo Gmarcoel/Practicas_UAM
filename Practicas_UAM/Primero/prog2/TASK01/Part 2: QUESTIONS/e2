@@ -1,0 +1,5 @@
+2.a) The function is correct because it uses all the functions wright, but it is not necessary because you can reach the same results by using the functions n1=node_create() and node_destroy(n1).
+
+2.b) The implementation shown is correct but for creating a new node you should put it as an argument od the function node_init().
+
+2.c) The function cannot be used because the pointer sent is a pointer to a pointer and wouldn't work for the already made functions.

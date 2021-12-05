@@ -1,0 +1,142 @@
+\hypertarget{space_8h}{}\section{space.\+h File Reference}
+\label{space_8h}\index{space.\+h@{space.\+h}}
+
+
+It defines a space.  
+
+
+{\ttfamily \#include \char`\"{}set.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}types.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}link.\+h\char`\"{}}\newline
+Include dependency graph for space.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{space_8h_a5f54fd55f983a2e33ce076cd9f587e82}\label{space_8h_a5f54fd55f983a2e33ce076cd9f587e82}} 
+\#define {\bfseries M\+A\+X\+\_\+\+S\+P\+A\+C\+ES}~100
+\item 
+\mbox{\Hypertarget{space_8h_a088cbe7c6f78264d46c2624194c5c680}\label{space_8h_a088cbe7c6f78264d46c2624194c5c680}} 
+\#define {\bfseries F\+I\+R\+S\+T\+\_\+\+S\+P\+A\+CE}~1
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{space_8h_a67533ffc2b70463baecc38fb0629bbfc}\label{space_8h_a67533ffc2b70463baecc38fb0629bbfc}} 
+typedef struct \hyperlink{struct__Space}{\+\_\+\+Space} {\bfseries Space}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{space_8h_a162866fcea156b800fd546d0ffd271c9}\label{space_8h_a162866fcea156b800fd546d0ffd271c9}} 
+\hyperlink{struct__Space}{Space} $\ast$ {\bfseries space\+\_\+create} (Id id)
+\item 
+\mbox{\Hypertarget{space_8h_a5c70c70398923693ddbe4dfac8d72a0d}\label{space_8h_a5c70c70398923693ddbe4dfac8d72a0d}} 
+S\+T\+A\+T\+US {\bfseries space\+\_\+destroy} (\hyperlink{struct__Space}{Space} $\ast$space)
+\item 
+\mbox{\Hypertarget{space_8h_ac8ddfd0d8692fd852ee49698c446cb50}\label{space_8h_ac8ddfd0d8692fd852ee49698c446cb50}} 
+Id {\bfseries space\+\_\+get\+\_\+id} (\hyperlink{struct__Space}{Space} $\ast$space)
+\item 
+\mbox{\Hypertarget{space_8h_aab5b468f9822ab78dbe16d1321870d93}\label{space_8h_aab5b468f9822ab78dbe16d1321870d93}} 
+S\+T\+A\+T\+US {\bfseries space\+\_\+set\+\_\+name} (\hyperlink{struct__Space}{Space} $\ast$space, char $\ast$name)
+\item 
+\mbox{\Hypertarget{space_8h_af7dd994c23cd59b077581ce8dd70d5bb}\label{space_8h_af7dd994c23cd59b077581ce8dd70d5bb}} 
+char $\ast$ {\bfseries space\+\_\+get\+\_\+name} (\hyperlink{struct__Space}{Space} $\ast$space)
+\item 
+\mbox{\Hypertarget{space_8h_a9ae3de3aac783ba5391d1b32f907beb8}\label{space_8h_a9ae3de3aac783ba5391d1b32f907beb8}} 
+S\+T\+A\+T\+US {\bfseries space\+\_\+set\+\_\+link\+North} (\hyperlink{struct__Space}{Space} $\ast$space, Id id)
+\item 
+\mbox{\Hypertarget{space_8h_ad027a2c9721427d996519818a54efc04}\label{space_8h_ad027a2c9721427d996519818a54efc04}} 
+Id {\bfseries space\+\_\+get\+\_\+link\+North} (\hyperlink{struct__Space}{Space} $\ast$space)
+\item 
+\mbox{\Hypertarget{space_8h_aa87e1d1f3a1d465293557fc057b15a42}\label{space_8h_aa87e1d1f3a1d465293557fc057b15a42}} 
+S\+T\+A\+T\+US {\bfseries space\+\_\+set\+\_\+link\+South} (\hyperlink{struct__Space}{Space} $\ast$space, Id id)
+\item 
+\mbox{\Hypertarget{space_8h_a23616b37baf461340197d9dfdbe6f0c8}\label{space_8h_a23616b37baf461340197d9dfdbe6f0c8}} 
+Id {\bfseries space\+\_\+get\+\_\+link\+South} (\hyperlink{struct__Space}{Space} $\ast$space)
+\item 
+\mbox{\Hypertarget{space_8h_a87e74b88f970d969646ae97dff4ec9c3}\label{space_8h_a87e74b88f970d969646ae97dff4ec9c3}} 
+S\+T\+A\+T\+US {\bfseries space\+\_\+set\+\_\+link\+East} (\hyperlink{struct__Space}{Space} $\ast$space, Id id)
+\item 
+\mbox{\Hypertarget{space_8h_a2ac6df9b3a2eed71f38cd716c3a39a4a}\label{space_8h_a2ac6df9b3a2eed71f38cd716c3a39a4a}} 
+Id {\bfseries space\+\_\+get\+\_\+link\+East} (\hyperlink{struct__Space}{Space} $\ast$space)
+\item 
+\mbox{\Hypertarget{space_8h_a04d5e2f965ad16f24115d40fc52a45ac}\label{space_8h_a04d5e2f965ad16f24115d40fc52a45ac}} 
+S\+T\+A\+T\+US {\bfseries space\+\_\+set\+\_\+link\+West} (\hyperlink{struct__Space}{Space} $\ast$space, Id id)
+\item 
+\mbox{\Hypertarget{space_8h_a55afd0c0213ce0bba56e322303a6ce47}\label{space_8h_a55afd0c0213ce0bba56e322303a6ce47}} 
+Id {\bfseries space\+\_\+get\+\_\+link\+West} (\hyperlink{struct__Space}{Space} $\ast$space)
+\item 
+\mbox{\Hypertarget{space_8h_a7aecc426029f567d452a0f916fd512d6}\label{space_8h_a7aecc426029f567d452a0f916fd512d6}} 
+S\+T\+A\+T\+US {\bfseries space\+\_\+set\+\_\+description} (\hyperlink{struct__Space}{Space} $\ast$space, char $\ast$description)
+\item 
+\mbox{\Hypertarget{space_8h_a292ba89734c883f99015a8b6ec147be8}\label{space_8h_a292ba89734c883f99015a8b6ec147be8}} 
+char $\ast$ {\bfseries space\+\_\+get\+\_\+description} (\hyperlink{struct__Space}{Space} $\ast$space)
+\item 
+\mbox{\Hypertarget{space_8h_a69b9e22046b7b44dc5aa2afe7cc0a1b9}\label{space_8h_a69b9e22046b7b44dc5aa2afe7cc0a1b9}} 
+S\+T\+A\+T\+US {\bfseries space\+\_\+add\+\_\+object} (\hyperlink{struct__Space}{Space} $\ast$space, Id id)
+\item 
+\mbox{\Hypertarget{space_8h_a32c30f0aa89f3f28c06802f1c72c1fdc}\label{space_8h_a32c30f0aa89f3f28c06802f1c72c1fdc}} 
+S\+T\+A\+T\+US {\bfseries space\+\_\+del\+\_\+object} (\hyperlink{struct__Space}{Space} $\ast$space, Id id)
+\item 
+\mbox{\Hypertarget{space_8h_a9cd5617c6cb1789172fdb315ab002f4b}\label{space_8h_a9cd5617c6cb1789172fdb315ab002f4b}} 
+Id $\ast$ {\bfseries space\+\_\+get\+\_\+objects} (\hyperlink{struct__Space}{Space} $\ast$space)
+\item 
+\mbox{\Hypertarget{space_8h_a530c8d5461afffee514eeea921617d5a}\label{space_8h_a530c8d5461afffee514eeea921617d5a}} 
+S\+T\+A\+T\+US {\bfseries space\+\_\+is\+\_\+object} (\hyperlink{struct__Space}{Space} $\ast$space, Id id)
+\item 
+\mbox{\Hypertarget{space_8h_a8239eb24c934b44c59c23a473faa430a}\label{space_8h_a8239eb24c934b44c59c23a473faa430a}} 
+\hyperlink{struct__Set}{Set} $\ast$ {\bfseries space\+\_\+get\+\_\+object\+\_\+set} (\hyperlink{struct__Space}{Space} $\ast$space)
+\item 
+\mbox{\Hypertarget{space_8h_a636371728617f02dbd5eb4f8ed4dafe6}\label{space_8h_a636371728617f02dbd5eb4f8ed4dafe6}} 
+S\+T\+A\+T\+US {\bfseries space\+\_\+set\+\_\+icon} (\hyperlink{struct__Space}{Space} $\ast$space, char $\ast$icon)
+\item 
+\mbox{\Hypertarget{space_8h_ad9bc363d4cf400f081fd26ff9043ea1a}\label{space_8h_ad9bc363d4cf400f081fd26ff9043ea1a}} 
+const char $\ast$ {\bfseries space\+\_\+get\+\_\+icon} (\hyperlink{struct__Space}{Space} $\ast$space)
+\item 
+\mbox{\Hypertarget{space_8h_a34a50a2b4273e545315404c601c0ba86}\label{space_8h_a34a50a2b4273e545315404c601c0ba86}} 
+S\+T\+A\+T\+US {\bfseries space\+\_\+set\+\_\+icon2} (\hyperlink{struct__Space}{Space} $\ast$space, char $\ast$icon)
+\item 
+\mbox{\Hypertarget{space_8h_a91b64fbf0fb7af9a47125293e9180b63}\label{space_8h_a91b64fbf0fb7af9a47125293e9180b63}} 
+const char $\ast$ {\bfseries space\+\_\+get\+\_\+icon2} (\hyperlink{struct__Space}{Space} $\ast$space)
+\item 
+\mbox{\Hypertarget{space_8h_ab8b6481d4ebd5aabbfe7001ad6348592}\label{space_8h_ab8b6481d4ebd5aabbfe7001ad6348592}} 
+S\+T\+A\+T\+US {\bfseries space\+\_\+set\+\_\+icon3} (\hyperlink{struct__Space}{Space} $\ast$space, char $\ast$icon)
+\item 
+\mbox{\Hypertarget{space_8h_a602bda142b8fea162ae1b58fa1bb2f98}\label{space_8h_a602bda142b8fea162ae1b58fa1bb2f98}} 
+const char $\ast$ {\bfseries space\+\_\+get\+\_\+icon3} (\hyperlink{struct__Space}{Space} $\ast$space)
+\item 
+\mbox{\Hypertarget{space_8h_a18eca058da6cdf20ae5eda9d122d992e}\label{space_8h_a18eca058da6cdf20ae5eda9d122d992e}} 
+S\+T\+A\+T\+US {\bfseries space\+\_\+print} (\hyperlink{struct__Space}{Space} $\ast$space)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+It defines a space. 
+
+\begin{DoxyAuthor}{Author}
+Profesores P\+P\+R\+OG 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+16/01/20 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+G\+NU Public License
+\end{DoxyCopyright}
+\begin{DoxyAuthor}{Author}
+Profesores P\+P\+R\+OG 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+13-\/01-\/2015 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+G\+NU Public License 
+\end{DoxyCopyright}

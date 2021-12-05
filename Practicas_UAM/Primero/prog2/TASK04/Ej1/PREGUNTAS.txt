@@ -1,0 +1,44 @@
+Sobre algoritmia:
+• ¿Que cambios habría que hacer en el prototipo y pseudocódigo de la fun-
+ción listMergeOrdered para que en vez de 2 listas concatenase N listas? No
+hace falta que proporciones el pseudocódigo de este nuevo algoritmo, tan
+solo cuenta la idea general.
+
+Para poder concatenar n listas el algoritmo tendria un nuevo loop while para comparar el elemento siguiente de cada una de las
+listas y con el mas pequeño de la comparacion anterior, y el que quedase al final sería el siguiente elemento de la lista concatendada.
+
+• Suponga este otro algoritmo para concatenar dos listas ordenadas de
+menor a mayor. A diferencia del algoritmo anterior, este nuevo algoritmo
+sí modifica las listas originales. ¿Cual es su coste temporal (complejidad
+algorítmica)? Compárelo con el algoritmo que tuvo que programar. Jus-
+tifique su respuesta.
+.
+E1:
+while l1 is not empty AND l2 is not empty :
+E1.1:
+if the element at the front of l1 < element at the front of l2 :
+E1.1.1:
+pop from the front of l1 and push it at the end into lout
+E1.2:
+else :
+E1.2.1:
+pop from the front of l2 and push it at the end into lout
+E2:
+determine the non empty list
+E3:
+while the "non_empty_list" is not empty :
+5E2.1:
+pop from the front and push it at the end into lout
+
+Este algoritmo tiene la misma complejidad que el usado pero se diferencia en que elimina los elementos de la lista que va añadiendo a lout.
+Su duración depende de la longitud de las listas.
+
+Sobre implementación:
+• En una buen implementación, la función listMergeOrdered debería ser com-
+pletamente independiente del tipo de dato que se almacenase en las listas.
+Esto es, podría utilizarse sin necesidad de reprogramarla de nuevo si, por
+ejemplo, los elementos de las listas l1 y l2 fuesen cadenas de caracteres.
+¿Por qué no podemos ahora? ¿Qué debería ocurrir para ello?
+
+No se puede ya que lo que estamos comparando son números y puede haber menores y mayores, pero caracteres no. Para que se pudiese implementar
+sería necesaria una función para comparar caracteres.

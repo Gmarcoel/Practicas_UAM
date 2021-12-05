@@ -1,0 +1,23 @@
+
+next: OK
+next: OK
+take: OK
+take: ERROR
+next: OK
+next: OK
+next: OK
+drop: OK
+exit: OK
+exit: OK
+next: OK
+next: OK
+next: OK
+next: OK
+next: OK
+next: OK
+next: OK
+take: ERROR
+take: ERROR
+next: OK
+left: OK
+exit: OK

@@ -1,0 +1,4 @@
+Question 1:
+In graph_deepFirst the function analizes a graph by depth, so it is better to look for nodes deep inside the graph.
+In graph_breadthFirst the function analizes the graph by width, making it better to find nodes that are not deep in the graph
+pathFromTo is a function that can work with both of the previous functions beecause it is not relevant the way the node is found.

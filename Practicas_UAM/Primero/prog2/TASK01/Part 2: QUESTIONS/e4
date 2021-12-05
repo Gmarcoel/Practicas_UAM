@@ -1,0 +1,1 @@
+It is not necessary for function node_print to require a pointer because it doesn't modify the given node. It is a pointer to make it easier because we are using them for all the functions.

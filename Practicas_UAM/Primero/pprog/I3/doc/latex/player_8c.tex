@@ -1,0 +1,80 @@
+\hypertarget{player_8c}{}\section{player.\+c File Reference}
+\label{player_8c}\index{player.\+c@{player.\+c}}
+
+
+It defines a player.  
+
+
+{\ttfamily \#include \char`\"{}player.\+h\char`\"{}}\newline
+Include dependency graph for player.\+c\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct__Player}{\+\_\+\+Player}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{player_8c_a94688a4a25a03cfbc6929fe15b1f8df0}\label{player_8c_a94688a4a25a03cfbc6929fe15b1f8df0}} 
+\#define {\bfseries str}~255
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{player_8c_a97ea1d0deda3c51ef6ce63a13dab7a38}\label{player_8c_a97ea1d0deda3c51ef6ce63a13dab7a38}} 
+\hyperlink{struct__Player}{Player} $\ast$ {\bfseries player\+\_\+create} (Id id)
+\item 
+\mbox{\Hypertarget{player_8c_a68e324aa5064e27d0a2f38aafb6809ad}\label{player_8c_a68e324aa5064e27d0a2f38aafb6809ad}} 
+S\+T\+A\+T\+US {\bfseries player\+\_\+destroy} (\hyperlink{struct__Player}{Player} $\ast$player)
+\item 
+\mbox{\Hypertarget{player_8c_a6a30809f7775f5c2d3bef47d92769e59}\label{player_8c_a6a30809f7775f5c2d3bef47d92769e59}} 
+S\+T\+A\+T\+US {\bfseries player\+\_\+set\+\_\+name} (\hyperlink{struct__Player}{Player} $\ast$player, char $\ast$name)
+\item 
+\mbox{\Hypertarget{player_8c_a054e92b126f556153279b569f8987674}\label{player_8c_a054e92b126f556153279b569f8987674}} 
+S\+T\+A\+T\+US {\bfseries player\+\_\+set\+\_\+location} (\hyperlink{struct__Player}{Player} $\ast$player, Id location)
+\item 
+\mbox{\Hypertarget{player_8c_abd42d08282b77189c0069215e56aa533}\label{player_8c_abd42d08282b77189c0069215e56aa533}} 
+S\+T\+A\+T\+US {\bfseries player\+\_\+is\+\_\+object} (\hyperlink{struct__Player}{Player} $\ast$player, Id id)
+\item 
+\mbox{\Hypertarget{player_8c_a7d6f74705bcee19a39dba6e8a04895bd}\label{player_8c_a7d6f74705bcee19a39dba6e8a04895bd}} 
+S\+T\+A\+T\+US {\bfseries player\+\_\+add\+\_\+object} (\hyperlink{struct__Player}{Player} $\ast$player, Id value)
+\item 
+\mbox{\Hypertarget{player_8c_a68871bc282449eb64b977acbdbd7565a}\label{player_8c_a68871bc282449eb64b977acbdbd7565a}} 
+S\+T\+A\+T\+US {\bfseries player\+\_\+del\+\_\+object} (\hyperlink{struct__Player}{Player} $\ast$player, Id id)
+\item 
+\mbox{\Hypertarget{player_8c_a6622c02be2fe230a5c0df66385a13ece}\label{player_8c_a6622c02be2fe230a5c0df66385a13ece}} 
+const char $\ast$ {\bfseries player\+\_\+get\+\_\+name} (\hyperlink{struct__Player}{Player} $\ast$player)
+\item 
+\mbox{\Hypertarget{player_8c_af5a101ec91427951c5875569a8709956}\label{player_8c_af5a101ec91427951c5875569a8709956}} 
+Id {\bfseries player\+\_\+get\+\_\+id} (\hyperlink{struct__Player}{Player} $\ast$player)
+\item 
+\mbox{\Hypertarget{player_8c_aa50ce77ab79af7166d749619fd60acfe}\label{player_8c_aa50ce77ab79af7166d749619fd60acfe}} 
+Id {\bfseries player\+\_\+get\+\_\+location} (\hyperlink{struct__Player}{Player} $\ast$player)
+\item 
+\mbox{\Hypertarget{player_8c_ab8efcd8a300b674453a4492635baa54b}\label{player_8c_ab8efcd8a300b674453a4492635baa54b}} 
+Id $\ast$ {\bfseries player\+\_\+get\+\_\+objects} (\hyperlink{struct__Player}{Player} $\ast$player)
+\item 
+\mbox{\Hypertarget{player_8c_a270da6469a85e0c2b7f9f4088d290051}\label{player_8c_a270da6469a85e0c2b7f9f4088d290051}} 
+\hyperlink{struct__Inventory}{Inventory} $\ast$ {\bfseries player\+\_\+get\+\_\+inventory} (\hyperlink{struct__Player}{Player} $\ast$player)
+\item 
+\mbox{\Hypertarget{player_8c_aa0f2f8b4d1b63a60ef927d47aa45dbd1}\label{player_8c_aa0f2f8b4d1b63a60ef927d47aa45dbd1}} 
+S\+T\+A\+T\+US {\bfseries player\+\_\+print} (\hyperlink{struct__Player}{Player} $\ast$player)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+It defines a player. 
+
+\begin{DoxyAuthor}{Author}
+Guillermo Martin 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+16/02/20 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+G\+NU Public License 
+\end{DoxyCopyright}

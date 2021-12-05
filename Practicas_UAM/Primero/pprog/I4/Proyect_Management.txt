@@ -1,0 +1,55 @@
+Iteration 4:
+    TASKS:
+        1. Add "illuminated" in space structure
+        2. Add "up" and "down" in move callback
+        3. Add detailed description in space
+        4. Modify "inspect" callback
+        5. Add new properties to objects
+        6. Create "turn on/off" and "open" callbacks
+        7. Modify data file,add objects and spaces
+        8. User guide creation
+        9. New "save" and "load" callbacks
+        10. Object dependencies and incompatibilities
+        11. Interface changes
+        12. Solve existing errors
+    
+    RESOURCES:
+        1. Javier López
+        2. Gabriela Trabajo
+        3. Guillermo Martín
+        4. Gonzalo Mejías
+        5. Doxygen
+
+    CALENDAR:
+        We divided all work in 2 weeks, and we had a meeting after each of them to check what was done and how to face the new tasks
+    
+    PLANNING:
+
+        MEETING 1:  We chose tasks for each person based on our skills
+            Gabriela and Guillermo: modify object module (tasks 5-6)
+            Javier and Gonzalo: modify space module (tasks 1-4)
+
+        WEEK 1: 
+            TASK 1,2,3 & 4: Javier and Gonzalo
+            TASK 5 & 6: Gabriela and Guillermo
+            TASK 7, 11 & 12: All team
+
+        MEETING 2: We didn't have much time left so we decided to invest all our resources together, finishing first task 8, then 10, then 9 and finally 11
+
+        WEEK 2:
+            TASK 7: All team
+            TASK 8: Javier, Gabriela and Guillermo
+            TASK 9: Javier and Guillermo
+            TASK 10: Gabriela 
+            TASKS 11 & 12: All team
+            
+
+        MEETING 3: We had a meeting previous to turnit in the iteration, where we tested that everything worked correctly and fixed all bugs and problems.
+
+
+
+
+
+        
+    
+

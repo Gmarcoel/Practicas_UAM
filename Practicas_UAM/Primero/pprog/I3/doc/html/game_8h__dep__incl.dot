@@ -1,0 +1,18 @@
+digraph "game.h"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node13 [label="game.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node13 -> Node14 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node14 [label="game.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$game_8c.html",tooltip="It implements the game interface and all the associated callbacks for each command. "];
+  Node13 -> Node15 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node15 [label="game_reader.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$game__reader_8h.html",tooltip="It loads the game space from a file. "];
+  Node15 -> Node14 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node13 -> Node16 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node16 [label="graphic_engine.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$graphic__engine_8h.html",tooltip="It defines a textual graphic engine. "];
+  Node16 -> Node17 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node17 [label="game_loop.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$game__loop_8c.html",tooltip="It defines the game loop. "];
+  Node16 -> Node18 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node18 [label="graphic_engine.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$graphic__engine_8c.html",tooltip="It defines a textual graphic engine. "];
+  Node13 -> Node17 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

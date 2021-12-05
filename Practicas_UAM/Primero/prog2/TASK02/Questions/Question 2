@@ -1,0 +1,16 @@
+long stack_size(Stack * stack)
+{
+    long i;
+    Stack *aux;
+    aux = stack_init();
+    for (i=0;stack_isEmpty(stack)==FALSE;i++)
+    {
+        stack_push(aux,stack_pop(stack));
+    }
+    while(stack_isEmpty(aux)==FALSE){
+        stack_push(stack,stack_pop(aux));
+    }
+    stack_free(aux);
+    return i;
+}
+/*This code would have a lot of cost in execution time because it needs to free pop and push the entire stack twice*/

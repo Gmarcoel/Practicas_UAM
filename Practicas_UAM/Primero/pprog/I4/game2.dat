@@ -1,0 +1,50 @@
+#s:1|Jail|-1|-1|-1|1|-1|-1|You are in a jail|There is a key on the floor, and a jaildoor|       |       |       |
+#s:2|Corridor|-1|1|3|2|-1|-1|You are in a corridor|There is a jaildoor, an armory, and a stairsroom|       |       |       |
+#s:3|Armory|-1|2|-1|-1|-1|-1|You are in an armory|There is a bottle of oil and an armorydoor to the corridor|       |       |       |
+#s:4|Stairs|3|-1|-1|-1|5|4|You are in the stairs|There is a door and stairs, you can move upstairs, or downstairs|       |       |       |
+#s:5|Pit|-1|-1|-1|-1|-1|-1|You fall into a pit|Impossible, you can't scape from here|       |       |       |
+#s:6|Stairs|6|-1|-1|-1|-1|5|You are up the srairs|You can see the maindoor and you can go downstairs|       |       |       |
+#s:7|MainEntrance|7|-1|6|8|-1|-1|You are in the main entrance|You can see two guards not far from here. Yo can cross the maindoor or go to the kitchen|       |       |       |
+#s:8|Kitchen|-1|9|7|10|-1|-1|You are in the kitchen|You can see the service room, a huge dinning room and a guard|       |       |       |
+#s:9|DinningRoom|-1|8|-1|10|-1|-1|You are in the dinning room|There are large windows to the gardens but they are closed|       |       |       |
+#s:10|ServiceRoom|-1|-1|-1|9|-1|-1|You are in the service room|There is an old ladder that you could use to climb the gate|       |       |       |
+#s:11|Gardens|-1|10|11|-1|-1|-1|You are in the gardens|You can see the gate but there are guards around|       |       |       |
+#s:12|Gate|11|-1|12|-1|-1|-1|You are in the gate|It seems that it is low enough to climb...|       |       |       |
+#s:13|Exit|-1|-1|-1|-1|-1|-1|You completed the game|  You  |   R   |CHAMPIO|
+
+#o:1|O1|1|A key that opens a        jaildoor|1|0|0|0|1|
+#o:2|O2|1|A stone you can use to    distract the guards|1|0|0|0|-1|
+#o:3|O3|2|A lantern with no fuel...|1|0|1|0|-1|
+#o:4|O4|3|You need this oil to      light up the lantern|1|0|0|0|-1|
+#o:5|O5|8|A key that opens the      servicedoor|1|0|0|0|9|
+#o:6|O6|3|A slingshot|1|0|0|0|-1|
+#o:7|O7|3|Pile of stones for the    slingshot|1|1|0|0|-1|
+#o:8|O8|11|Maybe you can make       noise with this bottle to distract the guards|0|0|0|0|-1|
+#o:9|O9|10|Ladder that could        serve to scape...|1|1|0|0|12|
+#o:10|OA|8|Fork that could open     the window...|1|0|0|0|10|
+#o:11|OB|6|A key that opens the     dinningdoor|1|0|0|0|8|
+#o:12|OC|4|With this clothes you    could seem like a real guard|1|0|0|0|-1|
+#o:13|OD|8|I could try to persuade  a guard whith this sandwich, it seems delicious|1|0|0|0|-1|
+#o:14|SV|2|You can rest and save    your progress here|0|0|0|0|-1|
+#o:15|SV|6|You can rest and save    your progress here|0|0|0|0|-1|
+#o:16|SV|10|You can rest and save   your progress here|0|0|0|0|-1|
+#o:17|OE|3|A main desk with some    papers and documents|0|0|0|0|-1|
+#o:18|OF|8|A kitchen cupboard with  nothing inside|0|0|0|0|-1|
+#o:19|OG|11|A beautiful fountain    with some coins inside|0|0|0|0|-1|
+#o:20|OH|6|A huge carpet, there     is nothing below|0|0|0|0|-1|
+
+#p:1|player 1|1
+
+#l:1|jaildoor|1|2|0
+#l:2|armorydoor|2|3|1
+#l:3|stairsdoor|2|4|1
+#l:4|downstairs|4|5|1
+#l:5|upstairs|4|6|1
+#l:6|maindoor|6|7|1
+#l:7|kitchendoor|7|8|1
+#l:8|dinningdoor|8|9|0
+#l:9|servicedoor|8|10|0
+#l:10|window|9|11|1
+#l:11|gardens|11|12|0
+#l:12|gate|12|13|1
+

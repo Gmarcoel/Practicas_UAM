@@ -1,0 +1,56 @@
+/**
+ * @brief It defines common types
+ *
+ * @file types.h
+ * @author Profesores PPROG
+ * @version 1.0
+ * @date 13-01-2015
+ * @copyright GNU Public License
+ */
+
+#ifndef TYPES_H
+#define TYPES_H
+
+#define WORD_SIZE 1000
+#define NO_ID -1
+/**
+* 
+* @brief Defines id structure
+*
+* Ids are long variables
+*/
+
+typedef long Id;
+/**
+* 
+* @brief Defines BOOL structure
+*
+* Bools are TRUE or FALSE
+*/
+typedef enum {
+  FALSE, TRUE
+} BOOL;
+/**
+* 
+* @brief Defines status structure
+*
+* Status are ok or error
+*/
+typedef enum {
+  ERROR, OK
+} STATUS;
+/**
+* 
+* @brief Defines directions
+* Directions are north, south, east and west
+*/
+typedef enum {
+  N, S, E, W
+} DIRECTION;
+
+
+typedef enum {
+  CLOSED, OPEN
+} CONNECTION;
+
+#endif
