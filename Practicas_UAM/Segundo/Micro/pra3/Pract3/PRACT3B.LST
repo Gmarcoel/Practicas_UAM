@@ -1,0 +1,138 @@
+Turbo Assembler	 Version 2.0	    04/21/21 17:55:41	    Page 1
+pract3b.asm
+
+
+
+      1				     ;*********************************************************************
+      2				     ;*
+      3				     ;*
+      4				     ;*	Sistemas Basados en Microprocesador
+      5				     ;*	2020-2021
+      6				     ;*	Practica 3a
+      7				     ;*
+      8				     ;*
+      9				     ;*	author:
+     10				     ;*
+     11				     ;*	notas: ejemplo vacío
+     12				     ;*********************************************************************/
+     13
+     14				     ; DEFINICION DEL SEGMENTO DE CODIGO COMO PUBLICO
+     15	0000			     _TEXT SEGMENT BYTE	PUBLIC 'CODE'
+     16					 ASSUME	CS:_TEXT
+     17
+     18					     ; COMIENZO	DEL PROCEDIMIENTO PRINCIPAL
+     19	0000				     _MAIN PROC
+     20						     ;COMIENZO DEL PROGRAMA
+     21						     PUBLIC _drawPixelsList
+     22	0000  00						_MODO_VIDEO DB 0
+     23
+     24	0001				     _MAIN ENDP
+     25
+     26	0001				     _drawPixelsList proc far ;	06 int numPixels 08 char bgcolout 10 long waitingTime 14 int+
+     27				     pixelList_x 18 int	pixelList_y 22 char pixelList_colour
+     28	0001  55				     push bp ; save bp
+     29	0002  8B EC				     mov bp, sp
+     30
+     31						     ; We use 10h interruption to enter	in video mode
+     32	0004  B4 0F				     MOV AH,0Fh	; Asking for video mode
+     33	0006  CD 10				     INT 10h ; Call to BIOS
+     34	0008  2E: A2 0000r			     MOV _MODO_VIDEO,AL	; We save the video mode and store it into AL
+     35
+     36	000C  B4 00				     mov ah, 00h ; We set the video mode
+     37	000E  B0 12				     mov al, 12h ; 640x480 16 color graphics (VGA)
+     38	0010  CD 10				     int 10h
+     39
+     40						     ; We set the background colour to the one chosen
+     41	0012  B4 0B				     mov ah, 0bh
+     42	0014  B7 00				     mov bh, 00h
+     43	0016  8A 5E 08				     mov bl, [bp + 08]
+     44	0019  CD 10				     int 10h
+     45
+     46						     ; Here the	loop starts
+     47	001B  8B 76 06				     mov SI, [bp + 06]
+     48	001E					     LOOPING:
+     49
+     50	001E  83 EE 01					     sub SI, 1
+     51
+     52							     ;Int10H draw pixel	--> AH=0Ch   AL	= Colour, BH = PageNumber, CX =	x,  +
+     53				     DX	= y
+     54	0021  B4 0C					     mov ah, 0Ch
+     55
+     56	0023  8B 7E 16					     mov DI, [bp + 22]
+     57	0026  03 FE					     add DI, SI
+Turbo Assembler	 Version 2.0	    04/21/21 17:55:41	    Page 2
+pract3b.asm
+
+
+
+     58	0028  8E 46 18					     mov ES, [bp + 24]
+     59	002B  26: 8A 05					     mov al, ES:[DI] ; color
+     60
+     61	002E  B7 00					     mov bh, 00
+     62
+     63	0030  8B 7E 0E					     mov DI, [bp + 14]
+     64	0033  03 FE					     add DI, SI
+     65	0035  8E 46 10					     mov ES, [bp + 16]
+     66	0038  26: 8B 0D					     mov cx, ES:[DI] ; x
+     67
+     68
+     69	003B  8B 7E 12					     mov DI, [bp + 18]
+     70	003E  03 FE					     add DI, SI
+     71	0040  8E 46 14					     mov ES, [bp + 20]
+     72	0043  26: 8B 15					     mov dx, ES:[DI] ; y
+     73
+     74							     ;add dx, SI ; adds	vector distance	to requested point times 2
+     75
+     76	0046  CD 10					     int 10h
+     77
+     78	0048  83 FE 00					     cmp SI, 0
+     79	004B  7D D1						     jge LOOPING
+     80
+     81						     ;Int15H active waiting in milliseconds: 1 millon us = 1 segundo
+     82	004D  8B 4E 0C				     MOV     CX, [bp+12] ; CX:DX are the waiting time: 1 second	= F:4240H --> 3	    +
+     83				     seconds 2D:C6C0h
+     84	0050  8B 56 0A				     MOV     DX, [bp+10]
+     85	0053  B4 86				     MOV     AH, 86H ;int15h with AH=86h to microseconds waiting in CX:DX
+     86	0055  CD 15				     INT     15H
+     87
+     88
+     89	0057  B4 00				     mov ah, 00h ; Restore the input configuration to video mode
+     90	0059  2E: A0 0000r			     mov al, _MODO_VIDEO ;
+     91	005D  CD 10				     int 10h
+     92
+     93
+     94	005F  5D				     pop bp
+     95
+     96	0060  B8 0000				     mov ax, 0
+     97
+     98	0063  CB				     ret
+     99	0064				     _drawPixelsList endp
+    100
+    101
+    102	0064			     _TEXT ENDS
+    103				     END
+Turbo Assembler	 Version 2.0	    04/21/21 17:55:41	    Page 3
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??date				  Text	 "04/21/21"
+??filename			  Text	 "pract3b "
+??time				  Text	 "17:55:41"
+??version			  Number 0200
+@Cpu				  Text	 0101H
+@FileName			  Text	 pract3b
+@WordSize			  Text	 2
+@curseg				  Text	 _TEXT
+LOOPING				  Near	 _TEXT:001E
+_MAIN				  Near	 _TEXT:0000
+_MODO_VIDEO			  Byte	 _TEXT:0000
+_drawPixelsList			  Far	 _TEXT:0001
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+_TEXT				  16  0064 Byte	  Public  CODE
+

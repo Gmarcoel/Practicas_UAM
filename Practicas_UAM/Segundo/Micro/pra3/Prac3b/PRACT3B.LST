@@ -1,0 +1,209 @@
+Turbo Assembler	 Version 2.0	    04/27/21 26:04:06	    Page 1
+pract3b.asm
+
+
+
+      1				     ;*********************************************************************
+      2				     ;*
+      3				     ;*
+      4				     ;*	Sistemas Basados en Microprocesador
+      5				     ;*	2020-2021
+      6				     ;*	Practica 3a
+      7				     ;*
+      8				     ;*
+      9				     ;*	author:	Guillermo Martín-Coello Juárez
+     10				     ;*
+     11				     ;*	notas:
+     12				     ;*********************************************************************/
+     13
+     14				     ; DEFINICION DEL SEGMENTO DE CODIGO COMO PUBLICO
+     15	0000			     _TEXT SEGMENT BYTE	PUBLIC 'CODE'
+     16					 ASSUME	CS:_TEXT
+     17
+     18					     ; COMIENZO	DEL PROCEDIMIENTO PRINCIPAL
+     19	0000				     _MAIN PROC
+     20						     ;COMIENZO DEL PROGRAMA
+     21	0000  01 02 04 08 05 0A	09+		     muls db 1,2,4,8,5,10,9,7,3,6
+     22	      07 03 06
+     23
+     24						     PUBLIC _findSubString
+     25						     PUBLIC _bankAccountNumber
+     26
+     27
+     28	000A				     _MAIN ENDP
+     29
+     30					     ; findSubString (char* str, char* substr)	     ; 06 str 08 sub
+     31	000A				     _findSubString proc far
+     32	000A  55				     push bp ; save bp
+     33	000B  8B EC				     mov bp, sp
+     34
+     35	000D  B9 0000				     mov cx, 0
+     36	0010  BE 0000				     mov si, 0
+     37	0013  BF 0000				     mov di, 0
+     38
+     39	0016					     find_lenght:
+     40	0016  C4 5E 06					     les bx, [bp + 06]	     ; moves the position of the first element of   +
+     41				     the string	to dx
+     42	0019  03 DE					     add bx, si			     ; adds to dx the counter si
+     43	001B  26: 8B 17					     mov dx, es:[bx]	     ; finds the element in that position
+     44	001E  80 FA 00					     cmp dl, 0			     ; compares	if it is the end of the	    +
+     45				     string
+     46	0021  74 03						     je	find_equals
+     47	0023  46					     inc si
+     48	0024  EB F0					     jmp find_lenght
+     49
+     50	0026					     find_equals:
+     51	0026  C4 5E 06				     les bx, [bp + 06]	     ; moves the position of the first element of the string+
+     52				     to	dx
+     53	0029  03 D9				     add bx, cx			     ; adds a counter for the character	number
+     54	002B  26: 8B 17				     mov dx, es:[bx]	     ; moves to	dx the current element
+     55
+     56	002E  C4 5E 0A				     les bx, [bp + 10]
+     57	0031  26: 8B 07				     mov ax, es:[bx]	     ; moves the position of the first element of the	    +
+Turbo Assembler	 Version 2.0	    04/27/21 26:04:06	    Page 2
+pract3b.asm
+
+
+
+     58				     substring to ax
+     59
+     60	0034  3A C2				     cmp al, dl			     ; compares	the current character with the first+
+     61				     character of the subarray
+     62	0036  74 07					     je	possible_candidate
+     63
+     64	0038  3B CE				     cmp cx, si			     ; compares	the length
+     65	003A  7D 2D					     jge not_found
+     66
+     67	003C  41				     inc cx
+     68	003D  EB E7				     jmp find_equals
+     69
+     70	003F					     possible_candidate:
+     71	003F  47					     inc di
+     72	0040  C4 5E 06					     les bx, [bp + 06]	     ; moves the position of the first element of   +
+     73				     the string	to dx
+     74	0043  03 D9					     add bx, cx			     ; adds a counter for the character	    +
+     75				     number
+     76	0045  03 DF					     add bx, di			     ; adds the	number of elements already  +
+     77				     equal
+     78	0047  26: 8B 17					     mov dx, es:[bx]	     ; moves to	dx the current element
+     79
+     80	004A  C4 5E 0A					     les bx, [bp + 10]
+     81	004D  03 DF					     add bx, di
+     82	004F  26: 8B 07					     mov ax, es:[bx]	     ; moves the position of the "di" element of the+
+     83				     substring to ax
+     84
+     85	0052  3C 00					     cmp al, 0			     ; check if	the substring is over
+     86	0054  74 0F						     je	sum
+     87
+     88	0056  80 FA 00					     cmp dl, 0			     ; check if	string is over
+     89	0059  74 0E						     je	not_found
+     90
+     91	005B  3A D0					     cmp dl, al			     ; if equal	check the next element
+     92	005D  74 E0						     je	possible_candidate
+     93
+     94	005F  41					     inc cx			     ; in case they are	not equal, inc	    +
+     95				     counter
+     96	0060  BF 0000					     mov di, 0			     ; reset di
+     97	0063  EB C1					     jmp find_equals	     ; and continue searching
+     98
+     99	0065					     sum:
+    100
+    101	0065  5D					     pop bp
+    102	0066  8B C1					     mov ax, cx
+    103	0068  CB					     ret
+    104
+    105
+    106	0069					     not_found:
+    107	0069  5D					     pop bp
+    108	006A  B8 FFFF					     mov ax, -1	; returns -1 if	not found
+    109	006D  CB					     ret
+    110
+    111
+    112	006E				     _findSubString endp
+    113
+    114				     ;	bankAccountNumber(char * bankAccountNumber);
+Turbo Assembler	 Version 2.0	    04/27/21 26:04:06	    Page 3
+pract3b.asm
+
+
+
+    115	006E				     _bankAccountNumber	proc far
+    116	006E  55				     push bp
+    117	006F  8B EC				     mov bp, sp
+    118	0071  BE 0000				     mov si, 0			     ; initializes a counter
+    119	0074  BF 0000				     mov di, 0			     ; initialize a sum
+    120
+    121	0077					     addition:
+    122	0077  B8 0000					     mov ax, 0
+    123	007A  C4 5E 06					     les bx, [bp + 06]	     ; moves the position of the "si" element of the+
+    124				     array to ax
+    125	007D  03 DE					     add bx, si			     ; adds a counter for the element number
+    126	007F  26: 8A 07					     mov al, es:[bx]	     ; moves to	dx the current element
+    127	0082  2C 30					     sub al, 30h		     ; converts	ascii number to	integer
+    128
+    129	0084  2E: F6 A4	0000r				     mul cs:muls[si] ; multiplies by corresponding number of the muls array
+    130	0089  03 F8					     add di, ax			     ; adds the	result to the sum
+    131
+    132	008B  83 FE 09					     cmp si, 9
+    133	008E  74 03						     je	modulus
+    134	0090  46					     inc si
+    135	0091  EB E4					     jmp addition
+    136
+    137	0093					     modulus:
+    138	0093  8B C7					     mov ax, di			     ; moving di to ax to do the division
+    139	0095  BA 0000					     mov dx, 0			     ; cleaning	dx so divide doesn't do	    +
+    140				     overflow
+    141	0098  B9 000B					     mov cx, 11
+    142	009B  F7 F1					     div cx			     ; divides the sum saved in	ax by eleven+
+    143				     and the modulus goes to dx
+    144	009D  2B CA					     sub cx, dx			     ; substracts the modulus to eleven
+    145
+    146	009F  8B C1					     mov ax, cx
+    147	00A1  3D 000A					     cmp ax, 10
+    148	00A4  74 02						     je	     special_case
+    149	00A6  5D					     pop bp
+    150	00A7  CB					     ret
+    151
+    152	00A8					     special_case:
+    153	00A8  B8 0001					     mov ax, 1
+    154	00AB  5D					     pop bp
+    155	00AC  CB					     ret
+    156
+    157	00AD				     _bankAccountNumber	endp
+    158
+    159
+    160	00AD			     _TEXT ENDS
+    161				     END
+Turbo Assembler	 Version 2.0	    04/27/21 26:04:06	    Page 4
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??date				  Text	 "04/27/21"
+??filename			  Text	 "pract3b "
+??time				  Text	 "26:04:06"
+??version			  Number 0200
+@Cpu				  Text	 0101H
+@FileName			  Text	 pract3b
+@WordSize			  Text	 2
+@curseg				  Text	 _TEXT
+_MAIN				  Near	 _TEXT:0000
+_bankAccountNumber		  Far	 _TEXT:006E
+_findSubString			  Far	 _TEXT:000A
+addition			  Near	 _TEXT:0077
+find_equals			  Near	 _TEXT:0026
+find_lenght			  Near	 _TEXT:0016
+modulus				  Near	 _TEXT:0093
+muls				  Byte	 _TEXT:0000
+not_found			  Near	 _TEXT:0069
+possible_candidate		  Near	 _TEXT:003F
+special_case			  Near	 _TEXT:00A8
+sum				  Near	 _TEXT:0065
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+_TEXT				  16  00AD Byte	  Public  CODE
+

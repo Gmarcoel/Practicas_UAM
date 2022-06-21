@@ -1,0 +1,530 @@
+Turbo Assembler	 Version 2.0	    04/15/21 02:40:55	    Page 1
+lab2E.asm
+
+
+
+      1				     ;**************************************************************************
+      2				     ; MBS 2021. LABORATORY ASSIGNMENT 2
+      3				     ; Author: Guillermo Martín-Coello	Juárez
+      4				     ; Group: 2292
+      5				     ; Task: 2A
+      6				     ;**************************************************************************
+      7				     ; DATA SEGMENT DEFINITION
+      8	0000			     DATA SEGMENT
+      9
+     10				     ; VARIABLE	DEFINITION
+     11	0000  00		     v DB 0
+     12				     ; VECTOR DEFINITION
+     13	0001  01 02 03 04	     vector1 DB	1,2,3,4
+     14	0005  03 04 01 02	     vector2 DB	3,4,1,2
+     15	0009  02 01 04 03	     vector3 DB	2,1,4,3
+     16	000D  04 03 02 01	     vector4 DB	4,3,2,1
+     17	0011  08*(00) 20 24	     numberASCII DB 8 dup (0), " $"
+     18	001B  49 4E 56 41 4C 49	44+  errorRows DB "INVALID ROWS", 13, 10, '$'
+     19	      20 52 4F 57 53 0D	0A+
+     20	      24
+     21	002A  56 41 4C 49 44 20	52+  correctRows DB "VALID ROWS",13,10,'$'
+     22	      4F 57 53 0D 0A 24
+     23	0037  49 4E 56 41 4C 49	44+  errorColumns DB "INVALID COLUMNS",	13, 10,	'$'
+     24	      20 43 4F 4C 55 4D	4E+
+     25	      53 0D 0A 24
+     26	0049  56 41 4C 49 44 20	43+  correctColumns DB "VALID COLUMNS",13,10,'$'
+     27	      4F 4C 55 4D 4E 53	0D+
+     28	      0A 24
+     29	0059  49 4E 56 41 4C 49	44+  errorRegions DB "INVALID REGIONS",	13, 10,	'$'
+     30	      20 52 45 47 49 4F	4E+
+     31	      53 0D 0A 24
+     32	006B  56 41 4C 49 44 20	52+  correctRegions DB "VALID REGIONS",13,10,'$'
+     33	      45 47 49 4F 4E 53	0D+
+     34	      0A 24
+     35	007B  49 6E 74 72 6F 64	75+  vectorText	DB "Introduce a	vector:",13,10,'$'
+     36	      63 65 20 61 20 76	65+
+     37	      63 74 6F 72 3A 0D	0A+
+     38	      24
+     39	0091  49 4E 43 4F 52 52	45+  vectorError DB "INCORRECT VECTOR",13,10,'$'
+     40	      43 54 20 56 45 43	54+
+     41	      4F 52 0D 0A 24
+     42	00A4  14*(00)		     getVector DB 20 dup (0)
+     43
+     44	00B8  00 00 00		     rc_flag DB	0, 0, 0	; row column flag to check if rows and columns are ok
+     45	00BB			     DATA ENDS
+     46				     ;**************************************************************************
+     47				     ; STACK SEGMENT DEFINITION
+     48	0000			     STACKSEG SEGMENT STACK "STACK"
+     49	0000  40*(00)		     DB	40H DUP	(0)  ; initialization example, 64 bytes	initialize to 0
+     50	0040			     STACKSEG ENDS
+     51				     ;**************************************************************************
+     52				     ; EXTRA SEGMENT DEFINITION
+     53	0000			     EXTRA SEGMENT
+     54	0000  0000 0000		     RESULT DW 0,0 ; initialization example. 2 WORDS (4	BYTES)
+     55	0004			     EXTRA ENDS
+     56				     ;*************************************************************************
+     57				     ; CODE SEGMENT DEFINITION
+Turbo Assembler	 Version 2.0	    04/15/21 02:40:55	    Page 2
+lab2E.asm
+
+
+
+     58	0000			     CODE SEGMENT
+     59				     ASSUME CS:	CODE, DS: DATA,	ES: EXTRA, SS: STACKSEG
+     60				     ; BEGINNING OF MAIN PROCEDURE
+     61	0000			     BEGIN PROC
+     62				     ; INITIALIZE THE SEGMENT REGISTER WITH ITS	VALUE
+     63	0000  B8 0000s		     MOV AX, DATA
+     64	0003  8E D8		     MOV DS, AX
+     65	0005  B8 0000s		     MOV AX, STACKSEG
+     66	0008  8E D0		     MOV SS, AX
+     67	000A  B8 0000s		     MOV AX, EXTRA
+     68	000D  8E C0		     MOV ES, AX
+     69	000F  BC 0040		     MOV SP, 64	 ; LOAD	A STACK	POINTER	WITH THE HIGHEST VALUE
+     70				     ; END OF INITIALIZATIONS
+     71
+     72				     ; BEGINNING OF THE	PROGRAMME
+     73	0012  BA 0000		     MOV DX, 0
+     74	0015  B9 0000			     MOV CX, 0
+     75	0018			     INTRODUCE_VECTOR:
+     76
+     77	0018  B8 0000			     MOV AX, 0
+     78	001B  BB 0000			     MOV BX, 0
+     79	001E  BE 0000			     MOV SI, 0
+     80	0021  B4 09			     MOV AH,9					     ;Write initial sentence
+     81	0023  BA 007Br			     MOV DX,OFFSET vectorText
+     82	0026  CD 21			     INT 21H
+     83	0028  B4 0A			     MOV AH,0AH
+     84	002A  BA 00A4r			     MOV DX,OFFSET getVector	     ;Save user	input inside getVector
+     85	002D  C6 06 00A4r 14		     MOV getVector[0],20	     ;Max characters
+     86	0032  CD 21			     INT 21h
+     87
+     88	0034			     PROCESS_VECTOR:
+     89	0034  83 FE 04			     CMP SI, 4					     ; If SI is	4, four	numbers	for the	    +
+     90				     vector, go	to find	next vector
+     91	0037  74 1F				     JE	NEXT_VECTOR
+     92	0039  83 FB 0A			     CMP BX, 10
+     93	003C  7D 2F				     JGE VECTOR_ERROR			     ; If CX is	8 not vector was found in   +
+     94				     the input
+     95
+     96	003E  8A 87 00A6r		     MOV AL, DS:getVector[BX+2]	     ;Reads written vector
+     97	0042  3C 20			     CMP AL, 32					     ;Ignores spaces
+     98	0044  74 0F				     JE	SKIP
+     99	0046  3C 0D			     CMP AL, 13
+    100	0048  74 23				     JE	VECTOR_ERROR		     ; Jumps if	"enter"	(incorrect vector)
+    101	004A  2C 30			     SUB AL, 30h				     ; Gets numerical from ascii
+    102	004C  03 F1			     ADD SI, CX					     ; Adds CX to specify wich vector is    +
+    103				     being written
+    104	004E  88 84 0001r		     MOV DS:VECTOR1[0][SI], AL	     ; Saves element inside vector matrix
+    105	0052  2B F1			     SUB SI, CX					     ; Removes CX from SI after	finding	the +
+    106				     possition needed
+    107	0054  46			     INC SI
+    108
+    109	0055			     SKIP:						     ; Skips in	case of	blank
+    110	0055  43			     INC BX
+    111	0056  EB DC			     JMP PROCESS_VECTOR
+    112
+    113	0058			     NEXT_VECTOR:
+    114	0058  8A 87 00A6r		     MOV AL, DS:getVector[BX+2]	     ;Reads written vector
+Turbo Assembler	 Version 2.0	    04/15/21 02:40:55	    Page 3
+lab2E.asm
+
+
+
+    115	005C  3C 0D			     CMP AL, 13
+    116	005E  75 0D			     JNE VECTOR_ERROR
+    117
+    118	0060  83 F9 0A			     CMP CX, 0Ah
+    119	0063  7D 12				     JGE FINISH_INPUT
+    120	0065  83 C1 04			     ADD CX, 4
+    121	0068  EB AE			     JMP INTRODUCE_VECTOR
+    122	006A  EB 0B 90			     JMP FINISH_INPUT
+    123
+    124	006D			     VECTOR_ERROR:
+    125	006D  B4 09			     MOV AH,9					     ;Write error sentence
+    126	006F  BA 0091r			     MOV DX,OFFSET vectorError
+    127	0072  CD 21			     INT 21H
+    128	0074  E9 00B9			     JMP ENDING					     ;Jumps to end of program
+    129
+    130	0077			     FINISH_INPUT:
+    131	0077  B9 0000		     MOV CX, 0
+    132	007A  BE 0000		     MOV SI, 0
+    133	007D  BF 0001		     MOV DI, 1
+    134	0080			     LOOPING:	     ;LOOPS EACH ELEMENT OF THE	VECTOR AND CALLS TO THE	COMPARING FUNCTION
+    135	0080  83 FE 04			     CMP SI, 4
+    136	0083  74 38				     JE	NEXT ; If all the elements of the vector have been read, it goes to the	next+
+    137				     vector
+    138	0085  E8 0009			     CALL READ	     ; function	to read	a vector
+    139	0088  E8 0020			     CALL TRANSFORM ; writes the read number into ascii
+    140	008B  E8 0028			     CALL ADDSPACE   ; adds spaces so the output looks cleaner
+    141	008E  46			     INC SI  ; counter that loops through the elements of the vectors
+    142	008F  EB EF			     JMP LOOPING     ; jumps to	the begining of	the loop
+    143
+    144	0091			     READ:   ; function	that reads a vector element
+    145	0091  B8 0000			     MOV AX, 0
+    146	0094  8B D9			     MOV BX, CX
+    147	0096  8A 80 0001r		     MOV AL, DS:vector1[BX][SI]
+    148	009A  C3			     RET
+    149	009B			     PRINT : ; funtion that prints a vector (saved in the numberASCII variable)
+    150	009B  8B D9			     MOV BX, CX
+    151	009D  BA 0011r			     MOV DX, OFFSET numberASCII
+    152	00A0  B4 09			     MOV AH, 9h
+    153	00A2  CD 21			     INT 21h
+    154	00A4  B2 0A			     MOV DL, 0Ah
+    155	00A6  B4 02			     MOV AH, 02h
+    156	00A8  CD 21			     INT 21h
+    157	00AA  C3			     RET
+    158
+    159	00AB			     TRANSFORM:	; function that	transforms into	ascii
+    160	00AB  05 0030			     ADD AX, 30h
+    161	00AE  8B D9			     MOV BX, CX
+    162	00B0  88 85 0011r		     MOV DS:numberASCII[DI], AL
+    163	00B4  47			     INC DI
+    164	00B5  C3			     RET
+    165	00B6			     ADDSPACE:	     ; adds spaces to the numberASCII variable to make the output cleaner
+    166	00B6  C6 85 0011r 20		     MOV DS:numberASCII[DI], ' '
+    167	00BB  47			     INC DI
+    168	00BC  C3			     RET
+    169
+    170	00BD			     NEXT: ; function that goes	to the next vector
+    171	00BD  83 F9 10			     CMP CX, 10h
+Turbo Assembler	 Version 2.0	    04/15/21 02:40:55	    Page 4
+lab2E.asm
+
+
+
+    172	00C0  7D 76				     JGE CHECK_ROWS
+    173	00C2  E8 FFD6			     CALL PRINT
+    174	00C5  83 C1 04			     ADD CX, 4
+    175
+    176	00C8  BE 0000			     MOV SI, 0
+    177	00CB  BF 0001			     MOV DI, 1
+    178	00CE  EB B0			     JMP LOOPING
+    179
+    180	00D0			     FAIL_ROWS:	     ; prints if rows are invalid
+    181	00D0  BA 001Br			     MOV DX, OFFSET errorRows
+    182	00D3  B4 09			     MOV AH, 9h
+    183	00D5  CD 21			     INT 21h
+    184	00D7  EB 3F 90			     JMP FLAG_CHECK2
+    185	00DA			     CORRECT_ROWS:   ; prints if rows are valid
+    186	00DA  BA 002Ar			     MOV DX, OFFSET correctRows
+    187	00DD  B4 09			     MOV AH, 9h
+    188	00DF  CD 21			     INT 21h
+    189	00E1  EB 35 90			     JMP FLAG_CHECK2
+    190	00E4			     FAIL_COLUMNS:   ; prints if columns are invalid
+    191	00E4  BA 0037r			     MOV DX, OFFSET errorColumns
+    192	00E7  B4 09			     MOV AH, 9h
+    193	00E9  CD 21			     INT 21h
+    194	00EB  EB 37 90			     JMP FLAG_CHECK3
+    195	00EE			     CORRECT_COLUMNS:	     ; prints if columns are valid
+    196	00EE  BA 0049r			     MOV DX, OFFSET correctColumns
+    197	00F1  B4 09			     MOV AH, 9h
+    198	00F3  CD 21			     INT 21h
+    199	00F5  EB 2D 90			     JMP FLAG_CHECK3
+    200	00F8			     FAIL_REGIONS:   ; prints if columns are invalid
+    201	00F8  BA 0059r			     MOV DX, OFFSET errorRegions
+    202	00FB  B4 09			     MOV AH, 9h
+    203	00FD  CD 21			     INT 21h
+    204	00FF  EB 2F 90			     JMP ENDING
+    205	0102			     CORRECT_REGIONS:	     ; prints if columns are valid
+    206	0102  BA 006Br			     MOV DX, OFFSET correctRegions
+    207	0105  B4 09			     MOV AH, 9h
+    208	0107  CD 21			     INT 21h
+    209	0109  EB 25 90			     JMP ENDING
+    210	010C			     FLAG_CHECK:     ; checks if row flag is active (in	that case rows would be	invalid)
+    211	010C  B8 0000			     MOV AX, 0
+    212	010F  A0 00B8r			     MOV AL, DS:rc_flag[0]
+    213	0112  3C 01			     CMP AL, 1
+    214	0114  74 BA				     JE	FAIL_ROWS
+    215	0116  EB C2			     JMP CORRECT_ROWS
+    216	0118			     FLAG_CHECK2: ; checks that	column flag is active
+    217	0118  B8 0000			     MOV AX, 0
+    218	011B  A0 00B9r			     MOV AL, DS:rc_flag[1]
+    219	011E  3C 01			     CMP AL, 1
+    220	0120  74 C2				     JE	FAIL_COLUMNS
+    221	0122  EB CA			     JMP CORRECT_COLUMNS
+    222	0124			     FLAG_CHECK3:
+    223	0124  B8 0000			     MOV AX, 0
+    224	0127  A0 00BAr			     MOV AL, DS:rc_flag[2]
+    225	012A  3C 01			     CMP AL, 1
+    226	012C  74 CA				     JE	FAIL_REGIONS
+    227	012E  EB D2			     JMP CORRECT_REGIONS
+    228	0130			     ENDING: ; END OF PROGRAM
+Turbo Assembler	 Version 2.0	    04/15/21 02:40:55	    Page 5
+lab2E.asm
+
+
+
+    229	0130  BA 0000			     MOV DX, 0
+    230	0133  B8 4C00			     MOV AX, 4C00H
+    231	0136  CD 21			     INT 21H
+    232
+    233	0138			     CHECK_ROWS:     ; check that both rows and	columns	work
+    234	0138  BB 0000			     MOV BX, 0
+    235	013B  BE 0000			     MOV SI, 0
+    236	013E  BF 0000			     MOV DI, 0
+    237	0141  B9 0000			     MOV CX, 0
+    238	0144			     ROWS_START:     ; used to make a loop for each vector
+    239	0144  83 FB 10			     CMP BX, 10h
+    240	0147  7D 7A				     JGE CHECK_REGIONS_JMP1
+    241	0149  B8 0000			     MOV AX, 0
+    242	014C  8A 80 0001r		     MOV AL, DS:VECTOR1[BX][SI]	; Moves	the chosen element of the vector to the	register AL
+    243
+    244	0150  3A 87 0001r		     CMP AL, VECTOR1[BX][0]
+    245	0154  74 70				     JE	ADD0
+    246	0156  3A 87 0002r	     RET0:   CMP AL, VECTOR1[BX][1] ; this part	is for rows
+    247	015A  74 6E					     JE	ADD1
+    248	015C  3A 87 0003r	     RET1:   CMP AL, VECTOR1[BX][2]
+    249	0160  74 6C					     JE	ADD2
+    250	0162  3A 87 0004r	     RET2:   CMP AL, VECTOR1[BX][3]
+    251	0166  74 6A					     JE	ADD3
+    252	0168  80 FC 01		     RET3:   CMP AH, 1
+    253	016B  75 79					     JNE FLAG_ROWS
+    254	016D  3C 04			     CMP AL, 4	     ; Check if	greater	than 4
+    255	016F  7F 75				     JG	FLAG_ROWS
+    256	0171  3C 01			     CMP AL, 1	     ; Check if	shorter	than 1
+    257	0173  7C 71				     JL	FLAG_ROWS
+    258	0175			     RET_ROW: ;return after adding the row flag
+    259	0175  B8 0000			     MOV AX, 0
+    260	0178  8B D3			     MOV DX, BX
+    261	017A  8B D9			     MOV BX, CX
+    262	017C  8A 81 0001r		     MOV AL, DS:VECTOR1[BX][DI]	; Moves	the chosen element of the vector to the	register AL
+    263
+    264	0180  3A 85 0001r			     CMP AL, VECTOR1[0][DI]
+    265	0184  74 50					     JE	ADD4
+    266	0186  3A 85 0005r	     RET4:   CMP AL, VECTOR1[4][DI]
+    267	018A  74 4E					     JE	ADD5
+    268	018C  3A 85 0009r	     RET5:   CMP AL, VECTOR1[8][DI]
+    269	0190  74 4C					     JE	ADD6
+    270	0192  3A 85 000Dr	     RET6:   CMP AL, VECTOR1[12][DI]
+    271	0196  74 4A					     JE	ADD7
+    272	0198  80 FC 01		     RET7:   CMP AH, 1
+    273	019B  75 50					     JNE FLAG_COLUMNS
+    274	019D  3C 04			     CMP AL, 4	     ; Check if	greater	than 4
+    275	019F  7F 4C				     JG	FLAG_COLUMNS
+    276	01A1  3C 01			     CMP AL, 1	     ; Check if	shorter	than 1
+    277	01A3  7C 48				     JL	FLAG_COLUMNS
+    278	01A5			     RET_COL:	     ; return to the place after adding	the column flag
+    279	01A5  8B CB			     MOV CX, BX
+    280	01A7  8B DA			     MOV BX, DX
+    281	01A9  83 C1 04			     ADD CX, 4
+    282	01AC  46			     INC SI
+    283	01AD  83 FE 04			     CMP SI, 4
+    284	01B0  74 02				     JE	END_ROW
+    285	01B2  EB 90			     JMP ROWS_START
+Turbo Assembler	 Version 2.0	    04/15/21 02:40:55	    Page 6
+lab2E.asm
+
+
+
+    286	01B4			     END_ROW:
+    287	01B4  83 C3 04			     ADD BX, 4
+    288	01B7  BE 0000			     MOV SI, 0
+    289	01BA  47			     INC DI
+    290	01BB  B9 0000			     MOV CX, 0
+    291	01BE  EB 84			     JMP ROWS_START
+    292
+    293	01C0  E9 FF49		     FLAG_CHECK_JMP1: JMP FLAG_CHECK
+    294	01C3  EB 36 90		     CHECK_REGIONS_JMP1: JMP CHECK_REGIONS
+    295
+    296	01C6			     ADD0:   ; This is separated in 7 to jump to different places but is just one function
+    297	01C6  FE C4			     INC AH
+    298	01C8  EB 8C			     JMP RET0
+    299	01CA			     ADD1:
+    300	01CA  FE C4			     INC AH
+    301	01CC  EB 8E			     JMP RET1
+    302	01CE			     ADD2:
+    303	01CE  FE C4			     INC AH
+    304	01D0  EB 90			     JMP RET2
+    305	01D2			     ADD3:
+    306	01D2  FE C4			     INC AH
+    307	01D4  EB 92			     JMP RET3
+    308	01D6			     ADD4:   ; This is separated in 4 to jump to different places but is just one function
+    309	01D6  FE C4			     INC AH
+    310	01D8  EB AC			     JMP RET4
+    311	01DA			     ADD5:
+    312	01DA  FE C4			     INC AH
+    313	01DC  EB AE			     JMP RET5
+    314	01DE			     ADD6:
+    315	01DE  FE C4			     INC AH
+    316	01E0  EB B0			     JMP RET6
+    317	01E2			     ADD7:
+    318	01E2  FE C4			     INC AH
+    319	01E4  EB B2			     JMP RET7
+    320
+    321
+    322	01E6			     FLAG_ROWS:	; adds a flag if the rows are invalid so they are printed as invalid later
+    323	01E6  C6 06 00B8r 01		     MOV DS:rc_flag[0],	1
+    324	01EB  EB 88			     jmp RET_ROW
+    325
+    326
+    327	01ED			     FLAG_COLUMNS:   ; adds a flag if the columns are invalid so they are printed as invalid later
+    328	01ED  C6 06 00B9r 01		     MOV DS:rc_flag[1],	1
+    329	01F2  EB B1			     JMP RET_COL
+    330
+    331	01F4			     FLAG_REGIONS:
+    332	01F4  C6 06 00BAr 01		     MOV DS:rc_flag[2],	1
+    333	01F9  EB C5			     JMP FLAG_CHECK_JMP1
+    334
+    335	01FB			     CHECK_REGIONS:
+    336	01FB  BB 0000			     MOV BX, 0
+    337	01FE  BE 0000			     MOV SI, 0
+    338	0201  BF 0000			     MOV DI, 0
+    339	0204  B9 0000			     MOV CX, 0
+    340	0207			     CHECK_REGIONS_CONTROL:
+    341	0207  83 FB 0E				     CMP BX, 14
+    342	020A  7D B4				     JGE FLAG_CHECK_JMP1
+Turbo Assembler	 Version 2.0	    04/15/21 02:40:55	    Page 7
+lab2E.asm
+
+
+
+    343	020C  B8 0000			     MOV AX, 0
+    344	020F  8A 80 0001r		     MOV AL, DS:VECTOR1[BX][SI]	; Moves	the chosen element of the vector to the	register AL
+    345
+    346	0213  3A 87 0001r			     CMP AL, VECTOR1[BX][0]
+    347	0217  74 2F					     JE	ADD8
+    348	0219			     RET8:
+    349	0219  3A 87 0002r			     CMP AL, VECTOR1[BX][1] ; this part	is for rows
+    350	021D  74 2D					     JE	ADD9
+    351	021F  83 C3 04		     RET9:	     ADD BX, 4
+    352	0222  3A 87 0001r			     CMP AL, VECTOR1[BX][0]
+    353	0226  74 28					     JE	ADD10
+    354	0228  3A 87 0002r	     RET10:  CMP AL, VECTOR1[BX][1]
+    355	022C  74 26					     JE	ADD11
+    356	022E  80 FC 01		     RET11:  CMP AH, 1
+    357	0231  75 C1					     JNE FLAG_REGIONS
+    358	0233  3C 04			     CMP AL, 4	     ; Check if	greater	than 4
+    359	0235  7F BD				     JG	FLAG_REGIONS
+    360	0237  3C 01			     CMP AL, 1	     ; Check if	shorter	than 1
+    361	0239  7C B9				     JL	FLAG_REGIONS
+    362
+    363	023B  83 C3 FE				     ADD BX, -2
+    364	023E  83 FB 04				     CMP BX, 4
+    365	0241  75 C4					     JNE CHECK_REGIONS_CONTROL
+    366	0243  83 C3 04				     ADD BX, 4
+    367	0246  EB BF				     JMP CHECK_REGIONS_CONTROL
+    368
+    369
+    370	0248			     ADD8:   ; This is separated in 7 to jump to different places but is just one function
+    371	0248  FE C4			     INC AH
+    372	024A  EB CD			     JMP RET8
+    373	024C			     ADD9:
+    374	024C  FE C4			     INC AH
+    375	024E  EB CF			     JMP RET9
+    376	0250			     ADD10:
+    377	0250  FE C4			     INC AH
+    378	0252  EB D4			     JMP RET10
+    379	0254			     ADD11:
+    380	0254  FE C4			     INC AH
+    381	0256  EB D6			     JMP RET11
+    382
+    383
+    384	0258			     BEGIN ENDP
+    385
+    386				     ; END OF THE CODE SEGMENT
+    387	0258			     CODE ENDS
+    388				     ; END OF THE
+    389
+    390				     END BEGIN
+Turbo Assembler	 Version 2.0	    04/15/21 02:40:55	    Page 8
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "04/15/21"
+??FILENAME			  Text	 "lab2E	  "
+??TIME				  Text	 "02:40:54"
+??VERSION			  Number 0200
+@CPU				  Text	 0101H
+@CURSEG				  Text	 CODE
+@FILENAME			  Text	 LAB2E
+@WORDSIZE			  Text	 2
+ADD0				  Near	 CODE:01C6
+ADD1				  Near	 CODE:01CA
+ADD10				  Near	 CODE:0250
+ADD11				  Near	 CODE:0254
+ADD2				  Near	 CODE:01CE
+ADD3				  Near	 CODE:01D2
+ADD4				  Near	 CODE:01D6
+ADD5				  Near	 CODE:01DA
+ADD6				  Near	 CODE:01DE
+ADD7				  Near	 CODE:01E2
+ADD8				  Near	 CODE:0248
+ADD9				  Near	 CODE:024C
+ADDSPACE			  Near	 CODE:00B6
+BEGIN				  Near	 CODE:0000
+CHECK_REGIONS			  Near	 CODE:01FB
+CHECK_REGIONS_CONTROL		  Near	 CODE:0207
+CHECK_REGIONS_JMP1		  Near	 CODE:01C3
+CHECK_ROWS			  Near	 CODE:0138
+CORRECTCOLUMNS			  Byte	 DATA:0049
+CORRECTREGIONS			  Byte	 DATA:006B
+CORRECTROWS			  Byte	 DATA:002A
+CORRECT_COLUMNS			  Near	 CODE:00EE
+CORRECT_REGIONS			  Near	 CODE:0102
+CORRECT_ROWS			  Near	 CODE:00DA
+ENDING				  Near	 CODE:0130
+END_ROW				  Near	 CODE:01B4
+ERRORCOLUMNS			  Byte	 DATA:0037
+ERRORREGIONS			  Byte	 DATA:0059
+ERRORROWS			  Byte	 DATA:001B
+FAIL_COLUMNS			  Near	 CODE:00E4
+FAIL_REGIONS			  Near	 CODE:00F8
+FAIL_ROWS			  Near	 CODE:00D0
+FINISH_INPUT			  Near	 CODE:0077
+FLAG_CHECK			  Near	 CODE:010C
+FLAG_CHECK2			  Near	 CODE:0118
+FLAG_CHECK3			  Near	 CODE:0124
+FLAG_CHECK_JMP1			  Near	 CODE:01C0
+FLAG_COLUMNS			  Near	 CODE:01ED
+FLAG_REGIONS			  Near	 CODE:01F4
+FLAG_ROWS			  Near	 CODE:01E6
+GETVECTOR			  Byte	 DATA:00A4
+INTRODUCE_VECTOR		  Near	 CODE:0018
+LOOPING				  Near	 CODE:0080
+NEXT				  Near	 CODE:00BD
+NEXT_VECTOR			  Near	 CODE:0058
+NUMBERASCII			  Byte	 DATA:0011
+Turbo Assembler	 Version 2.0	    04/15/21 02:40:55	    Page 9
+Symbol Table
+
+
+
+PRINT				  Near	 CODE:009B
+PROCESS_VECTOR			  Near	 CODE:0034
+RC_FLAG				  Byte	 DATA:00B8
+READ				  Near	 CODE:0091
+RESULT				  Word	 EXTRA:0000
+RET0				  Near	 CODE:0156
+RET1				  Near	 CODE:015C
+RET10				  Near	 CODE:0228
+RET11				  Near	 CODE:022E
+RET2				  Near	 CODE:0162
+RET3				  Near	 CODE:0168
+RET4				  Near	 CODE:0186
+RET5				  Near	 CODE:018C
+RET6				  Near	 CODE:0192
+RET7				  Near	 CODE:0198
+RET8				  Near	 CODE:0219
+RET9				  Near	 CODE:021F
+RET_COL				  Near	 CODE:01A5
+RET_ROW				  Near	 CODE:0175
+ROWS_START			  Near	 CODE:0144
+SKIP				  Near	 CODE:0055
+TRANSFORM			  Near	 CODE:00AB
+V				  Byte	 DATA:0000
+VECTOR1				  Byte	 DATA:0001
+VECTOR2				  Byte	 DATA:0005
+VECTOR3				  Byte	 DATA:0009
+VECTOR4				  Byte	 DATA:000D
+VECTORERROR			  Byte	 DATA:0091
+VECTORTEXT			  Byte	 DATA:007B
+VECTOR_ERROR			  Near	 CODE:006D
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+CODE				  16  0258 Para	  none
+DATA				  16  00BB Para	  none
+EXTRA				  16  0004 Para	  none
+STACKSEG			  16  0040 Para	  Stack	  STACK
+

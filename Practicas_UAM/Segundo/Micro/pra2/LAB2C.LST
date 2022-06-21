@@ -1,0 +1,272 @@
+Turbo Assembler	 Version 2.0	    04/09/21 16:26:30	    Page 1
+lab2C.asm
+
+
+
+      1				     ;**************************************************************************
+      2				     ; MBS 2021. LABORATORY ASSIGNMENT 2
+      3				     ; Author: Guillermo Martín-Coello	Juárez
+      4				     ; Group: 2292
+      5				     ; Task: 2A
+      6				     ;**************************************************************************
+      7				     ; DATA SEGMENT DEFINITION
+      8	0000			     DATA SEGMENT
+      9
+     10				     ; VARIABLE	DEFINITION
+     11	0000  00		     v DB 0
+     12				     ; VECTOR DEFINITION
+     13	0001  01 02 02 04	     vector1 DB	1,2,2,4
+     14	0005  04 02 05 01	     vector2 DB	4,2,5,1
+     15	0009  03 02 04 01	     vector3 DB	3,2,4,1
+     16	000D  08*(00) 20 24	     numberASCII DB 8 dup (0), " $"
+     17	0017  4F 75 74 73 69 64	65+  errorNumDif DB "Outside the set: [1,4]", 13, 10, '$'
+     18	      20 74 68 65 20 73	65+
+     19	      74 3A 20 5B 31 2C	34+
+     20	      5D 0D 0A 24
+     21	0030  44 75 70 6C 69 63	61+  errorNumEqu DB "Duplicated", 13, 10, '$'
+     22	      74 65 64 0D 0A 24
+     23	003D  43 6F 72 72 65 63	74+  correctOutput DB "Correct",13,10,'$'
+     24	      0D 0A 24
+     25	0047			     DATA ENDS
+     26				     ;**************************************************************************
+     27				     ; STACK SEGMENT DEFINITION
+     28	0000			     STACKSEG SEGMENT STACK "STACK"
+     29	0000  40*(00)		     DB	40H DUP	(0)  ; initialization example, 64 bytes	initialize to 0
+     30	0040			     STACKSEG ENDS
+     31				     ;**************************************************************************
+     32				     ; EXTRA SEGMENT DEFINITION
+     33	0000			     EXTRA SEGMENT
+     34	0000  0000 0000		     RESULT DW 0,0 ; initialization example. 2 WORDS (4	BYTES)
+     35	0004			     EXTRA ENDS
+     36				     ;*************************************************************************
+     37				     ; CODE SEGMENT DEFINITION
+     38	0000			     CODE SEGMENT
+     39				     ASSUME CS:	CODE, DS: DATA,	ES: EXTRA, SS: STACKSEG
+     40				     ; BEGINNING OF MAIN PROCEDURE
+     41	0000			     BEGIN PROC
+     42				     ; INITIALIZE THE SEGMENT REGISTER WITH ITS	VALUE
+     43	0000  B8 0000s		     MOV AX, DATA
+     44	0003  8E D8		     MOV DS, AX
+     45	0005  B8 0000s		     MOV AX, STACKSEG
+     46	0008  8E D0		     MOV SS, AX
+     47	000A  B8 0000s		     MOV AX, EXTRA
+     48	000D  8E C0		     MOV ES, AX
+     49	000F  BC 0040		     MOV SP, 64	 ; LOAD	A STACK	POINTER	WITH THE HIGHEST VALUE
+     50				     ; END OF INITIALIZATIONS
+     51
+     52				     ; BEGINNING OF THE	PROGRAMME
+     53	0012  B9 0000		     MOV CX, 0
+     54	0015  B8 0000		     MOV AX, 0
+     55	0018  BE 0000		     MOV SI, 0
+     56	001B  BF 0000		     MOV DI, 0
+     57	001E  BB 0000		     MOV BX, 0
+Turbo Assembler	 Version 2.0	    04/09/21 16:26:30	    Page 2
+lab2C.asm
+
+
+
+     58
+     59	0021			     PRINTVECTOR: ; Prints the vector
+     60	0021  B4 00			     MOV AH, 0
+     61	0023  BE 0000			     MOV SI, 0
+     62	0026  BF 0000			     mov DI, 0
+     63	0029  EB 0C 90			     JMP NOSPACE
+     64
+     65	002C			     TRANSFORMLOOP: ; Loop to call the transform function
+     66	002C  83 FE 04			     CMP SI,4
+     67	002F  74 0F				     JE	FIRSTLOOP
+     68	0031  47			     INC DI  ; register	used to	print spaces between the vector	numbers	to give	a clear	image
+     69	0032  C6 85 000Dr 20		     MOV DS:numberASCII[DI], ' '
+     70
+     71	0037			     NOSPACE: ;	Part of	the vector printing chosen the first loop to skip droping the space
+     72	0037  8B D9			     MOV BX, CX
+     73	0039  8A 80 0001r		     MOV AL, DS:VECTOR1[BX][SI]
+     74	003D  E9 008D			     JMP TRANSFORM
+     75
+     76	0040			     FIRSTLOOP:
+     77	0040  BA 000Dr			     MOV DX, OFFSET numberASCII	; printing the number
+     78	0043  B4 09			     MOV AH, 9h
+     79	0045  CD 21			     INT 21h
+     80	0047  BE 0000			     MOV SI, 0 ; Changes to 0 si when leaves printvector
+     81
+     82
+     83	004A			     LOOPING:	     ;LOOPS EACH ELEMENT OF THE	VECTOR AND CALLS TO THE	COMPARING FUNCTION
+     84	004A  83 FE 04			     CMP SI, 4
+     85	004D  74 5D				     JE	PRINT_CORRECT
+     86	004F  8B D9			     MOV BX, CX
+     87	0051  8A 80 0001r		     MOV AL, DS:VECTOR1[BX][SI]	; Moves	the chosen element of the vector to the	register AL
+     88	0055  EB 1A 90			     JMP COMPARE_FUNCTION    ; Calls the compare function
+     89
+     90	0058  EB 0F 90			     JMP ENDING
+     91
+     92				     ; END OF THE PROGRAMME
+     93	005B			     NEXT: ; LOOPS BETWEEN THE DIFFERENT VECTORS AND CALLS THE LOOPING FUNCTION
+     94
+     95				     ; Increments bx, which indicates the vector to check
+     96	005B  41			     INC CX
+     97	005C  41			     INC CX
+     98	005D  41			     INC CX
+     99	005E  41			     INC CX
+    100
+    101				     ; Compares	to check if all	vectors	are already checked. (Change 3 to the number of	vectors)
+    102	005F  83 F9 0C			     CMP CX, 4*3
+    103	0062  74 05				     JE	ENDING
+    104	0064  BE 0000			     MOV SI, 0
+    105	0067  EB B8			     JMP PRINTVECTOR
+    106
+    107	0069			     ENDING: ; END OF PROGRAM
+    108	0069  BA 0000			     MOV DX, 0
+    109	006C  B8 4C00			     MOV AX, 4C00H
+    110	006F  CD 21			     INT 21H
+    111	0071			     BEGIN ENDP
+    112
+    113				     ; SPACE FOR SUBROUTINES
+    114	0071			     COMPARE_FUNCTION:	     ; COMPARES	AN ELEMENT TO CHECK IF IS GOOD
+Turbo Assembler	 Version 2.0	    04/09/21 16:26:30	    Page 3
+lab2C.asm
+
+
+
+    115	0071  B4 00			     MOV AH, 0
+    116	0073  3A 87 0001r		     CMP AL, VECTOR1[BX][0]
+    117	0077  74 23				     JE	ADD0
+    118	0079  3A 87 0002r	     RET0:   CMP AL, VECTOR1[BX][1]
+    119	007D  74 21					     JE	ADD1
+    120	007F  3A 87 0003r	     RET1:   CMP AL, VECTOR1[BX][2]
+    121	0083  74 1F					     JE	ADD2
+    122	0085  3A 87 0004r	     RET2:   CMP AL, VECTOR1[BX][3]
+    123	0089  74 1D					     JE	ADD3
+    124	008B  80 FC 01		     RET3:   CMP AH, 1
+    125	008E  75 31					     JNE FAILEQU
+    126	0090  46				     INC SI
+    127				     ; Check if	outside	the set
+    128	0091  3C 04			     CMP AL, 4	     ; Check if	greater	than 4
+    129	0093  7F 20				     JG	FAIL
+    130	0095  3C 01			     CMP AL, 1	     ; Check if	shorter	than 1
+    131	0097  7C 1C				     JL	FAIL
+    132	0099  46			     INC SI
+    133	009A  EB AE			     JMP LOOPING
+    134
+    135
+    136	009C			     ADD0:   ; This is separated in 4 to jump to different places but is just one function
+    137	009C  FE C4			     INC AH
+    138	009E  EB D9			     JMP RET0
+    139	00A0			     ADD1:
+    140	00A0  FE C4			     INC AH
+    141	00A2  EB DB			     JMP RET1
+    142	00A4			     ADD2:
+    143	00A4  FE C4			     INC AH
+    144	00A6  EB DD			     JMP RET2
+    145	00A8			     ADD3:
+    146	00A8  FE C4			     INC AH
+    147	00AA  EB DF			     JMP RET3
+    148
+    149
+    150	00AC			     PRINT_CORRECT:  ; PRINTS CORRECT IF VECTOR	IS CORRECT
+    151
+    152
+    153	00AC  B4 09			     MOV AH,9
+    154	00AE  BA 003Dr			     MOV DX, OFFSET correctOutput
+    155	00B1  CD 21			     INT 21H
+    156	00B3  EB A6			     JMP NEXT
+    157
+    158	00B5			     FAIL:   ; PRINTS FAILURE ARRAY IF THE VECTOR IS NOT CORRECT
+    159
+    160	00B5  B4 09			     MOV AH,9
+    161	00B7  BA 0000			     MOV DX, 0000h
+    162	00BA  BA 0017r			     MOV DX,OFFSET errorNumDif;	Write fail
+    163	00BD  CD 21			     INT 21H
+    164	00BF  EB 9A			     JMP NEXT
+    165	00C1			     FAILEQU:	     ; PRINTS FAILURE ARRAY IF THE VECTOR IS NOT CORRECT
+    166
+    167	00C1  B4 09			     MOV AH,9
+    168	00C3  BA 0000			     MOV DX, 0000h
+    169	00C6  BA 0030r			     MOV DX,OFFSET errorNumEqu;	Write fail
+    170	00C9  CD 21			     INT 21H
+    171	00CB  EB 8E			     JMP NEXT
+Turbo Assembler	 Version 2.0	    04/09/21 16:26:30	    Page 4
+lab2C.asm
+
+
+
+    172
+    173	00CD			     TRANSFORM:
+    174	00CD  05 0030			     ADD AX, 30h
+    175	00D0  47			     inc DI
+    176	00D1  88 85 000Dr		     MOV DS:numberASCII[DI], AL
+    177
+    178	00D5  BA 0000s			     MOV DX, SEG numberASCII[DI]
+*Warning* lab2C.asm(173) [Constant] assumed to mean immediate constant
+    179	00D8  8B 9D 000Dr		     MOV BX, OFFSET numberASCII[DI]
+    180
+    181	00DC  46			     INC SI ; This is just to make the print loop easier and shorter it	increments si from  +
+    182				     here
+    183	00DD  E9 FF4C			     JMP TRANSFORMLOOP
+    184
+    185
+    186
+    187
+    188				     ; END OF THE CODE SEGMENT
+    189	00E0			     CODE ENDS
+    190				     ; END OF THE PROGRAMME POINTING OUT WHERE THE EXECUTION BEGINS
+    191				     END BEGIN
+Turbo Assembler	 Version 2.0	    04/09/21 16:26:30	    Page 5
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "04/09/21"
+??FILENAME			  Text	 "lab2C	  "
+??TIME				  Text	 "16:26:29"
+??VERSION			  Number 0200
+@CPU				  Text	 0101H
+@CURSEG				  Text	 CODE
+@FILENAME			  Text	 LAB2C
+@WORDSIZE			  Text	 2
+ADD0				  Near	 CODE:009C
+ADD1				  Near	 CODE:00A0
+ADD2				  Near	 CODE:00A4
+ADD3				  Near	 CODE:00A8
+BEGIN				  Near	 CODE:0000
+COMPARE_FUNCTION		  Near	 CODE:0071
+CORRECTOUTPUT			  Byte	 DATA:003D
+ENDING				  Near	 CODE:0069
+ERRORNUMDIF			  Byte	 DATA:0017
+ERRORNUMEQU			  Byte	 DATA:0030
+FAIL				  Near	 CODE:00B5
+FAILEQU				  Near	 CODE:00C1
+FIRSTLOOP			  Near	 CODE:0040
+LOOPING				  Near	 CODE:004A
+NEXT				  Near	 CODE:005B
+NOSPACE				  Near	 CODE:0037
+NUMBERASCII			  Byte	 DATA:000D
+PRINTVECTOR			  Near	 CODE:0021
+PRINT_CORRECT			  Near	 CODE:00AC
+RESULT				  Word	 EXTRA:0000
+RET0				  Near	 CODE:0079
+RET1				  Near	 CODE:007F
+RET2				  Near	 CODE:0085
+RET3				  Near	 CODE:008B
+TRANSFORM			  Near	 CODE:00CD
+TRANSFORMLOOP			  Near	 CODE:002C
+V				  Byte	 DATA:0000
+VECTOR1				  Byte	 DATA:0001
+VECTOR2				  Byte	 DATA:0005
+VECTOR3				  Byte	 DATA:0009
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+CODE				  16  00E0 Para	  none
+DATA				  16  0047 Para	  none
+EXTRA				  16  0004 Para	  none
+STACKSEG			  16  0040 Para	  Stack	  STACK
+Turbo Assembler	 Version 2.0	    04/09/21 16:26:30	    Page 6
+Error Summary
+
+
+
+*Warning* lab2C.asm(173) [Constant] assumed to mean immediate constant
+

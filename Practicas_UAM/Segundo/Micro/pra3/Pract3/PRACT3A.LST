@@ -1,0 +1,202 @@
+Turbo Assembler	 Version 2.0	    04/21/21 17:55:41	    Page 1
+pract3a.asm
+
+
+
+      1				     ;*********************************************************************
+      2				     ;*
+      3				     ;*
+      4				     ;*	Microprocessor-Based Systems
+      5				     ;*	2020-2021
+      6				     ;*	Lab 3a
+      7				     ;*
+      8				     ;*
+      9				     ;*	author:
+     10				     ;*
+     11				     ;*	notes: empty example
+     12				     ;*********************************************************************/
+     13
+     14				     ; DEFINITION OF THE CODE SEGMENT AS PUBLIC
+     15	0000			     _TEXT SEGMENT BYTE	PUBLIC 'CODE'
+     16					 ASSUME	CS:_TEXT
+     17
+     18
+     19					     ; BEGINNING OF THE	MAIN PROCEDURE
+     20	0000				     _MAIN PROC
+     21						     ;THE PROGRAMME STARTS
+     22						     PUBLIC _drawPixel
+     23				     PUBLIC _drawSquare
+     24	0000  00				     _MODO_VIDEO DB 0
+     25
+     26	0001				     _MAIN ENDP
+     27
+     28	0001				     _drawPixel	proc far
+     29
+     30						     ; BEGINNING OF THE	PROGRAMME
+     31	0001  55				     push bp
+     32	0002  8B EC				     mov bp, sp
+     33
+     34
+     35
+     36
+     37						     ; We use 10h interrupción	to enter in video mode
+     38	0004  B4 0F				     MOV AH,0Fh	; Asking for video mode
+     39	0006  CD 10				     INT 10h ; Call to BIOS
+     40	0008  2E: A2 0000r			     MOV _MODO_VIDEO,AL	; We save the video mode and store it into AL
+     41
+     42	000C  B4 00				     mov ah, 00h ; We set the video mode
+     43	000E  B0 12				     mov al, 12h ; 640x480 16 color graphics (VGA)
+     44	0010  CD 10				     int 10h
+     45
+     46						     ; We set the background colour to green 0010b
+     47	0012  B4 0B				     mov ah, 0bh
+     48	0014  B7 00				     mov bh, 00h
+     49	0016  B3 00				     mov bl, 00h; 0 black 2 ; green
+     50	0018  CD 10				      int 10h
+     51
+     52						     ;Int10H draw pixel	--> AH=0Ch   AL	= Colour, BH = PageNumber, CX =	x, DX =	y
+     53	001A  B4 0C				     mov ah, 0Ch
+     54	001C  8A 46 06				     mov al, [bp + 6]
+     55	001F  B7 00				     mov bh, 00
+     56	0021  8B 4E 08				     mov cx, [bp + 8]
+     57	0024  8B 56 0A				     mov dx, [bp + 10]
+Turbo Assembler	 Version 2.0	    04/21/21 17:55:41	    Page 2
+pract3a.asm
+
+
+
+     58	0027  CD 10				     int 10h
+     59
+     60						     ; Read from the stack the value for the colour
+     61						     ;mov al, 0Fh ; white colour 1111b
+     62						     ;mov bh, 00h ; page number	(keep it always	to zero)
+     63						     ;mov cx,320 ; X position
+     64						     ;mov dx,240 ; Y position
+     65
+     66						     ;Int15H active waiting in milliseconds: 1 millon us = 1 segundo
+     67	0029  B9 002D				     MOV     CX, 2Dh ; CX:DX are the waiting time: 1 second = F:4240H --> 3 seconds +
+     68				     2D:C6C0h
+     69	002C  BA C6C0				     MOV     DX, 0C6C0h
+     70	002F  B4 86				     MOV     AH, 86H ;int15h with AH=86h to microseconds waiting in CX:DX
+     71	0031  CD 15				     INT     15H
+     72
+     73
+     74	0033  B4 00				     mov ah, 00h ; Restore the input configuration to video mode
+     75	0035  2E: A0 0000r			     mov al, _MODO_VIDEO ;
+     76	0039  CD 10				     int 10h
+     77
+     78
+     79	003B  5D				     pop bp
+     80
+     81	003C  B8 0000				     mov ax, 0
+     82
+     83	003F  CB				     ret
+     84	0040				     _drawPixel	endp
+     85	0040					     _drawSquare proc far
+     86
+     87						     ; BEGINNING OF THE	PROGRAMME
+     88	0040  55				     push bp
+     89	0041  8B EC				     mov bp, sp
+     90
+     91						     ; We use 10h interrupción	to enter in video mode
+     92	0043  B4 0F				     MOV AH,0Fh	; Asking for video mode
+     93	0045  CD 10				     INT 10h ; Call to BIOS
+     94	0047  2E: A2 0000r			     MOV _MODO_VIDEO,AL	; We save the video mode and store it into AL
+     95
+     96	004B  B4 00				     mov ah, 00h ; We set the video mode
+     97	004D  B0 12				     mov al, 12h ; 640x480 16 color graphics (VGA)
+     98	004F  CD 10				     int 10h
+     99
+    100						     ; We set the background colour to green 0010b
+    101	0051  B4 0B				     mov ah, 0bh
+    102	0053  B7 00				     mov bh, 00h
+    103	0055  B3 00				     mov bl, 00h; 0 black 2 ; green
+    104	0057  CD 10				      int 10h
+    105
+    106						     ;Int10H draw pixel	--> AH=0Ch   AL	= Colour, BH = PageNumber, CX =	x, DX =	y
+    107						     ;unsigned char pintaCuadrado (unsigned char color = 6, int	tam = 8,int x =	10, +
+    108				     int y = 12)
+    109	0059  8B 76 08				     mov si, [bp + 8]
+    110	005C  8B 7E 08				     mov di, [bp + 8]
+    111	005F					     looping:
+    112	005F  B4 0C				     mov ah, 0Ch
+    113	0061  8A 46 06				     mov al, [bp + 6]
+    114	0064  B7 00				     mov bh, 00
+Turbo Assembler	 Version 2.0	    04/21/21 17:55:41	    Page 3
+pract3a.asm
+
+
+
+    115	0066  8B 4E 0A				     mov cx, [bp + 10]
+    116	0069  03 CE				     add cx, si
+    117	006B  8B 56 0C				     mov dx, [bp + 12]
+    118	006E  03 D7				     add dx, di
+    119	0070  CD 10				     int 10h
+    120
+    121	0072  83 EE 01				     sub si,1
+    122	0075  83 FE 00				     cmp si, 0
+    123	0078  7F E5					     jg	looping
+    124	007A  8B 76 08				     mov si, [bp + 8]
+    125	007D  83 EF 01				     sub di,1
+    126	0080  83 FF 00				     cmp di, 0
+    127	0083  7F DA					     jg	looping
+    128
+    129
+    130						     ; Read from the stack the value for the colour
+    131						     ;mov al, 0Fh ; white colour 1111b
+    132						     ;mov bh, 00h ; page number	(keep it always	to zero)
+    133						     ;mov cx,320 ; X position
+    134						     ;mov dx,240 ; Y position
+    135
+    136						     ;Int15H active waiting in milliseconds: 1 millon us = 1 segundo
+    137	0085  B9 002D				     MOV     CX, 2Dh ; CX:DX are the waiting time: 1 second = F:4240H --> 3 seconds +
+    138				     2D:C6C0h
+    139	0088  BA C6C0				     MOV     DX, 0C6C0h
+    140	008B  B4 86				     MOV     AH, 86H ;int15h with AH=86h to microseconds waiting in CX:DX
+    141	008D  CD 15				     INT     15H
+    142
+    143
+    144	008F  B4 00				     mov ah, 00h ; Restore the input configuration to video mode
+    145	0091  2E: A0 0000r			     mov al, _MODO_VIDEO ;
+    146	0095  CD 10				     int 10h
+    147
+    148
+    149
+    150	0097  5D				     pop bp
+    151
+    152	0098  B8 0000				     mov ax, 0
+    153	009B  CD 21				     int 21h
+    154
+    155	009D  CB				     ret
+    156
+    157	009E				     _drawSquare endp
+    158
+    159
+    160	009E			     _TEXT ENDS
+    161				     END
+Turbo Assembler	 Version 2.0	    04/21/21 17:55:41	    Page 4
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??date				  Text	 "04/21/21"
+??filename			  Text	 "pract3a "
+??time				  Text	 "17:55:41"
+??version			  Number 0200
+@Cpu				  Text	 0101H
+@FileName			  Text	 pract3a
+@WordSize			  Text	 2
+@curseg				  Text	 _TEXT
+_MAIN				  Near	 _TEXT:0000
+_MODO_VIDEO			  Byte	 _TEXT:0000
+_drawPixel			  Far	 _TEXT:0001
+_drawSquare			  Far	 _TEXT:0040
+looping				  Near	 _TEXT:005F
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+_TEXT				  16  009E Byte	  Public  CODE
+

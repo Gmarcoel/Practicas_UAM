@@ -1,0 +1,223 @@
+Turbo Assembler	 Version 2.0	    03/09/21 21:26:12	    Page 1
+alumno.asm
+
+
+
+      1				     ;_Guillermo Martín-Coello Juárez_______________________________________________________
+      2				     ; Data segment definition
+      3	0000			     DATOS SEGMENT
+      4	0000  1B 5B 32 4A 24		     CLR_PANT	     DB	     1BH,"[2","J$"
+      5	0005  1B 5B 34 3B 32 37	66+	     CUR_MICRO	     DB	     1BH,"[4;27fTECNOLOGIA DE COMPUTADORES$"
+      6	      54 45 43 4E 4F 4C	4F+
+      7	      47 49 41 20 44 45	20+
+      8	      43 4F 4D 50 55 54	41+
+      9	      44 4F 52 45 53 24
+     10	0027  1B 5B 38 3B 31 66	57+	     PREG_NOM	     DB	     1BH,"[8;1fWRITE YOUR NAME ? $"
+     11	      52 49 54 45 20 59	4F+
+     12	      55 52 20 4E 41 4D	45+
+     13	      20 3F 20 24
+     14	0040  1B 5B 31 30 3B 31	66+	     PREG_SEC	     DB	     1BH,"[10;1fWRITE YOUR SECOND NAME ? $"
+     15	      57 52 49 54 45 20	59+
+     16	      4F 55 52 20 53 45	43+
+     17	      4F 4E 44 20 4E 41	4D+
+     18	      45 20 3F 20 24
+     19	0061  1B 5B 31 33 3B 31	66+	     PREG_CTR	     DB	     1BH,"[13;1fCOUNTRY	NAME ? $"
+     20	      43 4F 55 4E 54 52	59+
+     21	      20 4E 41 4D 45 20	3F+
+     22	      20 24
+     23	0078  50*(00)			     NOMBRE	     DB	     80	DUP (0)
+     24	00C8  50*(00)			     NOMBRE2	     DB	     80	DUP  (0)
+     25	0118  50*(00)			     COUNTRY	     DB	     80	DUP  (0)
+     26	0168  1B 5B 32 32 3B 31	66+	     TEXTO	     DB	     1BH,"[22;1f","$"
+     27	      24
+     28	0170  20 29 20 49 53 20	43+	     TEXTO2	     DB	     " ) IS COURSING SECOND COURSE "
+     29	      4F 55 52 53 49 4E	47+
+     30	      20 53 45 43 4F 4E	44+
+     31	      20 43 4F 55 52 53	45+
+     32	      20
+     33	018D  4F 46 20 43 4F 4D	50+			     DB	     "OF COMPUTER SCIENCE",13,10,"$"
+     34	      55 54 45 52 20 53	43+
+     35	      49 45 4E 43 45 0D	0A+
+     36	      24
+     37	01A3  1B 20 28 46 52 4F	4D+	     TEXTO3	     DB	     1BH," (FROM ","$"
+     38	      20 24
+     39	01AC			     DATOS ENDS
+     40				     ;_______________________________________________________________
+     41				     ; Stack segment definition
+     42	0000			     PILA SEGMENT STACK	"STACK"
+     43	0000  40*(00)			     DB	40H DUP	(0)
+     44	0040			     PILA ENDS
+     45				     ;_______________________________________________________________
+     46				     ; Code segment definition
+     47	0000			     CODE SEGMENT
+     48				     ASSUME CS:CODE,DS:DATOS,SS:PILA
+     49				     ; Main process start
+     50	0000			     START PROC	FAR
+     51				     ;Segment registers	initialization
+     52	0000  B8 0000s			     MOV AX,DATOS
+     53	0003  8E D8			     MOV DS,AX	     ;End of initialization
+     54
+     55	0005  B4 09			     MOV AH,9	     ; Clear screen
+     56	0007  BA 0000r			     MOV DX, OFFSET CLR_PANT
+     57	000A  CD 21			     INT 21H
+Turbo Assembler	 Version 2.0	    03/09/21 21:26:12	    Page 2
+alumno.asm
+
+
+
+     58
+     59	000C  BA 0005r			     MOV DX,OFFSET CUR_MICRO	     ;Write course
+     60	000F  CD 21			     INT 21H
+     61
+     62	0011  BA 0027r			     MOV DX,OFFSET PREG_NOM	     ;Show write your name
+     63	0014  CD 21			     INT 21H
+     64
+     65	0016  B4 0A			     MOV AH,0AH			     ;Save the name
+     66	0018  BA 0078r			     MOV DX,OFFSET NOMBRE
+     67
+     68	001B  C6 06 0078r 3C		     MOV NOMBRE[0],60		     ;Max characters
+     69	0020  CD 21			     INT 21H
+     70
+     71				     ;-----------------------------------------------------------------
+     72				     ;-----------------------------------------------------------------
+     73
+     74	0022  B4 09			     MOV AH,9					     ;Move line
+     75
+     76	0024  BA 0040r			     MOV DX,OFFSET PREG_SEC	     ;Show write your second name
+     77	0027  CD 21			     INT 21H
+     78
+     79	0029  B4 0A			     MOV AH,0AH					     ;saves second name
+     80	002B  BA 00C8r			     MOV DX,OFFSET NOMBRE2
+     81
+     82
+     83	002E  C6 06 00C8r 3C		     MOV NOMBRE2[0],60			     ;max number of characters
+     84	0033  CD 21			     INT 21H
+     85
+     86				     ;-----------------------------------------------------------------
+     87				     ;-----------------------------------------------------------------
+     88
+     89	0035  B4 09			     MOV AH,9					     ;Move line
+     90
+     91	0037  BA 0061r			     MOV DX,OFFSET PREG_CTR	     ;Show write your Country
+     92	003A  CD 21			     INT 21H
+     93
+     94	003C  B4 0A			     MOV AH,0AH			     ;Saves Country
+     95	003E  BA 0118r			     MOV DX,OFFSET COUNTRY
+     96
+     97
+     98	0041  C6 06 0118r 3C		     MOV COUNTRY[0],60		     ;Max characters
+     99	0046  CD 21			     INT 21H
+    100
+    101
+    102				     ;-----------------------------------------------------------------
+    103				     ; printing
+    104				     ;-----------------------------------------------------------------
+    105	0048  B4 09			     MOV AH,9
+    106	004A  BA 0168r			     MOV DX, OFFSET TEXTO    ;Moves to write the name
+    107	004D  CD 21			     INT 21H
+    108
+    109	004F  BB 0000		     moV BX,0
+    110	0052			     OTRO:
+    111	0052  8A 97 007Ar		     MOV DL,NOMBRE[BX+2]	     ;Writes the name
+    112	0056  B4 02			     MOV AH,2
+    113	0058  CD 21			     INT 21H
+    114
+Turbo Assembler	 Version 2.0	    03/09/21 21:26:12	    Page 3
+alumno.asm
+
+
+
+    115	005A  43			     INC BX
+    116	005B  3A 1E 0079r		     CMP BL, NOMBRE[1]		     ;Compare character	n
+    117	005F  75 F1			     JNE OTRO
+    118
+    119	0061  BA 0020			     MOV DX,' '				     ; Write a space between name and last name
+    120	0064  CD 21			     INT 21H
+    121
+    122
+    123				     ;-----------------------------------------------------------------
+    124				     ;-----------------------------------------------------------------
+    125
+    126
+    127	0066  BB 0000		     moV BX,0
+    128	0069			     SEC:
+    129	0069  8A 97 00CAr		     MOV DL,NOMBRE2[BX+2]	     ;Writes last name
+    130	006D  B4 02			     MOV AH,2
+    131	006F  CD 21			     INT 21H
+    132
+    133	0071  43			     INC BX
+    134	0072  3A 1E 00C9r		     CMP BL, NOMBRE2[1]		     ;Compare with number of characters
+    135	0076  75 F1			     JNE SEC
+    136
+    137
+    138				     ;-----------------------------------------------------------------
+    139				     ;-----------------------------------------------------------------
+    140	0078  BA 0020			     MOV DX,' '		     ; Writes a	space and the From text
+    141	007B  CD 21			     INT 21H
+    142	007D  B4 09			     MOV AH,9
+    143	007F  BA 01A3r			     MOV DX, OFFSET TEXTO3
+    144	0082  CD 21			     INT 21H
+    145
+    146	0084  BB 0000		     moV BX,0
+    147	0087			     TRD:
+    148	0087  8A 97 011Ar		     MOV DL,COUNTRY[BX+2]	     ;Writes the country
+    149	008B  B4 02			     MOV AH,2
+    150	008D  CD 21			     INT 21H
+    151
+    152	008F  43			     INC BX
+    153	0090  3A 1E 0119r		     CMP BL, COUNTRY[1]		     ;Compares with the	number of characters
+    154	0094  75 F1			     JNE TRD
+    155
+    156	0096  BA 0170r			     MOV DX, OFFSET TEXTO2	     ; Writes the end
+    157	0099  B4 09			     MOV AH,9
+    158	009B  CD 21			     INT 21H
+    159
+    160				     ;-----------------------------------------------------------------
+    161				     ;-----------------------------------------------------------------
+    162
+    163
+    164	009D  B8 4C00			     MOV AX,4C00H		     ; End of program
+    165	00A0  CD 21			     INT 21H
+    166	00A2			     START ENDP
+    167				     ;FIN DEL SEGMENTO DE CODIGO
+    168	00A2			     CODE ENDS
+    169				     ;FIN DE PROGRAMA INDICANDO	DONDE COMIENZA LA EJECUCION
+    170				     END START
+Turbo Assembler	 Version 2.0	    03/09/21 21:26:12	    Page 4
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "03/09/21"
+??FILENAME			  Text	 "alumno  "
+??TIME				  Text	 "21:26:12"
+??VERSION			  Number 0200
+@CPU				  Text	 0101H
+@CURSEG				  Text	 CODE
+@FILENAME			  Text	 ALUMNO
+@WORDSIZE			  Text	 2
+CLR_PANT			  Byte	 DATOS:0000
+COUNTRY				  Byte	 DATOS:0118
+CUR_MICRO			  Byte	 DATOS:0005
+NOMBRE				  Byte	 DATOS:0078
+NOMBRE2				  Byte	 DATOS:00C8
+OTRO				  Near	 CODE:0052
+PREG_CTR			  Byte	 DATOS:0061
+PREG_NOM			  Byte	 DATOS:0027
+PREG_SEC			  Byte	 DATOS:0040
+SEC				  Near	 CODE:0069
+START				  Far	 CODE:0000
+TEXTO				  Byte	 DATOS:0168
+TEXTO2				  Byte	 DATOS:0170
+TEXTO3				  Byte	 DATOS:01A3
+TRD				  Near	 CODE:0087
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+CODE				  16  00A2 Para	  none
+DATOS				  16  01AC Para	  none
+PILA				  16  0040 Para	  Stack	  STACK
+

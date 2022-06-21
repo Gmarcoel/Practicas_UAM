@@ -1,0 +1,191 @@
+Turbo Assembler	 Version 2.0	    04/09/21 16:26:29	    Page 1
+lab2B.asm
+
+
+
+      1				     ;**************************************************************************
+      2				     ; MBS 2021. LABORATORY ASSIGNMENT 2
+      3				     ; Author: Guillermo Martín-Coello	Juárez
+      4				     ; Group: 2292
+      5				     ; Task: 2A
+      6				     ;**************************************************************************
+      7				     ; DATA SEGMENT DEFINITION
+      8	0000			     DATA SEGMENT
+      9
+     10				     ; VARIABLE	DEFINITION
+     11	0000  00		     v DB 0
+     12				     ; VECTOR DEFINITION
+     13	0001  01 02 02 04	     vector1 DB	1,2,2,4
+     14	0005  04 02 05 01	     vector2 DB	4,2,5,1
+     15	0009  03 02 04 01	     vector3 DB	3,2,4,1
+     16	000D  44 75 70 6C 69 63	61+  errorNumDif DB "Duplicated", 13, 10, '$'
+     17	      74 65 64 0D 0A 24
+     18	001A  43 6F 72 72 65 63	74+  correctOutput DB "Correct",13,10,'$'
+     19	      0D 0A 24
+     20	0024			     DATA ENDS
+     21				     ;**************************************************************************
+     22				     ; STACK SEGMENT DEFINITION
+     23	0000			     STACKSEG SEGMENT STACK "STACK"
+     24	0000  40*(00)		     DB	40H DUP	(0)  ; initialization example, 64 bytes	initialize to 0
+     25	0040			     STACKSEG ENDS
+     26				     ;**************************************************************************
+     27				     ; EXTRA SEGMENT DEFINITION
+     28	0000			     EXTRA SEGMENT
+     29	0000  0000 0000		     RESULT DW 0,0 ; initialization example. 2 WORDS (4	BYTES)
+     30	0004			     EXTRA ENDS
+     31				     ;*************************************************************************
+     32				     ; CODE SEGMENT DEFINITION
+     33	0000			     CODE SEGMENT
+     34				     ASSUME CS:	CODE, DS: DATA,	ES: EXTRA, SS: STACKSEG
+     35				     ; BEGINNING OF MAIN PROCEDURE
+     36	0000			     BEGIN PROC
+     37				     ; INITIALIZE THE SEGMENT REGISTER WITH ITS	VALUE
+     38	0000  B8 0000s		     MOV AX, DATA
+     39	0003  8E D8		     MOV DS, AX
+     40	0005  B8 0000s		     MOV AX, STACKSEG
+     41	0008  8E D0		     MOV SS, AX
+     42	000A  B8 0000s		     MOV AX, EXTRA
+     43	000D  8E C0		     MOV ES, AX
+     44	000F  BC 0040		     MOV SP, 64	 ; LOAD	A STACK	POINTER	WITH THE HIGHEST VALUE
+     45				     ; END OF INITIALIZATIONS
+     46
+     47				     ; BEGINNING OF THE	PROGRAMME
+     48	0012  B9 0000		     MOV CX, 0
+     49	0015  B8 0000		     MOV AX, 0
+     50	0018  BE 0000		     MOV SI, 0
+     51
+     52
+     53	001B			     LOOPING:	     ;LOOPS EACH ELEMENT OF THE	VECTOR AND CALLS TO THE	COMPARING FUNCTION
+     54	001B  83 FE 04			     CMP SI, 4
+     55	001E  74 52				     JE	PRINT_CORRECT
+     56	0020  8A 80 0001r		     MOV AL, DS:VECTOR1[BX][SI]	; Moves	the chosen element of the vector to the	register AL
+     57	0024  EB 1A 90			     JMP COMPARE_FUNCTION    ; Calls the compare function
+Turbo Assembler	 Version 2.0	    04/09/21 16:26:29	    Page 2
+lab2B.asm
+
+
+
+     58
+     59	0027  EB 0F 90			     JMP ENDING
+     60
+     61				     ; END OF THE PROGRAMME
+     62	002A			     NEXT: ; LOOPS BETWEEN THE DIFFERENT VECTORS AND CALLS THE LOOPING FUNCTION
+     63
+     64				     ; Increments bx, which indicates the vector to check
+     65	002A  43			     INC BX
+     66	002B  43			     INC BX
+     67	002C  43			     INC BX
+     68	002D  43			     INC BX
+     69
+     70				     ; Compares	to check if all	vectors	are already checked. (Change 3 to the number of	vectors)
+     71	002E  83 FB 0C			     CMP BX, 4*3
+     72	0031  74 05				     JE	ENDING
+     73	0033  BE 0000			     MOV SI, 0
+     74	0036  EB E3			     JMP LOOPING
+     75
+     76	0038			     ENDING: ; END OF PROGRAM
+     77	0038  BA 0000			     MOV DX, 0
+     78	003B  B8 4C00			     MOV AX, 4C00H
+     79	003E  CD 21			     INT 21H
+     80	0040			     BEGIN ENDP
+     81
+     82				     ; SPACE FOR SUBROUTINES
+     83	0040			     COMPARE_FUNCTION:	     ; COMPARES	AN ELEMENT TO CHECK IF IS GOOD
+     84	0040  B4 00			     MOV AH, 0
+     85	0042  3A 87 0001r		     CMP AL, VECTOR1[BX][0]
+     86	0046  74 1A				     JE	ADD0
+     87	0048  3A 87 0002r	     RET0:   CMP AL, VECTOR1[BX][1]
+     88	004C  74 18					     JE	ADD1
+     89	004E  3A 87 0003r	     RET1:   CMP AL, VECTOR1[BX][2]
+     90	0052  74 16					     JE	ADD2
+     91	0054  3A 87 0004r	     RET2:   CMP AL, VECTOR1[BX][3]
+     92	0058  74 14					     JE	ADD3
+     93	005A  80 FC 01		     RET3:   CMP AH, 1
+     94	005D  75 1C					     JNE FAIL
+     95	005F  46				     INC SI
+     96	0060  EB B9				     JMP LOOPING
+     97
+     98	0062			     ADD0:
+     99	0062  FE C4			     INC AH
+    100	0064  EB E2			     JMP RET0
+    101	0066			     ADD1:
+    102	0066  FE C4			     INC AH
+    103	0068  EB E4			     JMP RET1
+    104	006A			     ADD2:
+    105	006A  FE C4			     INC AH
+    106	006C  EB E6			     JMP RET2
+    107	006E			     ADD3:
+    108	006E  FE C4			     INC AH
+    109	0070  EB E8			     JMP RET3
+    110
+    111
+    112	0072			     PRINT_CORRECT:  ; PRINTS CORRECT IF VECTOR	IS CORRECT
+    113	0072  B4 09			     MOV AH,9
+    114	0074  BA 001Ar			     MOV DX, OFFSET correctOutput
+Turbo Assembler	 Version 2.0	    04/09/21 16:26:29	    Page 3
+lab2B.asm
+
+
+
+    115	0077  CD 21			     INT 21H
+    116	0079  EB AF			     JMP NEXT
+    117
+    118	007B			     FAIL:   ; PRINTS FAILURE ARRAY IF THE VECTOR IS NOT CORRECT
+    119	007B  B4 09			     MOV AH,9
+    120	007D  BA 0000			     MOV DX, 0000h
+    121	0080  BA 000Dr			     MOV DX,OFFSET errorNumDif;	Write fail
+    122	0083  CD 21			     INT 21H
+    123	0085  EB A3			     JMP NEXT
+    124
+    125
+    126
+    127				     ; END OF THE CODE SEGMENT
+    128	0087			     CODE ENDS
+    129				     ; END OF THE PROGRAMME POINTING OUT WHERE THE EXECUTION BEGINS
+    130				     END BEGIN
+Turbo Assembler	 Version 2.0	    04/09/21 16:26:29	    Page 4
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "04/09/21"
+??FILENAME			  Text	 "lab2B	  "
+??TIME				  Text	 "16:26:29"
+??VERSION			  Number 0200
+@CPU				  Text	 0101H
+@CURSEG				  Text	 CODE
+@FILENAME			  Text	 LAB2B
+@WORDSIZE			  Text	 2
+ADD0				  Near	 CODE:0062
+ADD1				  Near	 CODE:0066
+ADD2				  Near	 CODE:006A
+ADD3				  Near	 CODE:006E
+BEGIN				  Near	 CODE:0000
+COMPARE_FUNCTION		  Near	 CODE:0040
+CORRECTOUTPUT			  Byte	 DATA:001A
+ENDING				  Near	 CODE:0038
+ERRORNUMDIF			  Byte	 DATA:000D
+FAIL				  Near	 CODE:007B
+LOOPING				  Near	 CODE:001B
+NEXT				  Near	 CODE:002A
+PRINT_CORRECT			  Near	 CODE:0072
+RESULT				  Word	 EXTRA:0000
+RET0				  Near	 CODE:0048
+RET1				  Near	 CODE:004E
+RET2				  Near	 CODE:0054
+RET3				  Near	 CODE:005A
+V				  Byte	 DATA:0000
+VECTOR1				  Byte	 DATA:0001
+VECTOR2				  Byte	 DATA:0005
+VECTOR3				  Byte	 DATA:0009
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+CODE				  16  0087 Para	  none
+DATA				  16  0024 Para	  none
+EXTRA				  16  0004 Para	  none
+STACKSEG			  16  0040 Para	  Stack	  STACK
+
