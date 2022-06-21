@@ -1,0 +1,9 @@
+Software Analysis and Design
+Practice 1
+
+Answer to questions from P1: 
+Exercise 3: 
+The program works as expected when using negative numbers as arguments. When you use non-numerical elements, the program breaks. This could be improved by checking that all the arguments are numerical before sorting them.
+Exercise 4: 
+If we remove the parentheses the function concatenates the odd numbers sum and the even numbers sum instead of adding then together.
+

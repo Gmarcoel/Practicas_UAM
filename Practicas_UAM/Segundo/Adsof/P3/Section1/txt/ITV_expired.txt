@@ -1,0 +1,7 @@
+
+1245 HYN; ITV not passed;3
+5643 KOI; ITV not passed;2
+0987 ETG; ITV not passed;13
+1245 HYN; ITV not passed;3
+0987 ETG; ITV not passed;2
+5643 KOI; ITV not passed;2

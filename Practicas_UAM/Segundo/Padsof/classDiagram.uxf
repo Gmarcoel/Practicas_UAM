@@ -1,0 +1,330 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>Event r1manteinanc
++ chooseOccupancy(p: int): voide
++purchaseBookedTicket();
++purchaseBookedTicket();String itcneoseva
++createZone(name: Name, price: Price);leteeon: Zone
+-cketWithCadbooCustSringcustome,oWitList()DatenebjectOutputStream</help_text><element><id>UMLClass</id><coordinates><x>740</x><y>1300</y><w>260</w><h>50</h></coordinates><panel_attributes>Manager
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>270</x><y>1310</y><w>380</w><h>90</h></coordinates><panel_attributes>Customer
+--
+--
++addTicket(ticket: Ticket):void
++removeTicket(ticket: Ticket):void
++addPass(pass: Pass):void
++removePass(tpass: Pass):void
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>660</x><y>1230</y><w>160</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;50;140;50;140;70</additional_attributes></element><element><id>Relation</id><coordinates><x>340</x><y>1230</y><w>260</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>240;10;240;50;10;50;10;80</additional_attributes></element><element><id>UMLClass</id><coordinates><x>900</x><y>900</y><w>400</w><h>180</h></coordinates><panel_attributes>&lt;&lt;abstract&gt;&gt;
+/Event/
+--
+-title:String
+-author:String
+-director:String
+-description:String
+--
++cancelPerformance(performance: Performance): void
++addPerformance(performance: Performance):void
++addPrice(p: Price):void
++createPerformance(date: LocalDateTime, zones: ArrayList&lt;Event&gt;):void
++checkIfPerformanceExist(date LocalDateTime):boolean</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>950</x><y>1140</y><w>140</w><h>70</h></coordinates><panel_attributes>TheaterPlay
+--
+-actors: String
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1150</x><y>1160</y><w>140</w><h>60</h></coordinates><panel_attributes>Concert
+--
+-music pieces: String
+-orchestra: String
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1350</x><y>1150</y><w>140</w><h>90</h></coordinates><panel_attributes>Dance
+--
+-conductor: String
+-dancer: String
+-orchestra: String
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1290</x><y>1060</y><w>150</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;130;10;130;90</additional_attributes></element><element><id>Relation</id><coordinates><x>1010</x><y>1070</y><w>110</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>90;10;90;40;10;40;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>1200</x><y>1070</y><w>30</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>1160</x><y>690</y><w>90</w><h>230</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
+m1=1
+events</panel_attributes><additional_attributes>10;20;70;20;70;210</additional_attributes></element><element><id>Relation</id><coordinates><x>620</x><y>770</y><w>120</w><h>380</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
+m1=1
+users
+m2=*</panel_attributes><additional_attributes>100;20;10;20;10;360</additional_attributes></element><element><id>UMLClass</id><coordinates><x>720</x><y>570</y><w>450</w><h>320</h></coordinates><panel_attributes>TheaterApp
+--
+- ttb: int
+- ttp: int
+--
++payTicketWithCard(c:Customer,e:Event,t:Ticket,n:String):boolean
++payPassWithCard(c:Customer,p:Pass,card:String):boolean
++logIn(username:String,password:String):boolean
++register(username:String,password:String):boolean
++payWithPass(c:Customer,p:Pass,e:Event,t:Ticket):boolean
++searchEvent(type:int):ArrayList&lt;Event&gt;
++createDanceEvent(t:String,a:String,di:String,de:String,da:String,o:String):void
++createPlayEvent(t:String,a:String,di:String,de:String,de:String,):void
++createConcertEvent(t:String,a:String,di:String,de:String,mp:String,o:String):void
++cancelEvent(event:Event):void
++createPerformance(event:Event,date:LocalDateTime):void
++cancelPerformance(performance:Performance):void
++createCycle(title:String):void
++createCyclePass(name:String,discount:int,zone:Zone,cycle:Zone):void
++createAnnualPass(c:Customer,zone:Zone):void
++bookTicket(c:Customer,t:Ticket):void
++cancelBooking(c:Customer,t:Ticket):void
++purchaseBooked(c:Customer,t:Ticket):void
++subscribeToWaitList(customer:Customer,performance:Performance):void
++unsubscribeToWaitList(customer:Customer,performance:Performance):void
++createStandingZone(name:String,maxP:int,annualPassPrice:double):void
++createSittingZone(name:String,nRows:int,nCol:int,annualPassPrice:double):void
++createFragmentedZone(name:String):void
++deleteZone(zone:Zone):void
++maintainSeat(zone:String,row:int,col:int,date:LocalDate,notes:String):void
++updatePerformanceZoneStatistic(eName:String,date:LocalDateTime,zName:String):void
++updateEventZoneStatistic(eName:String,zName:String):void
++updateZoneStatistic(zName:String):void
++updateEventStatistic(eName:String):void
++updatePerformanceStatistic(eName:String,LocalDateTime date):void
++checkCard(cardNumber:String):boolean
++openBinOut(name:String):ObjectOutputStream
++closeBinOut(out:ObjectOutputStream):void
++save():void
++saveApp(out:ObjectOutputStream):void
++saveZones(out:ObjectOutputStream,zones:List&lt;Zone&gt;):void
++saveAnnualPassPrices(out:ObjectOutputStream):void
++saveEvents(out:ObjectOutputStream):void
++saveUsers(out:ObjectOutputStream):void
++savePasses(out:ObjectOutputStream):void
++saveStatistics(out:ObjectOutputStream):void
++savePerformance(out:ObjectOutputStream):void
++savePrices(out:ObjectOutputStream):void
++saveTickets(out:ObjectOutputStream):void
++saveBooks(out:ObjectOutputStream):void
++saveWaitList(out:ObjectOutputStream):void
++saveSeats(out:ObjectOutputStream,zones:List&lt;Zone&gt;):void
++openBinIn(name:String):ObjectInputStream
++closeBinIn(in:ObjectInputStream):void
++load():void
++loadZones(in:ObjectInputStream):void
++loadEvents(in:ObjectInputStream):void
++loadAnnualPassPrices(in:ObjectInputStream):void
++loadUsers(in:ObjectInputStream):void
++loadPasses(in:ObjectInputStream):void
++loadStatistics(in:ObjectInputStream):void
++loadPerformances(in:ObjectInputStream):void
++loadPrices(in:ObjectInputStream):void
++loadTickets(in:ObjectInputStream):void
++loadBooks(in:ObjectInputStream):void
++loadWaitList(in:ObjectInputStream):void
++loadSeats(in:ObjectInputStream):void
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1710</x><y>720</y><w>210</w><h>90</h></coordinates><panel_attributes>AnnualPass
+--
+-price:int
+-startDate:Date
+-endDate:Date
+--
++checkIfValidAnnualPass():boolean</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1420</x><y>800</y><w>210</w><h>110</h></coordinates><panel_attributes>CyclePass
+--
+-name:String
+-totalPrice:int
+-discountPertcentage: int
+-canGoTo:ArrayList&lt;Event&gt;
+--
++calcuclateDiscountedPrice():double</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1620</x><y>540</y><w>240</w><h>70</h></coordinates><panel_attributes>/Pass/
+--
+-arleadyAttended:ArrayList&lt;Event&gt; 
+--
++getIfHasAlreadyAttended():boolean</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1810</x><y>600</y><w>30</w><h>140</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;120</additional_attributes></element><element><id>Relation</id><coordinates><x>1530</x><y>580</y><w>110</w><h>240</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>90;10;10;10;10;220</additional_attributes></element><element><id>Relation</id><coordinates><x>1290</x><y>960</y><w>430</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
+m1=0..*
+m2=1
+Performances</panel_attributes><additional_attributes>10;20;410;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1700</x><y>870</y><w>340</w><h>180</h></coordinates><panel_attributes>Performance
+--
+-LocalDateTime: Date
+-availableSeats: boolean
+--
++postponePerformance(date: LocalDateTime): void
++checkOccupied(zone:Zone,seat:Seat):boolean
++checkOccupied(zone:Zone):boolean
++selectTicket(zone: Zone, seat: Seat): Ticket
++selectTicketWithString(zone:String,nRow:int, nCol:int):Ticket
++selectTicketWithString(zone:String):Ticket
++cancelPerformanceTicket(t:Ticket):void
++checkIfFull():boolean
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>810</x><y>520</y><w>830</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
+r2=passes
+m2=*
+m1=0</panel_attributes><additional_attributes>10;50;10;20;810;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>530</x><y>1130</y><w>200</w><h>110</h></coordinates><panel_attributes>&lt;&lt;abstract&gt;&gt;
+/RegisteredUser/
+--
+-username: String
+-password: String
+--
++checkCredentials():boolean
++cypher(password: String):String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1300</x><y>600</y><w>220</w><h>70</h></coordinates><panel_attributes>Cycle
+--
+--
++addEvent(e: Event):void
++calculateSumPrice(zoneZone):double
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1260</x><y>660</y><w>150</w><h>260</h></coordinates><panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+m1=1..*
+r1=from events
+m2=1
+</panel_attributes><additional_attributes>10;240;10;80;120;80;120;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>550</x><y>390</y><w>280</w><h>140</h></coordinates><panel_attributes>&lt;&lt;abstract&gt;&gt;
+/Zone/
+--
+-name:String
+-occupancy:int
+--
++getAttendees():int
++getNPosPeople():int
++getNMaxPeople():int
++cloneZone():Zone</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>660</x><y>520</y><w>150</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
+zones
+m2=*
+m1=1</panel_attributes><additional_attributes>120;50;120;20;10;20;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>550</x><y>80</y><w>170</w><h>330</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
+m1=*
+m2=0..*
+r2=subzones
+r1=dad</panel_attributes><additional_attributes>10;19;100;20;100;310</additional_attributes></element><element><id>UMLClass</id><coordinates><x>160</x><y>180</y><w>210</w><h>170</h></coordinates><panel_attributes>StandingZone
+--
+- nMaxPeople: int
+- nPeople: int
+--
++getAttendees():int
++getNPosPeople():void
++isOccupied():boolean
++reduceNPeople(n:int):void
++occupy():void
++free():void
++cloneZone():Zone</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>160</x><y>360</y><w>220</w><h>240</h></coordinates><panel_attributes>SittingZone
+--
+- nRows: int
+- nColumns: int
+- occupiedSeats:double
+--
++chooseOccupancy(p: int): void
++getAttendees():int
++getNMaxPeople():int
++getNPosPeople():int
++resetSeatsAvailability():void
++fullfilMatrix():void
++isAvailable(row:int,column:int):boolean
++occupy(Seat seat):void
++free(seat:Seat):void
++isOccupied(Seat seat):boolean
++cloneZone():Zone</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>360</x><y>210</y><w>210</w><h>210</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>190;190;140;190;140;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>370</x><y>400</y><w>200</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>180;40;50;40;50;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>320</x><y>0</y><w>240</w><h>170</h></coordinates><panel_attributes>FragmentedZone
+--
+--
++addSubzone(subzone:Zone):void
++removeSubZone(zone:Zone):void
++getAttendees():int
++getNMaxPeople():int
++getNPosPeople():int
++isOccupied(zone:Zone,seat:Seat):boolean
++isOccupied(zone:Zone):boolean
++occupy(zone:Zone):void
++cloneZone():Zone</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>550</x><y>100</y><w>100</w><h>310</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>80;290;80;20;10;19</additional_attributes></element><element><id>Relation</id><coordinates><x>1440</x><y>660</y><w>80</w><h>160</h></coordinates><panel_attributes>lt=-&gt;
+
+r2=from cycle
+</panel_attributes><additional_attributes>10;140;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1290</x><y>600</y><w>430</w><h>380</h></coordinates><panel_attributes>lt=&lt;-
+r1=0..*
+r2=1
+m1=attended events</panel_attributes><additional_attributes>10;350;400;350;400;10</additional_attributes></element><element><id>Relation</id><coordinates><x>230</x><y>590</y><w>60</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
+m2=*
+seats</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>UMLClass</id><coordinates><x>170</x><y>670</y><w>280</w><h>130</h></coordinates><panel_attributes>/Seat/
+--
+-occupied:bool
+-nRow: int
+-nColumn: int
+-available: boolean
+--
++ mantainSeat(d: Date, notes: String): void
++ habilitateSeat(): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>500</x><y>540</y><w>1620</w><h>910</h></coordinates><panel_attributes>lt=-&gt;&gt;&gt;&gt;
+m1= *
+r1=customers passes</panel_attributes><additional_attributes>1360;20;1600;20;1600;890;10;890;10;858</additional_attributes></element><element><id>UMLClass</id><coordinates><x>30</x><y>810</y><w>200</w><h>80</h></coordinates><panel_attributes>ManteincanceSeat
+--
+-endDate:LocalDate
+-notes: String
+--
++maintainedSeatVigent():boolean</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1770</x><y>1360</y><w>190</w><h>60</h></coordinates><panel_attributes>Booked
+--
+-timeToPay: LocalDateTime
+--
++checkOutOfTime():boolean</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>220</x><y>790</y><w>190</w><h>100</h></coordinates><panel_attributes>lt=&lt;-
+m1=1
+m2=1
+maintenance seat</panel_attributes><additional_attributes>10;70;160;70;161;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1610</x><y>1020</y><w>120</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
+m1=1
+m2=*
+r2=available tickets</panel_attributes><additional_attributes>89;10;20;10;18;90</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1580</x><y>1110</y><w>390</w><h>130</h></coordinates><panel_attributes>Ticket
+--
+-code:int
+-purchased: boolean
+-booked:Booked
+--
++freeTicket():void
++generateCode():int
++generateTicketPDF():void</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1780</x><y>1230</y><w>200</w><h>150</h></coordinates><panel_attributes>lt=-&gt;
+m2=0..1
+if booked</panel_attributes><additional_attributes>10;10;10;50;160;50;160;130</additional_attributes></element><element><id>Relation</id><coordinates><x>550</x><y>1160</y><w>1050</w><h>280</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;
+m2=*
+m1=1
+customer tickets</panel_attributes><additional_attributes>10;238;10;250;1000;250;1000;10;1030;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1190</x><y>1280</y><w>300</w><h>70</h></coordinates><panel_attributes>WaitList
+--
+--
++subscribeToWaitList(customer: Customer): void
++unsubscribeToWaitList(customer: Customer): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1480</x><y>990</y><w>240</w><h>330</h></coordinates><panel_attributes>lt=&lt;-&gt;
+r1=from a
+m1=1
+m2=1</panel_attributes><additional_attributes>220;20;50;20;50;300;10;300</additional_attributes></element><element><id>Relation</id><coordinates><x>640</x><y>1310</y><w>570</w><h>80</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=*
+users waiting</panel_attributes><additional_attributes>550;10;410;10;410;50;10;50</additional_attributes></element><element><id>UMLClass</id><coordinates><x>890</x><y>190</y><w>280</w><h>110</h></coordinates><panel_attributes>&lt;&lt;abstract&gt;&gt;
+/Statistic/
+--
+-name: String
+-occupancy: double
+-profits:double
+--
++calculateProfit(zone:Zone,p:Performance):double
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1010</x><y>290</y><w>70</w><h>300</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
+m1=1
+m2=*
+r2=statistics</panel_attributes><additional_attributes>10;280;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>820</x><y>450</y><w>1350</w><h>750</h></coordinates><panel_attributes>lt=&lt;-
+m1= 1
+m2= 1
+r1=zone of the ticket</panel_attributes><additional_attributes>10;20;1330;20;1330;720;1150;720</additional_attributes></element><element><id>Relation</id><coordinates><x>0</x><y>700</y><w>2090</w><h>780</h></coordinates><panel_attributes>lt=&lt;-
+m1=1
+m2=1
+r1=seat in
+</panel_attributes><additional_attributes>170;20;10;20;10;760;2070;760;2070;500;1970;500</additional_attributes></element><element><id>Relation</id><coordinates><x>730</x><y>330</y><w>1500</w><h>650</h></coordinates><panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;&gt;
+m1=1
+m2=1
+performance seats</panel_attributes><additional_attributes>10;60;10;20;1480;20;1480;620;1310;620</additional_attributes></element><element><id>Relation</id><coordinates><x>1290</x><y>660</y><w>150</w><h>280</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;260;90;260;90;110;130;110;130;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>680</x><y>960</y><w>140</w><h>70</h></coordinates><panel_attributes>Price
+--
+-price:int
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>810</x><y>980</y><w>110</w><h>40</h></coordinates><panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;&gt;
+m1=*</panel_attributes><additional_attributes>10;10;90;10</additional_attributes></element><element><id>Relation</id><coordinates><x>570</x><y>520</y><w>130</w><h>490</h></coordinates><panel_attributes>lt=&lt;-
+</panel_attributes><additional_attributes>10;10;10;470;110;470</additional_attributes></element><element><id>Relation</id><coordinates><x>819</x><y>399</y><w>910</w><h>160</h></coordinates><panel_attributes>lt=&lt;-
+zone</panel_attributes><additional_attributes>10;20;890;20;890;140</additional_attributes></element><element><id>Relation</id><coordinates><x>830</x><y>970</y><w>70</w><h>40</h></coordinates><panel_attributes>lt=-&gt;
+</panel_attributes><additional_attributes>10;20;50;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1570</x><y>1310</y><w>170</w><h>50</h></coordinates><panel_attributes>TicketPDF
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1640</x><y>1230</y><w>60</w><h>100</h></coordinates><panel_attributes>lt=-&gt;
+</panel_attributes><additional_attributes>10;80;10;50;40;50;40;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1640</x><y>1010</y><w>60</w><h>40</h></coordinates><panel_attributes>lt=-&gt;
+</panel_attributes><additional_attributes>10;20;40;20</additional_attributes></element><element><id>Relation</id><coordinates><x>1310</x><y>960</y><w>140</w><h>40</h></coordinates><panel_attributes>lt=&lt;-
+</panel_attributes><additional_attributes>10;20;120;20</additional_attributes></element><element><id>Relation</id><coordinates><x>570</x><y>90</y><w>50</w><h>30</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>10;10;30;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1300</x><y>270</y><w>280</w><h>50</h></coordinates><panel_attributes>EventStatistic
+--
+--
++updateStatistics(event:Event):void
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1237</x><y>290</y><w>80</w><h>630</h></coordinates><panel_attributes>lt=-&gt;
+event</panel_attributes><additional_attributes>60;20;10;20;10;610</additional_attributes></element><element><id>Relation</id><coordinates><x>1160</x><y>270</y><w>160</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;140;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1300</x><y>180</y><w>280</w><h>50</h></coordinates><panel_attributes>PerformanceStatistic
+--
+--
++updateStatistics(event:Event):void
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1577</x><y>190</y><w>430</w><h>700</h></coordinates><panel_attributes>lt=-&gt;
+performance</panel_attributes><additional_attributes>10;20;410;20;410;680</additional_attributes></element><element><id>Relation</id><coordinates><x>1160</x><y>210</y><w>160</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;140;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1140</x><y>40</y><w>500</w><h>120</h></coordinates><panel_attributes>ZoneStatistic
+--
+-all:double
+-oc:double
+-max:int
+--
++updateStatisticsFromPerformance(event:Event,performance:Performance,zone:Zone):void
++updateStatisticsFromEvent(event:Event,zone:Zone):void
++updateStatistics(List&lt;Event&gt;,zone:Zone):void
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>707</x><y>50</y><w>450</w><h>360</h></coordinates><panel_attributes>lt=-&gt;
+zone</panel_attributes><additional_attributes>430;20;10;20;10;340</additional_attributes></element><element><id>Relation</id><coordinates><x>1020</x><y>90</y><w>140</w><h>120</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;100;10;10;120;10</additional_attributes></element><element><id>Relation</id><coordinates><x>750</x><y>880</y><w>120</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
+m1=1
+annual pass price
+m2=*</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element></diagram>
