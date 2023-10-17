@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Title: {{ book.title }}</h1>
+<div class="bookSearchContainer">
+  {% load static %}
+  <div>
+    <a href="{{ book.get_absolute_url }}"><img src='{% static book.path_to_cover_image %}'></a>
+  </div>
+  <div class="searchDetailsContainer">
+    <p><strong>By: </strong>
+      {% for auth in book.author.all%}
+      <br>
+      {{auth.last_name}}, {{auth.first_name}}
+      {% endfor %}
+    </p>
+    <br>
+    <p><strong>Price:</strong> {{ book.price }} €</p>
+    <p><strong>Popularity index:</strong> {{ book.score }}</p>
+    <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+  </div>
+</div>
+<br>
+<br>
+<br>
+
+{% if user.is_authenticated %}
+<form action="/orders/cart_add/{{book.slug}}" method="post" class="quantity">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="Add to Cart" class="classicButton">
+</form>
+{% endif %}
+
+
+
+<br>
+<br>
+<h2>Comments</h2>
+{% for comment in comments %}
+
+<div class="usernameDate">
+  <p class="username"><strong>{{comment.user.username}}</strong></p>
+  <p class="date"> on {{comment.date}}</p> 
+  </div>
+<div class="comment">
+<p></strong>&emsp;&emsp;{{comment.msg}} </p>
+</div>
+<br>
+{% endfor %}
+
+{% endblock %}

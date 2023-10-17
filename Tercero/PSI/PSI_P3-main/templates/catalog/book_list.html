@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="searchHeader">
+<h1>Search</h1>
+
+<form action="{% url 'search' %}" method="get">
+  <input name="q" type="text" placeholder="Search for a title or author" class="searchbar">
+</form>
+</div>
+{% if book_list %}
+<ul>
+  {% for book in book_list %}
+  <li>
+  <div class="bookSearchContainer">
+    {% load static %}
+    <a href="{{ book.get_absolute_url }}"><img src='{% static book.path_to_cover_image %}'>
+    </a>
+      <br>
+      <div class="searchDetailsContainer">
+      <a href="{{ book.get_absolute_url }}">{{ book.title }}  </a>
+      <br>
+      Score: {{book.score}}/10
+      <br>
+      Date: {{book.date}}
+      <br>
+      By:
+      {% for auth in book.author.all%}
+      <br>
+      &emsp;{{auth.last_name}}, {{auth.first_name}}
+      {% endfor %}
+      <br>
+      <br>
+      {{book.price}} € ({{book.number_copies_stock}})
+      <br>
+      <br>
+      </div>
+  </div>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>There are no books in the library.</p>
+{% endif %}
+
+{% block pagination %}
+{% if is_paginated %}
+<div class="pagination">
+  <span class="page-links">
+    {% if page_obj.has_previous %}
+    <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
+    {% endif %}
+    <span class="page-current">
+      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+    </span>
+    {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
+    {% endif %}
+  </span>
+</div>
+{% endif %}
+{% endblock %}
+
+{% endblock %}
+
+

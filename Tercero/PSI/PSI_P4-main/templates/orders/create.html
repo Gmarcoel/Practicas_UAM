@@ -1,0 +1,17 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+<h1>CHECKOUT</h1>
+{% block title %}CHECKOUT{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="login">
+<form action="/orders/order_create" method='POST' class="login_label">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Place order" class="classicButton">
+</form>
+</div>
+{% endif %}
+
+{% endblock %}

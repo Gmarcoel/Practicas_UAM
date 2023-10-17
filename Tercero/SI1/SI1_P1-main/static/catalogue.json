@@ -1,0 +1,116 @@
+{ "peliculas": 
+  [ 
+    { 
+			"id": 1,
+			"titulo": "La guerra de las galaxias: Episodio 1-La amenaza fantasma",
+      "poster": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages-wixmp-ed30a86b8c4ca887773594c2.wixmp.com%2Ff%2Fea196117-0b64-49b7-b13f-79f43cf77e53%2Fdc86pu9-44a4000b-bbc8-4736-980d-92c0fddc76e4.png%3Ftoken%3DeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2VhMTk2MTE3LTBiNjQtNDliNy1iMTNmLTc5ZjQzY2Y3N2U1M1wvZGM4NnB1OS00NGE0MDAwYi1iYmM4LTQ3MzYtOTgwZC05MmMwZmRkYzc2ZTQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.q8EZIVQmx2wfPiTDHShR6r_VMF_NRsndfCWrkHcTIwA&f=1&nofb=1",
+      "director": "George Lucas",
+      "precio": 18.99,
+      "categoria": "Aventura",
+      "año": 1999,
+      "actores": 
+      [
+        { "nombre": "Jake Lloyd",
+          "personaje": "Anakin Skywalker",
+          "foto": "https://m.media-amazon.com/images/I/613RRu1WjtL._AC_UL1200_.jpg"
+        },
+        { "nombre": "El muerto",
+          "personaje": "Gustavo gustoso",
+          "foto": "https://i.ytimg.com/vi/3jqlT8vGbyQ/mqdefault.jpg"
+        },
+        { "nombre": "El no muerto",
+          "personaje": "John Bekaesh",
+          "foto": "https://pbs.twimg.com/media/EmfLZGfXUAY0pQ0.jpg"
+        },
+        { "nombre": "El muerto inmuerto",
+          "personaje": "Pepe Lagartija",
+          "foto": "https://ih1.redbubble.net/image.604063924.8897/flat,750x,075,f-pad,750x1000,f8f8f8.u1.jpg"
+        },
+        { "nombre": "El no muerto viviente",
+          "personaje": "Paquito Juarez",
+          "foto": "https://img.europapress.es/fotoweb/fotonoticia_20160322181454_420.jpg"
+        }
+      ]
+    },
+    { 
+			"id": 2,
+			"titulo": "Campeones",
+      "poster": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpics.filmaffinity.com%2Fcampeones-981723931-large.jpg&f=1&nofb=1",
+      "director": "George Lucas",
+      "precio": 18.99,
+      "categoria": "Drama",
+      "año": 2016,
+      "actores":
+      [
+        { "nombre": "Jake Lloyd",
+          "personaje": "Anakin Skywalker",
+          "foto": "imagenes/anakin.jpg"
+        }
+      ]
+    },
+    { 
+			"id": 3,
+			"titulo": "Gallos de Pelea",
+      "poster": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fr2.abcimg.es%2Fresizer%2Fresizer.php%3Fimagen%3Dhttps%3A%252F%252Fstatic3.abc.es%252Fmedia%252Fpeliculas%252F000%252F002%252F482%252Fgallos-de-pelea-1.jpg%26nuevoancho%3D620%26medio%3Dabc&f=1&nofb=1",
+      "director": "George Lucas",
+      "precio": 18.99,
+      "categoria": "Aventura",
+      "año": 1999,
+      "actores": 
+      [
+        { "nombre": "Jake Lloyd",
+          "personaje": "Anakin Skywalker",
+          "foto": "imagenes/anakin.jpg"
+        }
+      ]
+    },
+    { 
+			"id": 4,
+			"titulo": "Machete",
+      "poster": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ffanart.tv%2Ffanart%2Fmovies%2F23631%2Fmovieposter%2Fmachete-54ea61da8750c.jpg&f=1&nofb=1",
+      "director": "George Lucas",
+      "precio": 18.99,
+      "categoria": "Aventura",
+      "año": 1999,
+      "actores": 
+      [
+        { "nombre": "Jake Lloyd",
+          "personaje": "Anakin Skywalker",
+          "foto": "imagenes/anakin.jpg"
+        }
+      ]
+    },
+    { 
+			"id": 5,
+			"titulo": "The Room",
+      "poster": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.theglobaldispatch.com%2Fwp-content%2Fuploads%2F2017%2F12%2FThe-Room-movie-poster-Tommy-Wiseau.jpg&f=1&nofb=1",
+      "director": "George Lucas",
+      "precio": 18.99,
+      "categoria": "Aventura",
+      "año": 1999,
+      "actores": 
+      [
+        { "nombre": "Jake Lloyd",
+          "personaje": "Anakin Skywalker",
+          "foto": "imagenes/anakin.jpg"
+        }
+      ]
+    },
+    { 
+			"id": 6,
+			"titulo": "Romeo y julieta",
+      "poster": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.ytimg.com%2Fvi%2Fyqohy_Kae2U%2Fmaxresdefault.jpg&f=1&nofb=1",
+      "director": "George Lucas",
+      "precio": 18.99,
+      "categoria": "Aventura",
+      "año": 1999,
+      "actores": 
+      [
+        { "nombre": "Jake Lloyd",
+          "personaje": "Anakin Skywalker",
+          "foto": "imagenes/anakin.jpg"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{% extends 'base.html'%}
+{% block content %}
+<div class='paginaCarrito'>
+    <h1 class="textoBlanco">Carrito</h1>
+    <div class="productos">
+        {% if session['cart']|length < 1 %}
+        <h2 class="textoBlanco">El carrito esta vacio</h2>
+        {% else %}
+        
+    {% if not session['user'] %}
+    <button class="finalizarCompra2" onclick="window.location.href='../register'">REGISTER</button>
+    {% else %}
+    <button class="finalizarCompra2" onclick="window.location.href='../pago'">FINALIZAR COMPRA</button>
+    {% endif %}
+    {% for product in session['cart'] %}
+    <div class='productoCarrito'>
+        <a href="../pelicula/{{session['cart'][product]['idpelicula']}}">
+            <img class="carritoPeliculaImagen" src="/static/imagenes/placeholder.png">
+
+        </a>
+        <div class="quantity">
+            <p>Cant:</p>
+            <button class="modifyQuantityButton"
+                onclick="window.location.href='../carrito/{{session['cart'][product]['id']}}/-'">-</button>
+            <h2>{{session['cart'][product]['quantity']}} </h2>
+            <button class="modifyQuantityButton"
+                onclick="window.location.href='../carrito/{{session['cart'][product]['id']}}/+'">+</button>
+            <button class="removeOrder"
+                onclick="window.location.href='../carrito/{{session['cart'][product]['id']}}/d'">X</button>
+        </div>
+        
+        <h2 class="quantity">Total: {{"$%.2f"|format(session['cart'][product]['quantity']*session['cart'][product]['price'])}} $</h2>
+        <div class="carritoDetallesPelicula">
+            <h2>{{session['cart'][product]['titulo']}} </h2>
+            <p>{{session['cart'][product]['price']}} $ </p>
+        </div>
+
+    </div>
+</div>
+    {% endfor %}
+    {% endif %}
+
+</div>
+</div>
+{% endblock %}

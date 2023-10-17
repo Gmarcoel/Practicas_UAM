@@ -1,0 +1,98 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+  <div class="homeContainer">
+  <h2>Welcome to BookDEDE</h2>
+  <form action="{% url 'search' %}" method="get">
+    <input name="q" type="text" placeholder="Search for a title or author" class="searchbar">
+  </form>
+  {% if popularBooks or recentBooks %}
+  <ul>
+    {% if popularBooks %}
+      <h3>Popular</h3>
+      <hr>
+      <div class="bookContainer">
+      {% for book in popularBooks %}
+      <li>
+        <div class=bookBox>
+        
+        {% load static %}
+
+        <a href="{{ book.get_absolute_url }}" class="bookTitle"><img src='{% static book.path_to_cover_image %}'>
+
+          <br>
+          
+          {{ book.title }} 
+        </a>
+          <br>
+          Score: {{book.score}}/10
+          <div class=bookText>
+          
+          <br>
+          Date: {{book.date}}
+          <br>
+          By:
+          {% for auth in book.author.all%}
+          <br>
+          &emsp;{{auth.last_name}}, {{auth.first_name}}
+          {% endfor %}
+          <br>
+          <br>
+          {{book.price}} € ({{book.number_copies_stock}})
+          <br>
+          <br>
+          </div>
+        </div>
+      </li>
+      {% endfor %}
+      </div>
+      
+      <hr>
+    {% endif %}
+    {% if recentBooks %}
+      <h3>Recent</h3>
+      <hr>
+
+      <div class="bookContainer">
+      {% for book in recentBooks %}
+      <li>
+        <div class=bookBox>
+        {% load static %}
+        <a href="{{ book.get_absolute_url }}"class="bookTitle"><img src='{% static book.path_to_cover_image %}'>
+          <br>
+          {{ book.title }} 
+        </a>
+          <br>
+          Date: {{book.date}}
+          <div class=bookText>
+          <br>
+          Score: {{book.score}}/10
+          <br>
+          By:
+          {% for auth in book.author.all%}
+          <br>
+          &emsp;{{auth.last_name}}, {{auth.first_name}}
+          {% endfor %}
+          <br>
+          <br>
+          {{book.price}} € ({{book.number_copies_stock}})
+          <br>
+          <br>
+        </div>
+        </div>
+      </li>
+      {% endfor %}
+      </div>
+    {% endif %}
+    <hr>
+  </ul>
+  {% else %}
+  <p>There are no books in the library.</p>
+  {% endif %}
+</div>
+{% endblock %}
+  
+

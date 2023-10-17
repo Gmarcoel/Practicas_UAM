@@ -1,0 +1,34 @@
+{% extends 'base.html'%}
+{% block content %}
+  <div id='pago'>
+    {% if wrong == 1 %}
+    <p style="background-color: red;">No hay suficiente saldo</p>
+    {% endif %}
+    <h1 class="textoBlanco">Checkout</h1>
+
+    <div class="containerCheckout">
+        <h4>Cart
+          <span class="price" style="color:black">
+            <i class="shopping-cart"></i>
+            <b>{{session['cart']|length}}</b>
+          </span>
+        </h4>
+        {% for product in session['cart'] %}
+          <div>
+          <p><a href="../pelicula/{{product.pelicula['id']}}">{{product.pelicula['titulo']}}</a> ( x{{product.quantity}} )<span class="price">{{"$%.2f"|format(product.pelicula['precio']*product.quantity)}}</span></p>
+        </div>
+        {% endfor %}
+        <hr>
+
+
+        <p>Total <span class="price" style="color:black"><b>{{"$%.2f"|format(totalPrice)}}</b></span></p>
+        <form action="../pago" method="post">
+          <input type="checkbox" id="discount" name="discount" value="discount">
+          <label for="discount">Discount with points</label><br>
+          <p class="newPrice">New total <span class="price" style="color:black;"><b>{{"$%.2f"|format(priceAfterDiscount)}}</b></span></p>
+          <button type="submit">Pagar</button>
+        </form>
+    </div>
+  </div>
+
+    {% endblock %}

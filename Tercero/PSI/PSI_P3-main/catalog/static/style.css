@@ -1,0 +1,181 @@
+body{
+    background-color: rgb(255, 248, 234);
+    color: rgb(7, 7, 7);
+    display: block;
+    /* #fffbe rgb(35, 172, 214)*/
+}
+
+
+a:not(.linkException) {
+    color: rgb(8, 92, 15) ;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 25px;
+}
+
+img {
+    border-style: solid;
+    color:rgb(7, 7, 7);
+    border-width: 5px;
+    display: block;
+}
+#BookDEDE{
+    display: block;
+    font-family: 'georgia';
+    font-size: 20px;
+    font-weight: bold;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: auto;
+}
+
+#navigation {
+    font-weight: bold;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: right;
+    width: auto;
+}
+
+#home {
+    float: left;
+}
+
+.bookContainer {
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+
+.bookContainer li {
+  flex-basis: 20%;   
+}
+
+/********************************/
+
+.bookText {
+    overflow: hidden;
+    height: 0;
+    transition: 1s ease-in-out;
+    transition-delay: 0.5s;
+}
+
+.bookBox{
+    margin: 5px;
+    transition: 1s ease-in-out;
+    transition-delay: 0.5s;
+}
+
+
+
+.bookBox:hover > .bookText {
+    transition: 0.6s ease-in-out;
+    height: 200px
+    
+}
+
+
+
+/********************************/
+
+
+.bookSearchContainer {
+
+    display: flex;
+    padding-top: 20px;
+    
+
+}
+.bookSearchContainer a img {
+    
+}
+
+.searchDetailsContainer {
+    margin-left: 20px;
+    display: block;
+}
+
+.pagination {
+display: flex;
+justify-content: center;
+
+}
+
+.footer {
+    float: right;
+}
+
+.searchbar {
+    left: 20px;
+    position: relative;
+    width: 230px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    padding: 12px 10px 12px ;
+    -webkit-transition: 0.4s ease-in-out;
+    transition: 0.4s ease-in-out linear ;
+  }
+  
+.searchbar:focus {
+    width: 40%;
+    animation-name: animateSearch;
+    animation-duration: 0.4s;
+    left:30%;
+    background-color: rgba(240, 248, 255, 0.473);
+    position: fixed;
+  }
+
+  
+@keyframes animateSearch {
+    0%   {left: 20px;}
+    100% {left:30%;}
+  }
+
+  li {
+      
+    list-style-type: none;
+  }
+
+.BookDEDE {
+    overflow: hidden;
+    height:20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    border: none;
+    font: normal 30px/normal "Anton", Helvetica, sans-serif;
+    color: rgb(112, 112, 112);
+    text-transform: uppercase;
+    -o-text-overflow: clip;
+    text-overflow: clip;
+    letter-spacing: 10px;
+    text-shadow: 2px 2px 0 rgb(238,238,238) , 3px 3px 0 rgb(112, 112, 112);
+    overflow: hidden;
+    transition: 1s linear;
+    max-height: 100px;
+}
+
+.DEDE {
+    transition: 1s linear;
+
+}
+
+.BookDEDE:hover > .DEDE{
+    color: rgb(8, 92, 15);
+    text-shadow: 2px 2px 0 rgb(238,238,238) , 3px 3px 0 rgb(8, 92, 15);
+    font: normal 40px/normal "Anton", Helvetica, sans-serif;
+
+}
+.BookDEDE:hover{
+    font: normal 20px/normal "Anton", Helvetica, sans-serif;
+}
+
+d

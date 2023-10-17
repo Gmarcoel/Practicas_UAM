@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Title: {{ book.title }}</h1>
+<div class="bookSearchContainer">
+  {% load static %}
+  <div>
+    <a href="{{ book.get_absolute_url }}"><img src='{% static book.path_to_cover_image %}'></a>
+  </div>
+  <div class="searchDetailsContainer">
+    <p><strong>By: </strong>
+      {% for auth in book.author.all%}
+      <br>
+      {{auth.last_name}}, {{auth.first_name}}
+      {% endfor %}
+    </p>
+    <br>
+    <p><strong>Price:</strong> {{ book.price }} €</p>
+    <p><strong>Popularity index:</strong> {{ book.score }}</p>
+    <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+  </div>
+</div>
+
+<br>
+<br>
+<h2>Comments</h2>
+{% for comment in comments %}
+<p> > <strong>{{comment.user.username}} on {{comment.date}}: </strong> <br>&emsp;&emsp;{{comment.msg}} </p>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,30 @@
+Name                                           Stmts   Miss  Cover   Missing
+----------------------------------------------------------------------------
+catalog/__init__.py                                0      0   100%
+catalog/admin.py                                   5      0   100%
+catalog/apps.py                                    4      0   100%
+catalog/management/__init__.py                     0      0   100%
+catalog/management/commands/populate.py           72      1    99%   44
+catalog/migrations/0001_initial.py                 8      0   100%
+catalog/migrations/0002_alter_book_isbn.py         4      0   100%
+catalog/migrations/__init__.py                     0      0   100%
+catalog/models.py                                 38      0   100%
+catalog/urls.py                                    3      0   100%
+catalog/views.py                                  22      0   100%
+orders/__init__.py                                 0      0   100%
+orders/admin.py                                    4      0   100%
+orders/apps.py                                     4      0   100%
+orders/cart.py                                    46      0   100%
+orders/context_preprocesors.py                     3      0   100%
+orders/forms.py                                   24      0   100%
+orders/migrations/0001_initial.py                  7      0   100%
+orders/migrations/0002_order_items.py              4      0   100%
+orders/migrations/0003_remove_order_items.py       4      0   100%
+orders/migrations/0004_order_items.py              4      0   100%
+orders/migrations/0005_remove_order_items.py       4      0   100%
+orders/migrations/__init__.py                      0      0   100%
+orders/models.py                                  27      0   100%
+orders/urls.py                                     3      0   100%
+orders/views.py                                   49      0   100%
+----------------------------------------------------------------------------
+TOTAL                                            339      1    99%

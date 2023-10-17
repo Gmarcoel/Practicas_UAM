@@ -1,0 +1,76 @@
+{% extends 'base.html'%}
+{% block content %}
+<!--
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+</head>
+
+<body style="justify-content: left; display:flex;">
+-->
+  <!-- Formulario -->
+
+
+  <div id="logInForm">
+    <div class="container">
+      <h1 class="textoBlanco">Login</h1>
+      <br>
+      <br>
+      <br>
+      <hr>
+      <br>
+    {% if wrong == 1 %}
+    <p style="background-color: red;">Wrong password</p>
+    {% endif %}
+    <br>
+    <form action="http://localhost:5000/login" method="post">
+
+      <label class="textoBlanco" for="username"><b>Username</b></label>
+      {% if lastUser %}
+        <input type="text" placeholder="Enter Username" value="{{lastUser}}" name="username" id="username" required >
+      {% else %}
+        <input type="text" placeholder="Enter Username" name="username" id="username" required >
+      {% endif %}
+
+      <label class="textoBlanco" for="password"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="password" id="password" required>
+
+      <button class="registerButton" type="submit" class="registerbtn">Log in</button>
+
+      <br>
+      <br>
+      <br>
+      <hr>
+      <br>
+      <br>
+    </form>
+
+    <div class="container signin">
+      <p class="textoBlanco">New user? <a href="../register"> Register</a>.</p>
+      <br>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+  <!--
+</body>
+
+</html>
+-->
+
+<!--
+      <h1>Sign In</h1>
+    <form action="" method="post" novalidate>
+        <label><b>Username</b></label>
+        <input name="username" type="text" placeholder="Enter username">
+        <label><b>Password</b></label>
+        <input name="password" type="password" placeholder="Enter password">
+        <input type="submit" value="Login">
+    </form>
+-->

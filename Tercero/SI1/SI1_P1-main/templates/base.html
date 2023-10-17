@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>DVD</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body id="paginaPrincipal" class=estiloPrincipal>
+
+
+  <!-- Navigation bar -->
+
+  <!--
+  style="border-bottom: 3px solid white; background-color: rgba(0, 0, 0, 0.61); left: 0; width: 100%; top: 0%; position:
+  fixed; z-index: 1;">
+
+
+  <div class="navbar">
+    <a class="navFirst" href="sign_form.html">Home</a>
+    {% if not session['usuario'] %}
+    <a href="login_form.html">Log in</a>
+    <a href="sign_form.html">Register</a>
+    {% else %}
+    <a class="logOut">Log Out</a>
+    {% endif %}
+    <a href="historial.html">Historial</a>
+  </div>
+  -->
+
+  <!-- Navigation bar -->
+
+
+  <div class="navbar">
+    <a class="navFirst" href="../home">Home</a>
+    
+    {% if not session['user'] %}
+    <a href="../register">Register</a>
+    <a href="../login" class='logIn'>Log in</a>
+    {% else %}
+    <div style="right:3vw;position:fixed; z-index: 2">
+      <h1 style="font-size: 20px;">Ususario:{{ session['user'][0]}}</h1>
+      <h1 style="font-size: 15px;">Saldo. {{ "%.2f"|format(session['user'][1]) }}€ Puntos: {{ "%.0f"|format(session['user'][2]) }} </h1>
+    </div>
+    <a href="../historial">Historial</a>
+    <a href="../logout" class='logOut'>Log out</a>
+    {% endif %}
+    
+    <span style="font-size:35px;cursor:pointer; float: right" onclick="abrirMenuLateral()">&#128722;</span>
+
+  </div>
+
+
+
+
+  {% block content%} {% endblock %}
+
+  <!-- Carrito compra -->
+  <div id="miMenuLateral" class="carritoCompra">
+    <a id='editarCarrito' href="/carrito" style="float: right;">Edit cart</a>
+    <a class="textoCarritoCompra" href="javascript:void(0)" id="botonCerrarCarritoCompra"
+      onclick="cerrarMenuLateral()">&times;</a>
+    {% if session['cart']|length < 1 %}
+    <h2 style="color: white;">El carrito esta vacio</h2>
+    {% else %}
+    {% for product in session['cart'] %}
+    <a href="../pelicula/{{product.pelicula['id']}}">
+      <div class='productoCarrito'>
+        <img class="carritoPeliculaImagen" src="{{product.pelicula['poster']}}">
+        <h2 class="quantity">Total: {{"$%.2f"|format(product.quantity*product.pelicula['precio'])}} </h2>
+        <h2 class="quantity">Cant: {{product.quantity}} </h2>
+        <div class="carritoDetallesPelicula">
+          <h2>{{product.pelicula['titulo']}} </h2>
+          <p>{{product.pelicula['precio']}} $ </p>
+        </div>
+  </div></a>
+  {% endfor %}  
+  {% endif %}  
+    
+    {% if not session['user'] %}
+      <button class="finalizarCompra" onclick="window.location.href='../register'">REGISTER</button>
+    {% else %}
+      <button class="finalizarCompra" onclick="window.location.href='../pago'">FINALIZAR COMPRA</button>
+    {% endif %}
+  </div>
+
+
+
+
+
+
+  <!-- Cambia ancho menú -->
+  <script>
+
+function abrirMenuLateral() {
+      document.getElementById("miMenuLateral").style.width = "500px";
+    }
+
+    function cerrarMenuLateral() {
+      document.getElementById("miMenuLateral").style.width = "0px";
+    }
+  </script>
+
+  <!-- Pie de pagina -->
+  <div class="pieDePagina">
+    <p>Guilermo Martin-Coello & Daniel Varela</p>
+  </div>
+</body>
+
+</html>

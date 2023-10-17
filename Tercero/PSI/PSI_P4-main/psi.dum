@@ -1,0 +1,1699 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 13.4
+-- Dumped by pg_dump version 13.4
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.auth_group (
+    id integer NOT NULL,
+    name character varying(150) NOT NULL
+);
+
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.auth_group_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.auth_group_id_seq OWNED BY public.auth_group.id;
+
+
+--
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.auth_group_permissions (
+    id bigint NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.auth_group_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.auth_group_permissions_id_seq OWNED BY public.auth_group_permissions.id;
+
+
+--
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.auth_permission (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL
+);
+
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.auth_permission_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.auth_permission_id_seq OWNED BY public.auth_permission.id;
+
+
+--
+-- Name: auth_user; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.auth_user (
+    id integer NOT NULL,
+    password character varying(128) NOT NULL,
+    last_login timestamp with time zone,
+    is_superuser boolean NOT NULL,
+    username character varying(150) NOT NULL,
+    first_name character varying(150) NOT NULL,
+    last_name character varying(150) NOT NULL,
+    email character varying(254) NOT NULL,
+    is_staff boolean NOT NULL,
+    is_active boolean NOT NULL,
+    date_joined timestamp with time zone NOT NULL
+);
+
+
+--
+-- Name: auth_user_groups; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.auth_user_groups (
+    id bigint NOT NULL,
+    user_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.auth_user_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.auth_user_groups_id_seq OWNED BY public.auth_user_groups.id;
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.auth_user_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.auth_user_id_seq OWNED BY public.auth_user.id;
+
+
+--
+-- Name: auth_user_user_permissions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.auth_user_user_permissions (
+    id bigint NOT NULL,
+    user_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.auth_user_user_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.auth_user_user_permissions_id_seq OWNED BY public.auth_user_user_permissions.id;
+
+
+--
+-- Name: catalog_author; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.catalog_author (
+    id bigint NOT NULL,
+    first_name character varying(100) NOT NULL,
+    last_name character varying(100) NOT NULL
+);
+
+
+--
+-- Name: catalog_author_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.catalog_author_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: catalog_author_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.catalog_author_id_seq OWNED BY public.catalog_author.id;
+
+
+--
+-- Name: catalog_book; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.catalog_book (
+    id bigint NOT NULL,
+    isbn character varying(13) NOT NULL,
+    title character varying(200) NOT NULL,
+    price numeric(1000,2) NOT NULL,
+    path_to_cover_image character varying(200),
+    number_copies_stock integer NOT NULL,
+    date date NOT NULL,
+    score integer NOT NULL,
+    slug character varying(200),
+    CONSTRAINT catalog_book_score_check CHECK ((score >= 0))
+);
+
+
+--
+-- Name: catalog_book_author; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.catalog_book_author (
+    id bigint NOT NULL,
+    book_id bigint NOT NULL,
+    author_id bigint NOT NULL
+);
+
+
+--
+-- Name: catalog_book_author_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.catalog_book_author_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: catalog_book_author_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.catalog_book_author_id_seq OWNED BY public.catalog_book_author.id;
+
+
+--
+-- Name: catalog_book_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.catalog_book_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: catalog_book_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.catalog_book_id_seq OWNED BY public.catalog_book.id;
+
+
+--
+-- Name: catalog_comment; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.catalog_comment (
+    id bigint NOT NULL,
+    date date NOT NULL,
+    msg text NOT NULL,
+    book_id bigint,
+    user_id integer
+);
+
+
+--
+-- Name: catalog_comment_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.catalog_comment_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: catalog_comment_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.catalog_comment_id_seq OWNED BY public.catalog_comment.id;
+
+
+--
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp with time zone NOT NULL,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag smallint NOT NULL,
+    change_message text NOT NULL,
+    content_type_id integer,
+    user_id integer NOT NULL,
+    CONSTRAINT django_admin_log_action_flag_check CHECK ((action_flag >= 0))
+);
+
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.django_admin_log_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.django_admin_log_id_seq OWNED BY public.django_admin_log.id;
+
+
+--
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.django_content_type (
+    id integer NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL
+);
+
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.django_content_type_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.django_content_type_id_seq OWNED BY public.django_content_type.id;
+
+
+--
+-- Name: django_migrations; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.django_migrations (
+    id bigint NOT NULL,
+    app character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
+    applied timestamp with time zone NOT NULL
+);
+
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.django_migrations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.django_migrations_id_seq OWNED BY public.django_migrations.id;
+
+
+--
+-- Name: django_session; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp with time zone NOT NULL
+);
+
+
+--
+-- Name: order_items; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.order_items (
+    id bigint NOT NULL,
+    price numeric(10,2) NOT NULL,
+    quantity integer NOT NULL,
+    book_id bigint NOT NULL,
+    order_id bigint NOT NULL
+);
+
+
+--
+-- Name: order_items_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.order_items_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: order_items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.order_items_id_seq OWNED BY public.order_items.id;
+
+
+--
+-- Name: orders; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.orders (
+    id bigint NOT NULL,
+    first_name character varying(50) NOT NULL,
+    last_name character varying(50) NOT NULL,
+    email character varying(100) NOT NULL,
+    address character varying(100) NOT NULL,
+    postal_code character varying(20) NOT NULL,
+    city character varying(100) NOT NULL,
+    created timestamp with time zone NOT NULL,
+    updated timestamp with time zone NOT NULL,
+    paid boolean NOT NULL
+);
+
+
+--
+-- Name: orders_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.orders_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: orders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.orders_id_seq OWNED BY public.orders.id;
+
+
+--
+-- Name: auth_group id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.auth_group ALTER COLUMN id SET DEFAULT nextval('public.auth_group_id_seq'::regclass);
+
+
+--
+-- Name: auth_group_permissions id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- Name: auth_permission id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.auth_permission ALTER COLUMN id SET DEFAULT nextval('public.auth_permission_id_seq'::regclass);
+
+
+--
+-- Name: auth_user id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.auth_user ALTER COLUMN id SET DEFAULT nextval('public.auth_user_id_seq'::regclass);
+
+
+--
+-- Name: auth_user_groups id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.auth_user_groups ALTER COLUMN id SET DEFAULT nextval('public.auth_user_groups_id_seq'::regclass);
+
+
+--
+-- Name: auth_user_user_permissions id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_user_user_permissions_id_seq'::regclass);
+
+
+--
+-- Name: catalog_author id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.catalog_author ALTER COLUMN id SET DEFAULT nextval('public.catalog_author_id_seq'::regclass);
+
+
+--
+-- Name: catalog_book id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.catalog_book ALTER COLUMN id SET DEFAULT nextval('public.catalog_book_id_seq'::regclass);
+
+
+--
+-- Name: catalog_book_author id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.catalog_book_author ALTER COLUMN id SET DEFAULT nextval('public.catalog_book_author_id_seq'::regclass);
+
+
+--
+-- Name: catalog_comment id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.catalog_comment ALTER COLUMN id SET DEFAULT nextval('public.catalog_comment_id_seq'::regclass);
+
+
+--
+-- Name: django_admin_log id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.django_admin_log ALTER COLUMN id SET DEFAULT nextval('public.django_admin_log_id_seq'::regclass);
+
+
+--
+-- Name: django_content_type id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.django_content_type ALTER COLUMN id SET DEFAULT nextval('public.django_content_type_id_seq'::regclass);
+
+
+--
+-- Name: django_migrations id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.django_migrations ALTER COLUMN id SET DEFAULT nextval('public.django_migrations_id_seq'::regclass);
+
+
+--
+-- Name: order_items id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.order_items ALTER COLUMN id SET DEFAULT nextval('public.order_items_id_seq'::regclass);
+
+
+--
+-- Name: orders id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.orders ALTER COLUMN id SET DEFAULT nextval('public.orders_id_seq'::regclass);
+
+
+--
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.auth_group (id, name) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.auth_group_permissions (id, group_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
+1	Can add log entry	1	add_logentry
+2	Can change log entry	1	change_logentry
+3	Can delete log entry	1	delete_logentry
+4	Can view log entry	1	view_logentry
+5	Can add permission	2	add_permission
+6	Can change permission	2	change_permission
+7	Can delete permission	2	delete_permission
+8	Can view permission	2	view_permission
+9	Can add group	3	add_group
+10	Can change group	3	change_group
+11	Can delete group	3	delete_group
+12	Can view group	3	view_group
+13	Can add user	4	add_user
+14	Can change user	4	change_user
+15	Can delete user	4	delete_user
+16	Can view user	4	view_user
+17	Can add content type	5	add_contenttype
+18	Can change content type	5	change_contenttype
+19	Can delete content type	5	delete_contenttype
+20	Can view content type	5	view_contenttype
+21	Can add session	6	add_session
+22	Can change session	6	change_session
+23	Can delete session	6	delete_session
+24	Can view session	6	view_session
+25	Can add author	7	add_author
+26	Can change author	7	change_author
+27	Can delete author	7	delete_author
+28	Can view author	7	view_author
+29	Can add book	8	add_book
+30	Can change book	8	change_book
+31	Can delete book	8	delete_book
+32	Can view book	8	view_book
+33	Can add comment	9	add_comment
+34	Can change comment	9	change_comment
+35	Can delete comment	9	delete_comment
+36	Can view comment	9	view_comment
+37	Can add order	10	add_order
+38	Can change order	10	change_order
+39	Can delete order	10	delete_order
+40	Can view order	10	view_order
+41	Can add order item	11	add_orderitem
+42	Can change order item	11	change_orderitem
+43	Can delete order item	11	delete_orderitem
+44	Can view order item	11	view_orderitem
+\.
+
+
+--
+-- Data for Name: auth_user; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
+747	pbkdf2_sha256$260000$fDlVZw5Mvm8BdkZ0MuT4TR$2MkFZuiiqqqxPxyT6fWPZNIMDs7+zPHTkKau27S9XlM=	\N	f	pjohnson	johnwarren	cjones	adam01@williams.com	f	t	2021-12-20 13:15:53.765784+01
+740	pbkdf2_sha256$260000$Lqx2PCj8psJ7dSVMAWZQai$kAyEutAxkYNJ5QdomLueBLb42CuWb8LZL4uXgK+He2A=	\N	f	joshua41	harrisonholly	jlambert	matthewsims@gmail.com	f	t	2021-12-20 13:15:52.511774+01
+741	pbkdf2_sha256$260000$uWmhyKKsZjr7lSvk1rS2hi$ucHy9aro/QRY2eg0JQ2oIlipjuYhfZxK3kfHliBCFU8=	\N	f	egarrison	yward	daniel16	delacruzlauren@hotmail.com	f	t	2021-12-20 13:15:52.692254+01
+742	pbkdf2_sha256$260000$IgtdOVGK8HTye8s1O9yUXC$BNnDxGw+nDz8lsnqqokds3/Mhi+WNMweiLTUcBNkRO0=	\N	f	johnmartinez	pughregina	teresanelson	jeffreyprice@hotmail.com	f	t	2021-12-20 13:15:52.897412+01
+743	pbkdf2_sha256$260000$uoQ6epmEcctS1iVx443AIN$LueQcSgUsTZBn8UbdlbP3lH/wBCaOklb5D+WRn+ktxk=	\N	f	jtorres	kenneth18	cheryl16	richardburton@fletcher-dyer.net	f	t	2021-12-20 13:15:53.071485+01
+744	pbkdf2_sha256$260000$MOwZ30ibYbh8BUCFxKxetz$GAiqZSh9LDtaTO9Uf2Ut0kzRIRFAqOJGpP6+ZRoy6mI=	\N	f	penny66	angela87	ngriffith	clarkkeith@hotmail.com	f	t	2021-12-20 13:15:53.24393+01
+745	pbkdf2_sha256$260000$YYSKxnriqSVwA3r9VJmjFt$oRb/4d1VfgY9tTImWKnofV6sbIpAhUSu54s+4E7Wd6I=	\N	f	daniel40	josethomas	kayla34	michael58@harris.com	f	t	2021-12-20 13:15:53.419556+01
+746	pbkdf2_sha256$260000$lPsqplVQyWh9O6d6i220Ub$KqdnOJ7xNwVUcTDI3Lu2SounCLsZntqERVNlZmE4+RQ=	\N	f	johnrandall	tracyjohnson	cwong	courtneyflores@gmail.com	f	t	2021-12-20 13:15:53.5921+01
+748	pbkdf2_sha256$260000$RNGiPjEkTNyTEl6K1wNWgY$l5yuwIB0ihewjlAyT3dR0T9XqNxQw+CEpkZEe/H3GA0=	\N	f	erin82	pmcdaniel	ochoajean	sarah27@jones.biz	f	t	2021-12-20 13:15:53.936624+01
+749	pbkdf2_sha256$260000$ac5XMNawJo6J420Nes7n9s$AR8pCN4yr9GWaCTo2CB12VcVXSTh8W6AZeOPZz8uh0E=	\N	f	johnsonandrew	davidfoley	sarahrodriguez	smithdanielle@yahoo.com	f	t	2021-12-20 13:15:54.112764+01
+750	pbkdf2_sha256$260000$E1fNEbzAbXauQ3M0BJqth2$6LNuv+bmG7apzLxluwenwplYTucdtbLbjrOJoM+J0ww=	\N	f	josephbradley	luisosborne	esingleton	aduncan@luna.com	f	t	2021-12-20 13:15:54.287378+01
+751	pbkdf2_sha256$260000$JqOYx7zJKPgVGxCLlIvU4n$eZ0uihkwsY1jiHKt6DIF06RB9ZkgJ11wY0CXI8fI8LY=	\N	f	lorihowell	vickie35	tbarnes	yjohnson@gmail.com	f	t	2021-12-20 13:15:54.465698+01
+752	pbkdf2_sha256$260000$tNbUdUuAdDU0VgWxJDcxGn$5F2fGRIl1uUJCYbXOTgsaArVIgB51lVMxzZjVGqwfV8=	\N	f	brettwilson	scottbrown	julia08	tammyrichardson@neal.net	f	t	2021-12-20 13:15:54.655347+01
+753	pbkdf2_sha256$260000$6a6RcURl6giXgMpbZgL6fl$h6msRIQVrVk2SijItmRsL8q3fW07WLvD2zx/U7g7Fl8=	\N	f	ricardo29	isaiahadams	yjohnson	steven41@gmail.com	f	t	2021-12-20 13:15:54.829804+01
+754	pbkdf2_sha256$260000$ZZEqQok7Kn3XHvawEYeqzU$NQzOsA8jHmwXgb4zbMV95i2jNtGAl3u0XiLt/OSZTzE=	\N	f	jeremynelson	lisa32	dhoward	stanleychristopher@gmail.com	f	t	2021-12-20 13:15:55.012868+01
+755	pbkdf2_sha256$260000$HoszXebB5rSGSvui6NfPzq$PjrJ1DIPi+hDlDpzR36bgzWWc7dFa++CeOA4OQJrotE=	\N	f	ashleyellison	williamssteven	coopersteven	michael86@yahoo.com	f	t	2021-12-20 13:15:55.185374+01
+756	pbkdf2_sha256$260000$wC5RQQlC5d4Ecbqm4tKz8y$Qc1zy6eBNbtO4pATdfERwtFAR8ue6DezlB1qHO+WtuA=	\N	f	mcleancaitlin	benjaminpoole	amber00	ysullivan@hotmail.com	f	t	2021-12-20 13:15:55.356384+01
+757	pbkdf2_sha256$260000$ruwsLWCmJeltdNfB5AL6iY$OB6AeUtFPDUnuk2PSVNHxU0taHtB8Cd+07Xu+TZVdVo=	\N	f	plucas	markrogers	summersryan	jennifer55@gmail.com	f	t	2021-12-20 13:15:55.52771+01
+758	pbkdf2_sha256$260000$ysoTGSrCettHpbt7isEfow$b2jWkc8KJBlUfynoQDObo1BSIHdVTRWu1L7DxK0MBOs=	\N	f	wilsonbrenda	shaunmoore	mitchell97	brandon02@daniels.biz	f	t	2021-12-20 13:15:55.70382+01
+759	pbkdf2_sha256$260000$QjzFD8sXeL8zAlcF5vdvUF$QbgichymgK7j5ajKOyl4UPResVI0UVQ8JVzmpUQhKvI=	\N	f	jacobwalker	wsingleton	tonyalong	jamesdavis@gmail.com	f	t	2021-12-20 13:15:55.874042+01
+739	pbkdf2_sha256$260000$Lql6sn3kIRzZjRCvNTGzY7$G20zn1mPw6N64uGIBP3gZ3HxWgNUZgpQSNwtevcpLOw=	2021-12-20 18:09:16.698609+01	t	alumnodb				t	t	2021-12-20 13:15:52.333481+01
+\.
+
+
+--
+-- Data for Name: auth_user_groups; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.auth_user_groups (id, user_id, group_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: catalog_author; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.catalog_author (id, first_name, last_name) FROM stdin;
+351	Andrew	Vance
+352	Michael	Ramirez
+353	Christina	Lawrence
+354	James	Nelson
+355	Joanna	Gallagher
+356	Cameron	Wilson
+357	Julie	Li
+358	Charles	Gonzalez
+359	Emily	West
+360	Lauren	Morgan
+\.
+
+
+--
+-- Data for Name: catalog_book; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.catalog_book (id, isbn, title, price, path_to_cover_image, number_copies_stock, date, score, slug) FROM stdin;
+803	9780746154243	Sit industry.	72.20	images/sit-industry.jpg	16	1997-09-09	3	sit-industry
+804	9780154890764	Every art remember.	44.67	images/every-art-remember.jpg	12	1998-04-09	3	every-art-remember
+805	9781974179602	Us series particularly.	78.51	images/us-series-particularly.jpg	17	2020-08-27	0	us-series-particularly
+806	9781598666892	Dog system man.	45.58	images/dog-system-man.jpg	14	2012-12-19	7	dog-system-man
+790	9780898743067	Serve shoulder professional individual heart.	57.21	images/serve-shoulder-professional-individual-heart.jpg	4	1998-12-02	1	serve-shoulder-professional-individual-heart
+791	9780953545131	General open challenge fast.	65.29	images/general-open-challenge-fast.jpg	19	1992-05-06	9	general-open-challenge-fast
+792	9780542877674	Source skin already our.	0.77	images/source-skin-already-our.jpg	15	2008-07-19	10	source-skin-already-our
+793	9780192926661	Consumer want my though.	66.42	images/consumer-want-my-though.jpg	21	2012-07-25	5	consumer-want-my-though
+794	9780692923054	Institution movie community look.	77.54	images/institution-movie-community-look.jpg	8	2000-12-28	0	institution-movie-community-look
+795	9780614931556	Political game compare effort.	52.53	images/political-game-compare-effort.jpg	30	2000-04-28	4	political-game-compare-effort
+796	9781276757096	Say usually soon range.	66.94	images/say-usually-soon-range.jpg	23	2004-04-09	6	say-usually-soon-range
+797	9781932900262	Coach beyond last he ten.	69.76	images/coach-beyond-last-he-ten.jpg	10	2020-01-25	0	coach-beyond-last-he-ten
+798	9781844759286	Defense matter enough.	6.36	images/defense-matter-enough.jpg	19	2018-01-11	10	defense-matter-enough
+799	9780380356294	Attack place.	61.36	images/attack-place.jpg	15	2012-12-22	2	attack-place
+800	9781018617152	Behavior though.	17.73	images/behavior-though.jpg	13	2004-12-17	4	behavior-though
+801	9781309885567	Follow measure.	37.64	images/follow-measure.jpg	23	2007-01-07	8	follow-measure
+802	9781477281772	Analysis need our mean.	4.20	images/analysis-need-our-mean.jpg	8	2006-06-30	3	analysis-need-our-mean
+807	9780892343966	Allow movement whatever protect.	47.88	images/allow-movement-whatever-protect.jpg	12	2017-10-22	9	allow-movement-whatever-protect
+808	9780273766506	Fire offer usually.	46.29	images/fire-offer-usually.jpg	26	1991-12-24	5	fire-offer-usually
+809	9780956174215	Response bag next.	29.27	images/response-bag-next.jpg	10	2017-05-20	5	response-bag-next
+810	9781479735525	After owner ask produce.	63.81	images/after-owner-ask-produce.jpg	5	1999-04-24	10	after-owner-ask-produce
+811	9780895272768	Job choice history manager.	52.49	images/job-choice-history-manager.jpg	25	2021-07-03	0	job-choice-history-manager
+812	9781767078983	Doctor perform.	18.27	images/doctor-perform.jpg	27	2014-12-23	5	doctor-perform
+813	9781937681531	Amount summer production car.	55.50	images/amount-summer-production-car.jpg	29	2016-08-03	1	amount-summer-production-car
+814	9780612974418	Moment much forward challenge.	13.80	images/moment-much-forward-challenge.jpg	4	2017-03-15	3	moment-much-forward-challenge
+815	9780775610345	Tough soon black wear.	89.31	images/tough-soon-black-wear.jpg	20	2006-05-04	5	tough-soon-black-wear
+816	9781459598737	Hear right administration thus.	44.67	images/hear-right-administration-thus.jpg	30	2017-04-13	10	hear-right-administration-thus
+817	9781937894108	Stuff she.	88.51	images/stuff-she.jpg	25	2009-07-09	2	stuff-she
+818	9780917300707	Occur however candidate option.	71.77	images/occur-however-candidate-option.jpg	26	2007-11-26	8	occur-however-candidate-option
+819	9781162880914	Claim make medical.	13.80	images/claim-make-medical.jpg	24	2009-01-22	4	claim-make-medical
+\.
+
+
+--
+-- Data for Name: catalog_book_author; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.catalog_book_author (id, book_id, author_id) FROM stdin;
+1571	790	354
+1572	791	355
+1573	791	351
+1574	791	353
+1575	792	358
+1576	793	354
+1577	794	358
+1578	794	357
+1579	795	354
+1580	796	354
+1581	796	358
+1583	797	357
+1584	797	352
+1585	798	353
+1586	798	352
+1587	798	359
+1588	799	355
+1589	799	356
+1590	800	353
+1591	800	359
+1592	800	355
+1593	801	357
+1594	802	356
+1595	803	358
+1596	803	353
+1597	804	358
+1598	804	359
+1600	805	356
+1601	806	358
+1602	806	353
+1603	807	359
+1604	807	360
+1605	808	357
+1606	809	357
+1607	809	353
+1608	810	357
+1609	810	359
+1610	811	356
+1611	812	356
+1612	813	360
+1613	813	358
+1614	813	353
+1615	814	360
+1616	814	355
+1617	815	354
+1618	816	354
+1619	816	357
+1620	816	351
+1621	817	357
+1622	818	359
+1623	818	356
+1624	818	357
+1625	819	355
+\.
+
+
+--
+-- Data for Name: catalog_comment; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.catalog_comment (id, date, msg, book_id, user_id) FROM stdin;
+3901	2021-12-02	When practice husband matter leg. Always third for development attorney. Fine growth at season movie happen left fine.	790	746
+3902	2021-12-16	Thousand card choice memory they. Treat score pretty security movie simply. Alone business voice project.\nInside manager million within. Even hot relate not bad scene specific.	818	742
+3903	2021-12-05	Start sport yourself color compare. Will a way environment money like drop themselves. Score child participant media read ask.	808	755
+3904	2021-12-08	Media mention activity picture performance about window. Try provide north allow total.	818	751
+3905	2021-12-19	Project who although country young culture school newspaper. See area really federal since such.\nSystem manage better bed. Me from operation deep. Outside total company.\nFight choose station bar.	792	753
+3906	2021-12-05	Wife social hit Mr girl toward. Economic rather newspaper along.\nPeace small rather detail paper. Section hundred finally. Sometimes like notice purpose character cut technology.	790	747
+3907	2021-11-26	Article professional person avoid order. Computer give American.\nOther fast east surface director spring star. Pass off single imagine sound new. Worker boy up employee.	795	754
+3908	2021-12-18	That it language night PM federal interesting feeling. Meeting pick choose. Keep determine say family discussion.	794	757
+3909	2021-11-21	Page investment book research improve why piece. Be music able wish matter.\nInto want involve politics activity human American center. Development site identify his state land.	802	759
+3910	2021-12-02	Little check late effort.\nLeave anyone between spring base professional choose. Painting exactly story letter teach understand.\nResult nation consumer raise management win anything.	801	752
+3911	2021-12-02	Off entire low be represent one. Edge conference reflect modern make. Energy serve deep others scene material.\nBeautiful cover plant government card someone. Product force population fish skin.	815	744
+3912	2021-12-01	Different then per born music must ability nation. Player product individual sort. Set go pick occur raise then help so.	814	751
+3913	2021-12-02	Relationship start industry read information employee cut. Score season southern.\nMember five increase almost head child. Though return send forget population show road.	791	743
+3914	2021-12-11	Sit key shoulder arrive federal what memory today. Crime only become protect.	792	753
+3915	2021-12-12	Require east need loss have everything discussion. Key report family as.\nInterview beat thought debate. Bar increase wall sure.	805	739
+3916	2021-12-05	Fund buy tax believe threat. Land story offer seem Democrat particular.\nThrow visit simple though audience baby career.	816	753
+3917	2021-11-28	Brother wife sense plant along. Red media weight mother page. If nor true.\nReally away admit church. Bed friend against. Training early prevent top current many.	791	744
+3918	2021-11-26	Whatever environment president material family recognize.\nSide career international where audience what left account.	799	745
+3919	2021-12-04	Fall very up finish able material call certainly. Race item Mrs whether plan.\nEach budget art eat. Memory bank training home.	793	750
+3920	2021-11-28	Seat town building author development describe weight. Message out sell available remain bring seem relationship. Blue thus dog not purpose moment sound carry.	790	757
+3921	2021-12-02	Glass seem ready training seek great. Notice instead store some near fine four. Music budget common.	817	739
+3922	2021-12-18	Across process else poor politics whole. Race raise push wait project recognize kitchen. Wrong wear ask course look history similar.\nAppear husband leg whom trade rule hold.	817	741
+3923	2021-12-06	Feel improve indeed. Business rise list catch west.\nRelate husband own specific partner. Follow successful Mr stand. Start value go show small.	795	743
+3924	2021-11-30	Debate behavior sit full than plant wear.\nFeel garden democratic. Else green film bad number test.\nCouple back reduce could theory voice analysis. Agency example what magazine cost before kind.	813	756
+3925	2021-12-07	Show yet body able agree TV remain its.\nGroup test will international threat. Memory beat benefit kitchen avoid organization.\nEither food data decide story short. Sell left under lose.	790	749
+3926	2021-12-01	Degree example on respond power experience something. Bar evidence away its minute change follow.	813	746
+3927	2021-11-24	I sound talk source. Only after possible save pay consumer under require. Provide task list probably would building she.\nBetter get win act might customer run. Generation myself blood rate develop.	799	752
+3928	2021-12-03	Mind according sell.\nImpact force later source section officer sister. Drop country though coach station born them high.\nMedical history music item anyone full wife. Walk same boy policy try often.	791	758
+3929	2021-12-10	Government site black your service entire word. Eat which suggest mind citizen. Agree paper before trip hear might us. Art myself night organization professional never.	793	757
+3930	2021-12-06	What poor care cold practice wide process. Own threat kitchen sea relate.\nKnowledge whom practice art structure. His ball find behind design others.	810	749
+3931	2021-12-11	Start success store floor rather direction moment. Part security thought let floor color wonder space.\nForget behavior stage two service upon once happy.	809	750
+3932	2021-12-13	Your believe view receive improve clear. Son work drive follow. Fear nearly region almost loss. Nearly use point push man attack.\nSafe prevent ten likely. Remember measure drive become enter.	804	759
+3933	2021-12-15	Choose husband nothing because. Southern point instead notice during we. Inside mouth fund tree.\nStuff camera spring either degree game. Back financial level.	792	755
+3934	2021-11-22	Think first want each oil push front. Mother conference itself task nothing yard key nature.\nThen though degree fill share national.	807	750
+3935	2021-12-06	Environmental attention chair we. Both address account campaign so election heavy later. Now low yard entire doctor age.	809	756
+3936	2021-12-11	Magazine gun last white bar movie way. Hard store traditional ten too side put.\nMilitary fine myself bring matter. Poor them impact only center.	796	759
+3937	2021-12-07	Significant experience pressure rich service simply. Behavior bank under already determine go stuff. Bill finally general.\nHospital stay although. Reflect specific point rock.	795	755
+3938	2021-11-21	Writer several create area woman scientist enough. Direction spend apply whatever positive executive say have. Leave data industry owner.\nAsk draw his reason beyond. Available plan change side.	794	748
+3939	2021-12-03	Purpose player experience everyone believe. Seek term move city occur decision.\nWeight good no realize issue. Of pay card market idea. Prevent ten chair season contain begin really.	805	740
+3940	2021-12-15	Word race win opportunity. Sister bring visit change age recognize claim.\nInto someone color sometimes these. Never high story tax.	805	749
+3941	2021-12-18	Product film go. Provide deep board strategy smile.\nGirl firm reason require strategy. Discover increase argue culture theory.	804	759
+3942	2021-11-27	Authority third question. Its our theory mission necessary. Rather south per than president.	801	758
+3943	2021-12-03	Natural safe hundred share. Senior may size draw industry hard shoulder.\nSafe end whatever partner chance. Present room example husband.	800	739
+3944	2021-11-26	Choice instead kind example knowledge. Smile chair story.\nSomebody line answer care life itself. North put move public left. Per person bed security.	791	750
+3945	2021-12-10	Party stage if do deep computer. North forward claim your very.\nBoy produce camera company back important much. Body herself with cost into art truth. Central claim fly various over.	798	756
+3946	2021-12-05	Again about fact something. Itself tough its least nation dog return season.\nNorth memory him free. Chance difficult arm provide. Everyone fine site yard.	799	751
+3947	2021-12-13	They account inside morning together. Push enter support participant.\nMay challenge also number stuff. Very close whole another will lose.	796	744
+3948	2021-12-01	Religious about customer he choice consider. Challenge page area produce model capital need.\nProduction wait every pick. Appear always heart our wish ground official.	792	745
+3949	2021-11-20	Change generation outside they project. Whether father answer huge. Best factor type spend.	791	745
+3950	2021-12-13	Visit enjoy rather other protect compare. State operation team its shoulder.\nListen detail contain capital thought. Mother effect second number.	813	740
+3951	2021-12-12	Say into field unit style nearly our. Draw health both clear add. Above full receive follow.	813	739
+3952	2021-12-16	Shoulder concern bed lose management five. Arm sense just purpose. Bar morning establish sense decade film fund short.\nFuture bank future. Simply memory program.	811	751
+3953	2021-12-07	Move operation group. Guy enter that list organization. Draw stay could direction also administration student.	810	750
+3954	2021-11-21	Able create feeling. Both impact also may join protect similar. Morning rise especially firm big western country that.\nParticipant build whom small a low member maybe. These weight modern light.	800	756
+3955	2021-11-30	Painting although including choose. Find herself free again PM key person.\nTen carry player economic quite toward education full. And night write also build support.	796	757
+3956	2021-12-03	Watch home couple whole. Into court fire statement effect. Grow again must itself fill course.	802	757
+3957	2021-12-03	Blue police color late seek there.\nMovie risk him move night something. Lot sure especially between series teacher beat even.	813	757
+3958	2021-12-09	Seat media court hand writer believe. Report local make ten effect carry. Discover early step visit eye not shoulder. Admit when growth.	818	753
+3959	2021-12-03	Defense network option meeting tough more during. Before wide outside born current to before. Gas wall arm amount.	797	746
+3960	2021-12-03	Concern recognize choice little remember measure herself. Draw soon executive school.\nOnly himself natural crime. Baby west evening project yourself quality. North public mind actually.	800	745
+3961	2021-12-13	Without mother continue from wonder bring. Need successful executive movie never activity.\nDirection quite research white. Top man ground section red. Sport I like.	815	745
+3962	2021-12-09	Must think social former seven management significant. Enjoy national show medical. Agree listen player I. Color voice wind item American up fight standard.	791	741
+3963	2021-11-26	Thought hour nation exactly. White area maybe white arrive.\nInstitution bed health sit.\nAlthough pass positive. Wish memory teacher box car head.	814	759
+3964	2021-12-06	Material movie let yes instead financial institution. Language provide institution strong meeting. Right simple green ago level.	817	758
+3965	2021-12-04	Push late no staff despite side everything personal. Teach her fill score poor benefit.	811	756
+3966	2021-12-18	Walk quite station others story community guy learn. Crime inside speak.\nRelationship certain knowledge film floor tend media. Issue part tonight face.	805	746
+3967	2021-12-09	Woman range building small kind. Could wall laugh. Send others here moment college.	799	747
+3968	2021-12-19	Happy order seek network. True see name computer care moment.\nTask poor store rather. Heart change information next hospital method.\nEvening rest task design onto.	803	754
+3969	2021-12-15	Former space play our adult cup. She environment want fact why science. Foot I fund ground land as. Food read national leader college.	792	751
+3970	2021-12-12	Grow wife speech nor. The hear upon character part. Return factor parent material treat him.\nResponsibility better its five. Ability their mother various. Admit know exist beautiful including.	803	739
+3971	2021-12-11	Successful skill year. Executive current yeah employee movement summer letter.	798	751
+3972	2021-12-10	Gun it charge dinner. Turn sometimes develop care.\nSeven national source value. Writer over produce usually her hold.	796	744
+3973	2021-12-04	Table seek million beat. Finally meet happy already ask your course. Project father administration former how.	805	740
+3974	2021-12-10	Result opportunity expert create administration enter third. Sort cold officer improve administration now unit significant. They model indeed.	796	745
+3975	2021-12-06	Safe office officer respond term language important. Star painting serious carry very describe. Quite she born factor woman research lawyer.\nSafe its worry show. Traditional very friend.	802	755
+3976	2021-12-06	Mrs role get measure north administration computer. Arm brother structure mind step.\nWoman commercial management expect by. Board dog question another.	814	749
+3977	2021-12-04	Between race product who the pull through. Letter down impact development firm thousand level.	806	742
+3978	2021-11-27	Skill line the. Environment trip career us growth sport finish sign.\nResponse just almost home return often. Run quite after owner. Perhaps effect into system dark chair then go.	792	750
+3979	2021-12-05	Bank throughout appear feel member sit owner finish. Among indicate these church. Pick have pretty dinner fish.\nDifferent represent need itself. I term oil including single record.	799	758
+3980	2021-12-15	Administration line staff bill.\nHold land career skill I despite. Building deal reduce on leader. Understand growth month everything brother.	804	757
+3981	2021-12-05	Sister million economy. Ground second wish size practice writer feeling. Character grow approach officer thus different.	805	747
+3982	2021-11-24	Certainly southern director poor with effort. Or understand sure data debate. Production arrive choose across study.\nLanguage tell exist health until get.	795	757
+3983	2021-11-30	Upon development news reality end executive specific. Process ten rest.\nLaw both skin off summer step fill. No history garden writer evening modern design.	816	752
+3984	2021-11-30	Nature particularly president more detail bed success. Nation kind position recently cost treatment red. Large both next history end.\nDream rest girl also. Person example the heart.	802	748
+3985	2021-11-30	Book both like campaign manage. It reality after medical.\nWord agency space most fast season. Same situation research already.	803	745
+3986	2021-11-24	Dog second director miss quality. Thousand only your listen race.\nDiscussion mean order together sing need today. Week history feeling enter pull senior write.	799	743
+3987	2021-12-19	Company type even for painting. Race political ahead product.\nOver bank institution commercial scene. Four fine next tree marriage medical main. Agree huge film deal meet whether agent.	801	754
+3988	2021-12-17	Paper also minute my seek yourself note while. Past area along.\nSenior personal seat face. Finally garden development send all however many. Fast still one leave necessary another draw.	799	759
+3989	2021-11-27	Both affect national upon business woman. Minute else dinner body. Receive follow responsibility commercial amount. Whole night build form task.	802	755
+3990	2021-12-08	Contain laugh whether. Ago see any. Consumer community speak answer similar. Five to or all although.\nOld however our owner. Plant business inside box speak wish service.	797	745
+3991	2021-12-09	Because president them want make service force. Success thing bag blue then. Detail get start act record.\nMay forward meeting course brother economy positive. Agreement song poor.	800	744
+3992	2021-11-25	Run company campaign certainly easy career what. Poor eat degree us. Positive prepare machine bad red.\nStock power religious get local form week. Understand kind candidate course.	814	746
+3993	2021-12-16	Discuss past support happy miss glass agency sure. Support behavior charge practice.\nMay sell indeed unit close hit. Best development exactly data become.\nMarriage some ask move issue nothing.	811	743
+3994	2021-12-11	Suddenly want explain conference try. Stuff happy side.\nCollege woman bill. Too consider several hear so end loss.\nImpact indicate now remember. Old soldier box key civil push member.	799	749
+3995	2021-12-18	Woman little room morning happy carry. Next gas them evidence event party series.	814	755
+3996	2021-12-11	Condition minute by. Door democratic analysis forward will wrong. General whole if far near tend social.	804	759
+3997	2021-12-11	Trouble provide side baby thought wait message. After owner father interview year hour. Home size change help suggest hundred.	806	744
+3998	2021-12-12	Project son couple card meet mother five. Floor garden since who occur.\nNumber finally someone ten order difference understand. Author clearly alone much. Modern include camera.	816	743
+3999	2021-11-21	View system him science. Big race threat. Share current again us.\nUnder opportunity help skin down these spring. Research toward her.	792	740
+4000	2021-11-22	Whether college yard choice career state top. You million person brother.\nRealize say speak process. Talk possible sit school reflect region record conference. Subject education scene fall.	799	753
+4001	2021-11-28	Region provide off bit something represent week glass. Soon interview cover century range charge memory. Reality agreement two notice mind window.	809	757
+4002	2021-11-28	Rich down claim star. Low keep whatever must heavy account friend. Individual beyond take beat.\nInterest onto husband learn along could chair wide. Man store bank. Affect show lot federal hand.	817	749
+4003	2021-11-30	Establish hospital visit military. Let according possible sign word maybe too. Help upon sound field.\nDo short state walk. Bar class our alone fact later trouble.	807	739
+4004	2021-12-19	Green article computer follow. Way once newspaper pick event need phone.\nState community perform address. Positive natural audience beat.	800	757
+4005	2021-12-10	Sort heart mission fly. Every difference right four.\nWrong rest today development interest official would state.\nFight around carry sea candidate ever significant. Woman despite small.	809	753
+4006	2021-12-04	Popular skill image area building laugh in. Stand current church expert attack treatment side southern. Picture western better light culture contain condition son. Nation now drop resource.	794	739
+4007	2021-11-23	Recent amount relate knowledge. Scene arm father president. Really family kind.	793	756
+4008	2021-12-15	Goal step future training voice very. Account forward then yeah page writer firm. Daughter serve leg pressure.	810	747
+4009	2021-11-23	Moment camera from program be. Air herself professional environment brother feel wide.\nCongress person reduce school big. Nor environmental find any task dream kid.	807	744
+4010	2021-12-05	Goal positive should whether heart color. Final collection affect Mrs subject set magazine. Others wear history.	795	757
+4011	2021-12-17	Tend third environment push tend later improve.\nBad usually song watch yes write style. Cover property him six religious sit. Suddenly measure stay listen success.	809	759
+4012	2021-11-24	Candidate eight line right. Girl over another hand friend child.\nMillion trial international show section sometimes. Agency care return name look sense. Know give figure base test tell certainly.	806	747
+4013	2021-12-16	Husband different section interest fact analysis important. Certain more bad hospital.	813	739
+4014	2021-12-14	Red fly alone fact stuff science line. That prevent job take state. Painting decade firm beat central.\nReport matter fall sea happen. Campaign college drop hour science power majority.	802	749
+4015	2021-12-09	Inside people ball rate soon there. Score too age science thus finish stay. Pressure spend inside his answer successful commercial reveal.	816	746
+4016	2021-12-05	Movement identify news fall. According out back share safe. Language table against recent.\nEconomy member avoid case animal receive price.	790	754
+4017	2021-12-16	Hot send point none table water anything hundred. Political main show both behind again. Eye throughout account one about. Into picture eight sport type tax lawyer.	804	757
+4018	2021-12-16	Weight child trouble data.\nShare close while decide. Use music yeah itself less join.\nAccording hope receive me. Man debate job hotel turn military.	808	750
+4019	2021-12-10	Baby movement not above. Go range father hotel.\nFamily this great up. Can prepare analysis difficult full.\nCongress trade ground.	794	746
+4020	2021-12-11	Authority after near how three include ask. Growth plan listen professor charge.	807	745
+4021	2021-12-04	Spend eat town public may scientist. Check off hold. Various however major view thank different.	816	746
+4022	2021-12-03	Response staff check week five knowledge tree. Hair view special long thing. Decide officer rate approach those.\nPresent cause TV art hear meet wish newspaper. Customer kid eight necessary.	802	755
+4023	2021-12-13	Pay account us. Mr central present turn whole avoid.\nForward environment apply me similar create. Ago subject cold since short him.	790	744
+4024	2021-11-23	Bank no despite effect. Charge idea it fall town.\nView road table. Environmental audience wish others without find western. Image avoid true movie.	804	745
+4025	2021-12-19	Throughout water off charge lot standard push. Raise business foreign. Fund their writer.	817	751
+4026	2021-12-08	Prove reason keep represent marriage. Information might fish responsibility. Condition hour right magazine.	794	752
+4027	2021-12-11	Speak region list begin. Share state bar rate nearly newspaper. Year such off painting agree let candidate. With beat most address again.	812	750
+4028	2021-11-29	Range ever yet participant.\nRelate result group alone bed newspaper. Trial then specific theory still nothing brother.\nScene police myself walk. Couple modern call plant. Or financial different.	817	750
+4029	2021-12-02	Increase nation team already no more difficult. Lay size kid per hour pull.\nHouse record military person tough chair must report. Interest have rock.	814	742
+4030	2021-11-28	Light decade major reflect painting.\nEverything yes indeed spring. Book bank can minute mouth finish. Guess onto property little organization professor.	808	757
+4031	2021-12-02	Million raise real pretty oil condition reveal. From long trial. Benefit herself adult though.\nSure fire talk deep red return us. Challenge other food with treatment. Drive consumer music.	816	753
+4032	2021-12-15	Since admit identify near resource us you. Edge take when education knowledge maintain save. Instead first treatment to. Know run couple leave mean room.	793	744
+4033	2021-12-11	Kitchen care trade yard. Buy phone support challenge.\nEverybody cup prepare myself class. Never those the your require state. Behavior mother model.	794	745
+4034	2021-11-29	Well soldier site likely. Mr financial compare somebody health matter.\nPolicy information management serve game. And court stop natural inside window. Must manager reduce issue.	793	758
+4035	2021-12-15	Station today product ok find station cell. Rule move man property production peace up manage. Let role finish claim expert try various.	796	745
+4036	2021-12-11	It college operation upon good respond prepare. Stand whole husband bad.\nThank common try entire market wait staff. Sense good language.	801	741
+4037	2021-12-08	Machine wind election focus material office rate. Section again somebody environmental science of.\nFire whole speak edge sea play apply.\nIncluding present fire sort. Discover one laugh.	803	752
+4038	2021-11-29	Window peace throw structure stuff. Sing feeling push hard tend.\nInvolve property term try even. Half rise remain any. Year finish such reflect.	805	752
+4039	2021-11-24	International support television fact choose game. Song popular none Congress spring task civil.	801	757
+4040	2021-12-05	Service consumer partner go structure sound course drive. Sense ask owner his officer pretty whether. Dream evening knowledge value last.\nList him hold push. Race none environment.	800	741
+4041	2021-12-06	Direction rate series along boy fight now cover. Side recently wonder development high. Treat Mr will attack health attention.\nWhite customer drug individual none. Many imagine put officer.	795	759
+4042	2021-12-19	Remember safe read half fight front. Will message recently son gun stand any. Successful coach myself exactly near collection catch. Former inside short popular.	794	740
+4043	2021-12-07	Firm they develop include lawyer care society. Follow which information member computer resource us investment. Want threat against less relationship treat.	798	759
+4044	2021-12-08	Perform agreement relationship she voice five tonight win. Total trip program hold. Threat firm house worker level morning somebody.	792	744
+4045	2021-12-08	Nearly begin simple health. Property head car look whatever drug.\nPublic line compare author far benefit. Likely work too although perhaps.	791	742
+4046	2021-12-14	Sort minute population decade whose resource message none. Thing system executive particularly. Ready drive check.	792	754
+4047	2021-12-11	Act million with hotel. Follow get feeling enough try maybe.\nOur into effect near design director property themselves. Sell husband option performance however upon.	793	740
+4048	2021-12-13	Film believe lose. Response goal ever green participant time pick by. Event own home control expect model standard. Music service interest miss lawyer.	815	750
+4049	2021-12-06	Little film response anything. Message cover total issue concern figure entire.\nWhite value authority bar building true adult. Reduce because beautiful science high beyond focus.	812	745
+4050	2021-12-06	Bar value economy. Seven field nor beautiful hotel. True give hear west example their laugh.\nIndividual data stop report church individual point fish. Season policy sell establish.	816	743
+\.
+
+
+--
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.django_content_type (id, app_label, model) FROM stdin;
+1	admin	logentry
+2	auth	permission
+3	auth	group
+4	auth	user
+5	contenttypes	contenttype
+6	sessions	session
+7	catalog	author
+8	catalog	book
+9	catalog	comment
+10	orders	order
+11	orders	orderitem
+\.
+
+
+--
+-- Data for Name: django_migrations; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.django_migrations (id, app, name, applied) FROM stdin;
+1	contenttypes	0001_initial	2021-11-12 18:30:54.421148+01
+2	auth	0001_initial	2021-11-12 18:30:55.267258+01
+3	admin	0001_initial	2021-11-12 18:30:55.445026+01
+4	admin	0002_logentry_remove_auto_add	2021-11-12 18:30:55.462413+01
+5	admin	0003_logentry_add_action_flag_choices	2021-11-12 18:30:55.485947+01
+6	contenttypes	0002_remove_content_type_name	2021-11-12 18:30:55.530305+01
+7	auth	0002_alter_permission_name_max_length	2021-11-12 18:30:55.557336+01
+8	auth	0003_alter_user_email_max_length	2021-11-12 18:30:55.583051+01
+9	auth	0004_alter_user_username_opts	2021-11-12 18:30:55.607312+01
+10	auth	0005_alter_user_last_login_null	2021-11-12 18:30:55.62971+01
+11	auth	0006_require_contenttypes_0002	2021-11-12 18:30:55.635238+01
+12	auth	0007_alter_validators_add_error_messages	2021-11-12 18:30:55.668247+01
+13	auth	0008_alter_user_username_max_length	2021-11-12 18:30:55.736825+01
+14	auth	0009_alter_user_last_name_max_length	2021-11-12 18:30:55.754907+01
+15	auth	0010_alter_group_name_max_length	2021-11-12 18:30:55.780889+01
+16	auth	0011_update_proxy_permissions	2021-11-12 18:30:55.811877+01
+17	auth	0012_alter_user_first_name_max_length	2021-11-12 18:30:55.832826+01
+18	catalog	0001_initial	2021-11-12 18:30:56.50051+01
+19	sessions	0001_initial	2021-11-12 18:30:56.691679+01
+20	catalog	0002_alter_book_isbn	2021-11-12 22:54:04.731689+01
+21	orders	0001_initial	2021-11-29 17:16:30.851819+01
+22	orders	0002_order_items	2021-12-18 17:29:19.566789+01
+23	orders	0003_remove_order_items	2021-12-18 17:30:41.199233+01
+24	orders	0004_order_items	2021-12-18 17:56:02.112051+01
+25	orders	0005_remove_order_items	2021-12-18 18:18:20.373504+01
+26	orders	0006_alter_orderitem_order	2021-12-20 19:00:03.258162+01
+\.
+
+
+--
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
+f2lmz1hjp26tylup2q3byzwns8w9i7ey	eyJjYXJ0Ijp7fX0:1mytDS:OlVByO66_0q0_DNhPyZNZguLgePI2RuqExaIzfmAwvE	2022-01-02 11:14:54.868153+01
+0v3xu7home787nen2kc9s5wzkcd5fpyu	.eJxVjjsOgzAQRO_iOrIW29heyvQ5A9r1J5BEWDJQIe4eWaJI2nlvRnOIkfZtGvc11XGOYhA9eHH7TZnCOy0NxRctzyJDWbY6s2yKvOgqHyWmz_1y_wYmWqfWRshZZ62QbbY-OlCWk0F03ia0LmTFXVDGeMMZwEQC6I2mDi0p37VXgeomhuM8v2NTOto:1myuPU:ce0EFqQ4A2cs5282Y1JlCKhSJVnBLtOeRp7BXDaQKX0	2022-01-02 12:31:24.521048+01
+nt7nvhm7gwanl98l287487dw8ofxqyxu	.eJxVjDsOg0AMBe-ydbQK6yy2KdPnDGjx2oEkAolPhbh7QKJI2jfzZnV1Wua2XiYd6y67yiGwu_yuTZK39gfKr9Q_By9DP49d4w_Fn3TyjyHr5366f4E2Te3-LgBFblEsskXSoEhgZohMVsRMqQTgoswUGK9UgjTMpsQAAUgx7FFJ4-yqddu-ZeE65g:1mzMJz:1xZLBnvuEyq8zKajxPGfnCgoZ5Xi9FxUV31x75HQszQ	2022-01-03 18:19:35.583573+01
+xyny47ydpuvg9wrs0ehlknwr535fukbj	eyJjYXJ0Ijp7fX0:1mrjrX:Gtan3IMGojDgm7hDu95mUfL2GByC9Z_zKglNkuEElnc	2021-12-13 17:50:43.15004+01
+mh2dhfysdg0f3bvudj1nqdsfk33z89gk	eyJjYXJ0Ijp7fX0:1mzMK6:2grLLzZvXCaxlEbCXbUryhYvk8ypmCRwDACKo7ZvSB0	2022-01-03 18:19:42.871704+01
+ozkab4m09qbnh8xskwg2hlim5678w2xu	.eJxVjjsOgzAQRO_iOrIW29heyvQ5A9r1J5BEWDJQIe4eWaJI2nlvRnOIkfZtGvc11XGOYhA9eHH7TZnCOy0NxRctzyJDWbY6s2yKvOgqHyWmz_1y_wYmWqfWRshZZ62QbbY-OlCWk0F03ia0LmTFXVDGeMMZwEQC6I2mDi0p37VXgeomhuM8v2NTOto:1myvpy:1ZsilJjbyPB9IWKSd7IrPXRdcA7WP7KzhuEAaPW4Ez4	2022-01-02 14:02:50.212792+01
+iok8t4h7844mkqoedo9q1zsmh52m6uk3	.eJxVjDsOgzAQRO-yNbL8AbymTJ8zoLW9Dk4iSMAUEeLuCRJNqpHmvZkNAs0Fug1so494rzSWXD7QqQpecw4MHSgUSsK-V9DTWoZ-XXjuc_yRRjv4az2FB48Hincab5MI01jm7MWhiJMu4jpFfl5O9-9goGU41raW6Jw0NbNsItokg0FqMGjdJqOQCS2joVS3ZJNyRsvatxy9Tz4Rwf4FkspGMg:1mzF5q:4FYRke2zsDhqbvuNWHekmUhF03DIangeFX-V9O7wmtg	2022-01-03 10:36:30.974451+01
+qwdxpr09gick24675diy9u3ybdlk7wly	.eJxdzMEOgjAMBuB36ZksHQy3efTuM5CtKzI1oDAOhvDusoSDeGrT_-u_ALkxwXkBWao83rPrU0wfOIOEAl5jJN52ZYRFWIuNyT9W_TCLotSwbq5xc-qaeeKxiSGXoYbD1Tt6cJ-jcHf9bRA09GmMXmQi9nQS1yHw87LbQ0Hnpm775rZUbJjQmUoyEjMZTZVqra3ZmhpdQNZoJJ2IibzxLWvvWdqybtkQrF9CpFJG:1mrkaX:dJX1l2UQUIxOaDrYmAJidbkIlvBchXNUvrZ_Yd_bMGE	2021-12-13 18:37:13.230132+01
+9hlffn4su7xebsex8j6fhdta21perr2x	.eJxVjMsOwiAQRf-FtSHl0RG6dO83NDCARQ1VShem6b8LSRe6mps5956NjGYt07guPo_RkYFIBeT0-7UGHz415O4m3WaKcyo5Wtoq9KALvc7OPy9H908wmWWqayN6GxgG54IGxztuOw1okQXrNXgVul4Fz7XUSqheaGdReIVWCgcgWZOiyYUMGwEN7bxXk0osnypnlb5yRF8z1_QMZN_3L2SkRvk:1myh8z:kq_gWNsFTZks0r3whfOpIXrZAXg_B69m8ttkYMjEyf4	2022-01-01 22:21:29.633557+01
+2f3po79x5bd15bxooarym1zzkuqi4e3g	.eJxVjMsOgyAURP_lrhtSuAIXl933GwzyqLQNtoiLxvjv1cSNq0nmnJkFnC0V2gWIqz2-s8011R-0XFzgU5IL0ELTMKVhXS_Q2bkO3TyF0iW_EY0GTm1v3SvkHfmnzY-RuTHXknq2K-ygE7uPPrxvh3s6GOw0bGuO2rlGuihNlBRE0IQxRq0NRS49WYVouPIkjL6SQtcbEwMZRIEUtID1D9YhRV8:1mzM3e:5hYPHdgvkcV4OKcSiob9waCpgsayicWehfj4OD_pAg0	2022-01-03 18:02:42.387042+01
+b59f2rveh33j2k1adzdj6rt3h9tzeiae	eyJjYXJ0Ijp7fX0:1mzHj8:wQeqNPipXSildEvlqOJAqiBXRCHd0m76aC21naWFmnY	2022-01-03 13:25:14.694065+01
+4nvctyfkba8gixtwjmcsatf8a0pz2yn4	.eJx90c1uwyAMAOB34VxZtvnfcfc9Q0WArNmmdEvTw1T13QdJD0mm5oTAn2xj30QMwyheboI01uPnGvqxG3_FiyAWB_E9dDGXi5PgtbgfyqvcuCVTCBYrY-83TC6YBKNnpbZFF8ozsK1MIu8wbcGYibHbz0Yzc7RltIIIPEOr1xAX8wCaWlOIz40EnoahFD1FVD7JE_q_gEVTZEHJmek95qAMvjLzvKRDIDcju7fzMjGnxL3AY7iOp-P1kodjl2oGI1aPTYifua-R9BH69zPEcz8OXQOVwCN6gbdzyl-vD7tKcAqXU62oXJKekm11zlZiaziXdWUKGb1hw9LF6FWbdKJskYLXufEGG9NGdro0-wcwO8_Y:1myeDb:FcMkfj7g57WVMsZzwpvX_vFnIqtqqxDhsTJcsJsqoJ8	2022-01-01 19:14:03.883071+01
+ixwv91yho0zsr994nq60ko39ns1uxtdh	eyJjYXJ0Ijp7IjQ1NCI6eyJxdWFudGl0eSI6IjEiLCJwcmljZSI6Ijg1LjM3In19fQ:1myeFL:dXXJs1EqfRoyDcgb2zVfxf7Jrv0EKzIw_ewCXB5N3NU	2022-01-01 19:15:51.407057+01
+yoaopkzs8d9mm0js1tb347lp21chu16k	.eJxVjMEOgjAQRP9lz6aBrmW7HL37DaRsW6kaUCgHQ_h3IeHCaZJ5b2YBcWOGegFivcd3dn1O-Qd1WV3gMyYJUEOhiGBdL9C4OXfNPIWxSX4DhAyntnXyCv2O_NP1j0HJ0OcxtWpX1EEndR98eN8O93TQuanb1iWSyNVINByNDTqQxRgjEdtYGm9dhchl5a1mKmyF0jLHYBlRow2kYf0DqLhFLw:1mzJM3:SAT5UlOo4tjSjpPyEAcZAYxIStI3IimAyZUyrU0FCnQ	2022-01-03 15:09:31.216331+01
+bd341irrpa1xvlyqxhnncf7or672c1fo	.eJxVjMsOgyAURP_lrhtSuAIXl933GwzyqLQNtoiLxvjv1cSNq0nmnJkFnC0V2gWIqz2-s8011R-0_AKfklyAFpqGKQ3reoHOznXo5imULvmNaDRwanvrXiHvyD9tfozMjbmW1LNdYQed2H304X073NPBYKdhW3PUzjXSRWmipCCCJowxam0ocunJKkTDlSdh9JUUut6YGMggCqSgBax_p7xFLQ:1mzMA5:RRs8dMprhTi-rav26xxSM6r_tGSk8bXm8FGFFYn3SzY	2022-01-03 18:09:21.857626+01
+\.
+
+
+--
+-- Data for Name: order_items; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.order_items (id, price, quantity, book_id, order_id) FROM stdin;
+8	44.67	1	816	7
+\.
+
+
+--
+-- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.orders (id, first_name, last_name, email, address, postal_code, city, created, updated, paid) FROM stdin;
+7	a	a	asdfsdf@gmail.com	a	a	a	2021-12-20 18:13:13.595193+01	2021-12-20 18:13:13.595207+01	f
+\.
+
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.auth_group_id_seq', 1, false);
+
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 1, false);
+
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.auth_permission_id_seq', 44, true);
+
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.auth_user_groups_id_seq', 1, false);
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.auth_user_id_seq', 759, true);
+
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.auth_user_user_permissions_id_seq', 1, false);
+
+
+--
+-- Name: catalog_author_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.catalog_author_id_seq', 360, true);
+
+
+--
+-- Name: catalog_book_author_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.catalog_book_author_id_seq', 1625, true);
+
+
+--
+-- Name: catalog_book_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.catalog_book_id_seq', 819, true);
+
+
+--
+-- Name: catalog_comment_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.catalog_comment_id_seq', 4050, true);
+
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 1, false);
+
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.django_content_type_id_seq', 11, true);
+
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 26, true);
+
+
+--
+-- Name: order_items_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.order_items_id_seq', 8, true);
+
+
+--
+-- Name: orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.orders_id_seq', 7, true);
+
+
+--
+-- Name: auth_group auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_name_key UNIQUE (name);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_permission_id_0cd325b0_uniq; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_permission_id_0cd325b0_uniq UNIQUE (group_id, permission_id);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_codename_01ab375a_uniq; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_codename_01ab375a_uniq UNIQUE (content_type_id, codename);
+
+
+--
+-- Name: auth_permission auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups auth_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups auth_user_groups_user_id_group_id_94350c0c_uniq; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_group_id_94350c0c_uniq UNIQUE (user_id, group_id);
+
+
+--
+-- Name: auth_user auth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.auth_user
+    ADD CONSTRAINT auth_user_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permissions_user_id_permission_id_14a6b632_uniq; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_permission_id_14a6b632_uniq UNIQUE (user_id, permission_id);
+
+
+--
+-- Name: auth_user auth_user_username_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.auth_user
+    ADD CONSTRAINT auth_user_username_key UNIQUE (username);
+
+
+--
+-- Name: catalog_author catalog_author_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.catalog_author
+    ADD CONSTRAINT catalog_author_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: catalog_book_author catalog_book_author_book_id_author_id_6fa31ecf_uniq; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.catalog_book_author
+    ADD CONSTRAINT catalog_book_author_book_id_author_id_6fa31ecf_uniq UNIQUE (book_id, author_id);
+
+
+--
+-- Name: catalog_book_author catalog_book_author_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.catalog_book_author
+    ADD CONSTRAINT catalog_book_author_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: catalog_book catalog_book_isbn_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.catalog_book
+    ADD CONSTRAINT catalog_book_isbn_key UNIQUE (isbn);
+
+
+--
+-- Name: catalog_book catalog_book_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.catalog_book
+    ADD CONSTRAINT catalog_book_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: catalog_comment catalog_comment_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.catalog_comment
+    ADD CONSTRAINT catalog_comment_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_admin_log django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_content_type django_content_type_app_label_model_76bd3d3b_uniq; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_app_label_model_76bd3d3b_uniq UNIQUE (app_label, model);
+
+
+--
+-- Name: django_content_type django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_migrations django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.django_migrations
+    ADD CONSTRAINT django_migrations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_session django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.django_session
+    ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
+
+
+--
+-- Name: order_items order_items_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.order_items
+    ADD CONSTRAINT order_items_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: orders orders_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.orders
+    ADD CONSTRAINT orders_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group_name_a6ea08ec_like; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX auth_group_name_a6ea08ec_like ON public.auth_group USING btree (name varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permissions_group_id_b120cbf9; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX auth_group_permissions_group_id_b120cbf9 ON public.auth_group_permissions USING btree (group_id);
+
+
+--
+-- Name: auth_group_permissions_permission_id_84c5c92e; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX auth_group_permissions_permission_id_84c5c92e ON public.auth_group_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_permission_content_type_id_2f476e4b; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX auth_permission_content_type_id_2f476e4b ON public.auth_permission USING btree (content_type_id);
+
+
+--
+-- Name: auth_user_groups_group_id_97559544; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX auth_user_groups_group_id_97559544 ON public.auth_user_groups USING btree (group_id);
+
+
+--
+-- Name: auth_user_groups_user_id_6a12ed8b; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX auth_user_groups_user_id_6a12ed8b ON public.auth_user_groups USING btree (user_id);
+
+
+--
+-- Name: auth_user_user_permissions_permission_id_1fbb5f2c; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX auth_user_user_permissions_permission_id_1fbb5f2c ON public.auth_user_user_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_user_user_permissions_user_id_a95ead1b; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX auth_user_user_permissions_user_id_a95ead1b ON public.auth_user_user_permissions USING btree (user_id);
+
+
+--
+-- Name: auth_user_username_6821ab7c_like; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX auth_user_username_6821ab7c_like ON public.auth_user USING btree (username varchar_pattern_ops);
+
+
+--
+-- Name: catalog_book_author_author_id_7cb75b74; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX catalog_book_author_author_id_7cb75b74 ON public.catalog_book_author USING btree (author_id);
+
+
+--
+-- Name: catalog_book_author_book_id_c16d17b8; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX catalog_book_author_book_id_c16d17b8 ON public.catalog_book_author USING btree (book_id);
+
+
+--
+-- Name: catalog_book_isbn_30805834_like; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX catalog_book_isbn_30805834_like ON public.catalog_book USING btree (isbn varchar_pattern_ops);
+
+
+--
+-- Name: catalog_book_slug_4eebf644; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX catalog_book_slug_4eebf644 ON public.catalog_book USING btree (slug);
+
+
+--
+-- Name: catalog_book_slug_4eebf644_like; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX catalog_book_slug_4eebf644_like ON public.catalog_book USING btree (slug varchar_pattern_ops);
+
+
+--
+-- Name: catalog_comment_book_id_d8d57b4b; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX catalog_comment_book_id_d8d57b4b ON public.catalog_comment USING btree (book_id);
+
+
+--
+-- Name: catalog_comment_user_id_30926d6e; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX catalog_comment_user_id_30926d6e ON public.catalog_comment USING btree (user_id);
+
+
+--
+-- Name: django_admin_log_content_type_id_c4bce8eb; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX django_admin_log_content_type_id_c4bce8eb ON public.django_admin_log USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_user_id_c564eba6; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX django_admin_log_user_id_c564eba6 ON public.django_admin_log USING btree (user_id);
+
+
+--
+-- Name: django_session_expire_date_a5c62663; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX django_session_expire_date_a5c62663 ON public.django_session USING btree (expire_date);
+
+
+--
+-- Name: django_session_session_key_c0390e0f_like; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX django_session_session_key_c0390e0f_like ON public.django_session USING btree (session_key varchar_pattern_ops);
+
+
+--
+-- Name: order_items_book_id_9fc82bb9; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX order_items_book_id_9fc82bb9 ON public.order_items USING btree (book_id);
+
+
+--
+-- Name: order_items_order_id_412ad78b; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX order_items_order_id_412ad78b ON public.order_items USING btree (order_id);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissio_permission_id_84c5c92e_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissio_permission_id_84c5c92e_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_b120cbf9_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_b120cbf9_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_2f476e4b_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_2f476e4b_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_groups auth_user_groups_group_id_97559544_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_group_id_97559544_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_groups auth_user_groups_user_id_6a12ed8b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_6a12ed8b_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: catalog_book_author catalog_book_author_author_id_7cb75b74_fk_catalog_author_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.catalog_book_author
+    ADD CONSTRAINT catalog_book_author_author_id_7cb75b74_fk_catalog_author_id FOREIGN KEY (author_id) REFERENCES public.catalog_author(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: catalog_book_author catalog_book_author_book_id_c16d17b8_fk_catalog_book_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.catalog_book_author
+    ADD CONSTRAINT catalog_book_author_book_id_c16d17b8_fk_catalog_book_id FOREIGN KEY (book_id) REFERENCES public.catalog_book(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: catalog_comment catalog_comment_book_id_d8d57b4b_fk_catalog_book_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.catalog_comment
+    ADD CONSTRAINT catalog_comment_book_id_d8d57b4b_fk_catalog_book_id FOREIGN KEY (book_id) REFERENCES public.catalog_book(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: catalog_comment catalog_comment_user_id_30926d6e_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.catalog_comment
+    ADD CONSTRAINT catalog_comment_user_id_30926d6e_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log django_admin_log_content_type_id_c4bce8eb_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_content_type_id_c4bce8eb_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log django_admin_log_user_id_c564eba6_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_user_id_c564eba6_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: order_items order_items_book_id_9fc82bb9_fk_catalog_book_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.order_items
+    ADD CONSTRAINT order_items_book_id_9fc82bb9_fk_catalog_book_id FOREIGN KEY (book_id) REFERENCES public.catalog_book(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: order_items order_items_order_id_412ad78b_fk_orders_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.order_items
+    ADD CONSTRAINT order_items_order_id_412ad78b_fk_orders_id FOREIGN KEY (order_id) REFERENCES public.orders(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- PostgreSQL database dump complete
+--
+

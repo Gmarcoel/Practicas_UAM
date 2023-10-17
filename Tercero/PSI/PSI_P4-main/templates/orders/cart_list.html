@@ -1,0 +1,38 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+<h1>EL CARRO</h1>
+{% load static %}
+{% block title %}CARRO{% endblock %}
+
+{% block content %}
+{% for e in table %}
+<div class="row">
+    <h2>Title: {{e.book}}</h2>
+    <div class="ImageDetails">
+    <a href="../catalog/{{e.book.slug}}">
+        <img src="{% static e.book.path_to_cover_image %}">
+    </a>
+    <div class="details">
+        <br>
+        <br>
+        <br>
+    <p>Quantity: {{e.quantity}}</p>
+    <p>Price: {{e.price}}</p>
+    <p>Total price: {{e.total}}</p>
+    <form action="/orders/cart_remove/{{e.book.slug}}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Delete" class="deleteButton">
+    </form>
+    </div>
+</div>
+</div>
+<br>
+<br>
+<br>
+{% endfor %}
+    {% if user.is_authenticated %}
+    
+    <a href="/orders/order_create" class="linkButton">Checkout</a>
+    {% endif %}
+</div>
+{% endblock %}

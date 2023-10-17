@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>DVD</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="static/side_menu.js"></script>
+  <script src="static/refresh_image.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body id="paginaPrincipal" class=estiloPrincipal>
+
+
+
+
+  <div class="navbar">
+    <a class="navFirst" href="../home">Home</a>
+    
+    {% if not session['user'] %}
+    <a href="../register">Register</a>
+    <a href="../login" class='logIn'>Log in</a>
+    {% else %}
+    <div id="barra1">
+      <h1 id="barra2">Ususario:{{ session['user'][0]}}</h1>
+      <h1 id="barra3">Saldo. {{ "%.2f"|format(session['user'][1]) }}€ Puntos: {{ "%.0f"|format(session['user'][2]) }} </h1>
+    </div>
+    <a href="../historial">Historial</a>
+    <a href="../logout" class='logOut'>Log out</a>
+    {% endif %}
+    
+    <span id="menuLatBarra" onclick="abrirMenuLateral()">&#128722;</span>
+
+  </div>
+
+
+
+
+  {% block content%} {% endblock %}
+
+  <!-- Carrito compra -->
+  <div id="miMenuLateral" class="carritoCompra">
+    <a id='editarCarrito' href="/carrito" id="barraEditarCarrito">Edit cart</a>
+    <a class="textoCarritoCompra" href="javascript:void(0)" id="botonCerrarCarritoCompra"
+      onclick="cerrarMenuLateral()">&times;</a>
+    {% if session['cart']|length < 1 %}
+    <h2 id="barraCarritoVacio">El carrito esta vacio</h2>
+    {% else %}
+    {% for product in session['cart'] %}
+    <a href="../pelicula/{{session['cart'][product]['idpelicula']}}">
+      <div class='productoCarrito'>
+        <img class="carritoPeliculaImagen" src="/static/imagenes/placeholder.png">
+        <h2 class="quantity">Total: {{((session['cart'][product]['quantity'])*(session['cart'][product]['price']))}} € </h2>
+        <h2 class="quantity">Cant: {{session['cart'][product]['quantity']}} </h2>
+        <div class="carritoDetallesPelicula">
+          <h2>{{session['cart'][product]['titulo']}} </h2>
+          <p>{{session['cart'][product]['product']}}</p>
+          <p>{{session['cart'][product]['price']}} $ </p>
+        </div>
+  </div></a>
+  {% endfor %}  
+  {% endif %}  
+    
+    {% if not session['user'] %}
+      <button class="finalizarCompra" onclick="window.location.href='../register'">REGISTER</button>
+    {% else %}
+      <button class="finalizarCompra" onclick="window.location.href='../pago'">FINALIZAR COMPRA</button>
+    {% endif %}
+  </div>
+
+
+
+
+
+
+
+  <!-- Pie de pagina -->
+  <div class="pieDePagina">
+    <p>Guilermo Martin-Coello & Daniel Varela</p>
+  </div>
+</body>
+
+</html>

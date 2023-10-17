@@ -1,0 +1,87 @@
+{% extends 'base.html'%}
+{% block content %}
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<div id="detallePelicula">
+        <!-- Poster -->
+        <div id="detalle1">
+            
+            <img src="https://loremflickr.com/300/500/movie%20poster">
+            <!-- <img src="/static/imagenes/placeholder.png" width="300px"></a>   -->      
+            </div>
+        <div id="detalle4">
+            <!-- Título -->
+            <h2 class="textoBlanco">{{pelicula['titulo']}}</h2>
+        </div>
+            <!-- Carrito -->
+            <br>
+            <br>
+            <br>
+            <div class="productoHor">
+            {% for producto in productos %}
+                    <div class="producto">
+                        <div class="productoDescripcion">
+                            <h3>{{producto['descripcion']}}</h3>
+                        </div>
+                        <div class="productoPrecio">
+                            <p>{{producto['precio']}}</p>
+                        </div>
+                        <a href="../addToCart/{{pelicula.id}}/{{producto.id}}/1">
+                        <img src="/static/imagenes/compra/carrito.png" class="añadirCarrito"></a>
+                    </div>
+            {% endfor %}
+                </div>
+        <!-- Description -->
+        <br>
+        <br>
+        <div class="textoBlanco" id="detalle2">
+            <h3>Descripcion</h3>
+            <!-- Year -->
+            <p>
+                &emsp; Año: {{pelicula['year']}}
+            </p>
+            <!-- Genre -->
+            <p>
+                &emsp;  Genero: {{pelicula['genero']}}
+            </p>
+            <!-- Price -->
+            <p>
+                &emsp; Precio: {{pelicula['precio']}}
+            </p>
+            <!-- Product type -->
+            <p>
+                &emsp; Tipo: {{pelicula['tipoProducto']}}
+            </p>
+            <!-- Idiomas -->
+            <p>
+                &emsp; Idiomas: {{pelicula['lenguas']}}
+            </p>
+            <!-- Paises -->
+            <p>
+                &emsp; Paises: {{pelicula['paises']}}
+            </p>
+            <!-- Director -->
+            <p>
+                &emsp; Directors: {{pelicula['directores']}}
+            </p>
+            <br>
+            <br>
+            <br>
+            <br>
+            <!-- Actors -->
+            <p>
+                &emsp; Actores:
+            </p>
+            {% for actor in pelicula['actores'] %}
+                <p>&emsp; &emsp; {{actor}}</p>
+            {% endfor %}
+            <br>
+            <br>
+            <br>
+            <br>
+
+        </div>
+    </div>
+    {% endblock %}
+    <!--
+</body>
+-->

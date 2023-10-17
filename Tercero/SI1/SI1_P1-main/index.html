@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>DVD</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body id="paginaPrincipal" class=estiloPrincipal>
+
+  <!-- Navigation bar -->
+  <div style="border-bottom: 3px solid white; background-color: rgba(0, 0, 0, 0.61); left: 0; width: 100%; top: 0%; position: fixed; z-index: 1;">
+
+    <div class="navbar">
+      <a class="navFirst" href="sign_form.html">Home</a>
+      <a href="login_form.html">Log in</a>
+      <a href="sign_form.html">Register</a>
+      <a href="historial.html">Historial</a>
+
+    </div>
+
+    <div style="right:10vw;top:-5px;position:fixed; z-index: 1; display: flex;">
+      <h1 style="font-size: 15px;">Saldo. 0.00€  Puntos: 0 </h1>
+      <span style="font-size:35px;cursor:pointer;"
+        onclick="abrirMenuLateral()">&#128722;</span>
+    </div>
+  <div style="display:inline-block; width: 95%; padding-top: 7vh; padding-left: 1vw;">
+    <h1 class="textoBlanco">Amazing DVDs</h1>
+
+    <div class="Buscador" style="float: right;">
+      <input type="text" id="fname" name="fname" placeholder="Buscar"
+        style="width: 20vw; height: 1vw; border-radius: 4px;">
+      <select style="height: 3vh; border-radius: 4px;">
+        <option>Todos</option>
+        <option>Drama</option>
+        <option>Comedia</option>
+        <option>Terror</option>
+      </select>
+      <button style="width:7vw">Buscar</button>
+    </div>
+</div>
+
+  </div>
+  <!-- Menu DVDs -->
+  <div class="row">
+    <div class="column">
+      <div class="container">
+        <a href="detalle_pelicula.html">
+          <img
+            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pelis24tv.co%2Fwp-content%2Fuploads%2F2020%2F02%2Fel-rey-leon-4249-poster-scaled.jpg&f=1&nofb=1"></img>
+        </a>
+        <div class="overlay">Titulo de pelicula</div>
+      </div>
+      <div class="container">
+        <a href="detalle_pelicula.html">
+          <img
+            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpics.filmaffinity.com%2Fcampeones-981723931-large.jpg&f=1&nofb=1"></img>
+        </a>
+        <div class="overlay">Titulo de pelicula</div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="container">
+        <a href="detalle_pelicula.html">
+          <img
+            src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fcdn.collider.com%2Fwp-content%2Fuploads%2F2015%2F12%2Fstar-wars-a-new-hope-poster.jpg&f=1&nofb=1"></img>
+        </a>
+        <div class="overlay">Titulo de pelicula</div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="container">
+        <a href="detalle_pelicula.html">
+          <img
+            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.klydT9wX2A_4uEMajG6qzgHaKg%26pid%3DApi&f=1"></img>
+        </a>
+        <div class="overlay">Titulo de pelicula</div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="container">
+        <a href="detalle_pelicula.html">
+          <img
+            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.ufapzp-TUciYi0xEEnXsAQHaJy%26pid%3DApi&f=1"></img>
+        </a>
+        <div class="overlay">Titulo de pelicula</div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+  <!-- Carrito compra -->
+  <div id="miMenuLateral" class="carritoCompra">
+    <a class="textoCarritoCompra" href="javascript:void(0)" id="botonCerrarCarritoCompra"
+      onclick="cerrarMenuLateral()">&times;</a>
+    <a class="textoCarritoCompra" href="detalle_pelicula.html">Pelicula1 15€</a>
+    <a class="textoCarritoCompra" href="detalle_pelicula.html">Pelicula2 10€</a>
+    <a class="textoCarritoCompra" href="detalle_pelicula.html">Pelicula3 7€</a>
+    <button class="finalizarCompra" onclick="window.location.href='pago.html'">FINALIZAR COMPRA</button>
+  </div>
+
+
+
+  <!-- Cambia ancho menú -->
+  <script>
+
+    function abrirMenuLateral() {
+      document.getElementById("miMenuLateral").style.width = "250px";
+    }
+
+    function cerrarMenuLateral() {
+      document.getElementById("miMenuLateral").style.width = "0px";
+    }
+  </script>
+</body>
+
+</html>

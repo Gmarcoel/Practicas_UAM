@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <title>
+      {% block title %} BookShop {% endblock %}
+   </title>
+   {% load static %}
+   <link rel="stylesheet" href='{% static "style.css" %}'>
+</head>
+
+<body>
+   {% block header %}
+   <div class="BookDEDE">
+         <h1>Book</h1>
+         <div class="DEDE">
+            <h1>DEDE</h1>
+         </div>
+      </a>
+      </a>
+   </div>
+   </a>
+   <hr>
+
+   {% endblock %}
+   <div id=navigation>
+      {% block menu %}
+      <a id="home" href="{% url 'home' %}"> Home</a>
+      {% if user.is_authenticated %}
+      <a href="{% url 'logout' %}"> Log Out</a>
+      {% else %}
+      <a href="{% url 'login' %}"> Log In</a>
+      <a href="{% url 'signup' %}"> Sign Up</a>
+      {% endif %}
+      <hr>
+      {% endblock %}
+   </div>
+   {% block content %}
+   <!-- main block -->
+   <hr>
+   {% endblock %}
+   {% block footer %}
+   <hr>
+   <div class="footer">
+      <p>Guillermo Martin-Coello Juarez</p>
+      <p>Daniel Varela Sanchez</p>
+   </div>
+   {% endblock %}
+</body>
+
+</html>
+<!-- Ejemplo de fichero base.html. 
+Esto es solo un ejemplo para empezar a trabajar, 
+se espera que lo modifiquéis tanto como sea necesario. -->

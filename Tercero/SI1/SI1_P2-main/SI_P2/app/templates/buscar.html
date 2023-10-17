@@ -1,0 +1,95 @@
+{% extends 'base.html'%}
+{% block content %}
+
+<div
+  id="index1">
+  <div id="index2">
+    <h1 class="textoBlanco">DVDede</h1>
+
+    <div class="Buscador" id="index3">
+      {% if busqueda %}
+      <input type="text" id="buscador" name="buscador" id="index4"
+        value="{{busqueda}}">
+      {% else %}
+      <input type="text" id="buscador" name="buscador" placeholder="Buscar"
+        id="index5" value="">
+      {% endif %}
+      {% if genero %}
+      <select id="filtrado">
+        <option hidden selected>{{genero}}</option>
+        <option>All</option>
+        {% for g in generos %}
+        <option>{{g[0]}}</option>
+        {% endfor %}
+
+      </select>
+      {% else %}
+      <select id="filtrado">
+        <option selected>All</option>
+        {% for g in generos %}
+        <option>{{g[0]}}</option>
+        {% endfor %}
+      </select>
+      {% endif %}
+      <button id="index6" onclick="sendToPage()">Buscar</button>
+    </div>
+  </div>
+</div>
+
+<ul class="thumbnails">
+  {% for pelicula in peliculas %}
+  <a href="../pelicula/{{pelicula['movieid']}}">
+    <img id=poster src="https://loremflickr.com/300/500/movie%20poster?random={{pelicula['movieid']}}">
+    <!--<img src="/static/imagenes/placeholder.png"> -->
+
+
+    </img>
+    <div class="overlay">{{pelicula['movietitle']}}
+    </div>
+
+  </a>
+  {% endfor %}
+
+</ul>
+<br>
+<br>
+<br>
+  <form method='GET' id="paginator">
+    {% if page>1 %}
+    <input type="submit" name="page" value="{{page-1}}">
+    <p class="pagText"> <-previous |</p>
+    {% endif %}
+    {% if hasNext==True %}
+    <p class="pagText">| next -> </p>
+    <input type="submit" name="page" value="{{page+1}}">
+    {% endif %}
+  </form>
+  <br>
+  <br>
+  <br>
+
+<!-- dani que hace esto aqui -->
+<script type="text/javascript">
+  function sendToPage() {
+    var input = document.getElementById("buscador").value;
+    var input2 = document.getElementById("filtrado").value;
+    if (input != "" && input2 == 'All') {
+      location.replace(location.origin + '/buscar/' + input);
+    }
+    else if (input == "") {
+      location.replace(location.origin + '/filtrar/' + input2);
+    }
+    else {
+      location.replace(location.origin + '/buscar/' + input2 + '/' + input);
+    }
+  }
+</script>
+
+
+
+{% endblock %}
+<!--
+</body>
+
+</html>
+-->

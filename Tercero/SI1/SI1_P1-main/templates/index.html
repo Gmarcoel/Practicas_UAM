@@ -1,0 +1,85 @@
+{% extends 'base.html'%}
+{% block content %}
+<!--
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>DVD</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body id="paginaPrincipal" class=estiloPrincipal>
+
+  -->
+<div
+  style="border-bottom: 3px solid white; background-color: rgba(0, 0, 0, 0.61); left: 0; width: 100%; top: 0%; position: fixed; z-index: 1;">
+  <div style="display:inline-block; width: 95%; padding-top: 7vh; padding-left: 1vw;">
+    <h1 class="textoBlanco">Playdede</h1>
+
+    <div class="Buscador" style="float: right;">
+      {% if busqueda %}
+      <input type="text" id="buscador" name="buscador" style="width: 20vw; height: 1vw; border-radius: 4px;"
+        value="{{busqueda}}">
+      {% else %}
+      <input type="text" id="buscador" name="buscador" placeholder="Buscar"
+        style="width: 20vw; height: 1vw; border-radius: 4px;" value="">
+      {% endif %}
+      {% if genero %}
+      <select style="height: 3vh; border-radius: 4px;" id="filtrado">
+        <option hidden selected>{{genero}}</option>
+        <option>Todos</option>
+        <option>Drama</option>
+        <option>Comedia</option>
+        <option>Aventura</option>
+      </select>
+      {% else %}
+      <select style="height: 3vh; border-radius: 4px;" id="filtrado">
+        <option>Todos</option>
+        <option>Drama</option>
+        <option>Comedia</option>
+        <option>Terror</option>
+      </select>
+      {% endif %}
+      <button style="width:7vw" onclick="sendToPage()">Buscar</button>
+    </div>
+  </div>
+</div>
+<ul class="thumbnails">
+  {% for pelicula in peliculas %}
+  <a href="../pelicula/{{pelicula['id']}}">
+    <img src="{{pelicula['poster']}}">
+
+
+    </img>
+    <div class="overlay">{{pelicula['titulo']}}
+    </div>
+
+  </a>
+  {% endfor %}
+
+</ul>
+
+<script type="text/javascript">
+  function sendToPage() {
+    var input = document.getElementById("buscador").value;
+    var input2 = document.getElementById("filtrado").value;
+    if (input != "" && input2 == 'Todos') {
+      location.replace(location.origin + '/buscar/' + input);
+    }
+    else if (input == "") {
+      location.replace(location.origin + '/filtrar/' + input2);
+    }
+    else {
+      location.replace(location.origin + '/buscar/' + input2 + '/' + input);
+    }
+  }
+</script>
+
+
+{% endblock %}
+<!--
+</body>
+
+</html>
+-->

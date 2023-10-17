@@ -1,0 +1,121 @@
+
+
+{% extends 'base.html'%}
+{% block content %}
+<script src="static/sign_validation.js"></script>
+<script>
+  
+$(document).on('input',function(){
+  var password = document.getElementById('password');
+    var meter = document.getElementById('passwordStrength');
+    var text = document.getElementById('passwordStrengthText');
+
+    var val = 0
+    if (password.value.length > 8 ) val++;
+    if (password.value.length > 20 ) val++;
+    re = /^[<>'\"/;`%#\$]*$/;
+    if (re.test(username)) val++;
+    re = /[A-Z]/;
+    if (re.test(username)) val++;
+    
+    // var result = zxcvbn(val);   
+    // Update the password strength meter
+    meter.value = val;
+    // Update the text indicator
+    if (val !== "") {
+      text.innerHTML = "Strength: " + strength[val]; 
+    } else {
+      text.innerHTML = "";
+    }
+    if(val==1)
+  {
+   $("#passwordStrength").animate({width:'50px'},50);
+   meter.style.backgroundColor="red";
+   document.getElementById("pass_type").innerHTML="Very Weak";
+  }
+
+  if(val==2)
+  {
+   $("#passwordStrength").animate({width:'100px'},50);
+   meter.style.backgroundColor="#FFB266";
+   document.getElementById("pass_type").innerHTML="Weak";
+  }
+
+  if(val==3)
+  {
+   $("#passwordStrength").animate({width:'150px'},50);
+   meter.style.backgroundColor="#FFFF66";
+  }
+
+  if(val==4)
+  {
+   $("#passwordStrength").animate({width:'200px'},50);
+   meter.style.backgroundColor="#4C9A5B";
+  }
+
+}); 
+
+
+</script>
+<div id="registerForm">
+  <div class="container">
+    <h1 class="textoBlanco">Register</h1>
+    <br>
+    <br>
+    <br>
+    <hr>
+    <br>
+    {% if wrong == 1 %}
+    <p class="errorMessage">Wrong password</p>
+    {% elif wrong == 2 %}
+    <p class="errorMessage">User already exists</p>
+    {% else %}
+    <p class="errorMessage" id="errores"></p>
+    {% endif %}
+
+    <br>
+    <form name ="registration" action="http://localhost:5000/register" method="post" onSubmit="return formValidation();">
+
+    <label class="textoBlanco" for="username"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="username" id="username" required>
+
+    <label class="textoBlanco" for="password"><b>Password</b></label>
+    <!--<input type="password" placeholder="Enter Password" name="password" id="password" onChange="meter_update(this.value);" required>-->
+    <input type="password" placeholder="Enter Password" name="password" id="password" onChange="meter_update(this.value); required">
+
+    <meter max="4" id="passwordStrength"></meter>
+    <p id="passwordStrengthText"></p>
+
+    <label class="textoBlanco" for="password2"><b>Repeat Password</b></label>
+    <input type="password" placeholder="Enter Password Again" name="password2" id="password2" required>
+  
+    <label class="textoBlanco" for="email"><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="email" id="email" required>
+
+    <label class="textoBlanco" for="creditCard"><b>Credit Card</b></label>
+    <input type="text" placeholder="Enter Credit Card" name="creditCard" id="creditCard" required>
+
+    <label class="textoBlanco" for="address"><b>Address</b></label>
+    <input type="text" placeholder="Enter Address" name="address" id="address" required>
+      
+
+    <button class="registerButton" type="submit" class="registerbtn" >Register</button>
+    </form>
+
+      <br>
+      <br>
+      <hr>
+      <br>
+      <br>
+    <div class="container signin">
+      <p class="textoBlanco" >Already have an account? <a href="../login">Sign in</a>.</p>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+<!--
+</body>
+
+</html>
+-->

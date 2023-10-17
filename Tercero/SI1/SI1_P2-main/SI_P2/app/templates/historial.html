@@ -1,0 +1,60 @@
+{% extends 'base.html'%}
+{% block content %}
+
+<div id="historial1">
+    <h1 class="textoBlanco">Historial</h1>
+    {% if añadido == true %}
+    {% endif %}
+
+    <form action="../historial" method='POST' id="historial4">
+        {% if wrong == 1 %}
+        <p class="errorMessage">Saldo no válido</p>
+        {% endif %}
+        <p id="historial2">Añadir saldo:
+            <input type="number" step="0.01" min="0" name="saldo">
+            <input type="submit" value="Añadir saldo">
+        </p>
+    </form>
+    
+    {% if añadido==true %}
+    <br>
+    <br>
+    <p id="saldoAñadido">Saldo añadido correctamente</p>
+    {% endif %}
+    {% if historial|length < 1 %} <br>
+        <br>
+        <br>
+        <br>
+        <p id="historial2">Aun no se ha realizado ninguna compra</p>
+
+    {% else %}
+
+        {% for pedido in historial %}
+            <table id="historial3" >
+                <tr>
+                    <th class=textoBlanco>Pedido </th>
+                </tr>
+                <div class="productosHistorial">
+                <tbody class="contenidoDesplegable">
+                {% for pelicula in pedido %}
+                
+                <tr >
+                    
+                        <td><a href="../pelicula/{{pelicula.id}}"> <img src="/static/imagenes/placeholder.png" width="300px"></a></td>
+                    
+                        <td><a href="../pelicula/{{pelicula.id}}">{{pelicula.title}}</a></td>
+                        <td>{{pelicula.price}}</td>
+                        <td>{{pelicula.amount}}</td>
+                    
+                </tr>
+                
+                {% endfor %}
+                </tbody>
+            </div>
+            </table>
+        {% endfor %}
+        
+    {% endif %}
+</div>
+{% endblock %}
+

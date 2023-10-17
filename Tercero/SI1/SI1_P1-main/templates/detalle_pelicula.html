@@ -1,0 +1,71 @@
+{% extends 'base.html'%}
+{% block content %}
+<!--
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Detalle</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body style="margin: 25px 50px 75px 50px; text-emphasis-color: beige;">
+-->
+
+<div id="detallePelicula">
+        <!-- Poster -->
+        <div style="min-width:20%; float:left;">
+            <img src="{{pelicula['poster']}}" width="300px"></a>        </div>
+        <div style="width:70%; float:right;">
+            <!-- Título -->
+            <h2 class="textoBlanco">{{pelicula['titulo']}}</h2>
+            <!-- Carrito -->
+            <div>
+                <a href="../addToCart/{{pelicula.id}}/1">
+                <img src="imagenes/compra/carrito.png" class="añadirCarrito"></a>
+            </div>
+        </div>
+        <!-- Description -->
+        <div class="textoBlanco" style="width:70%; float:right;">
+            <h3>Descripcion</h3>
+            <!-- Director -->
+            <p>
+                Director: {{pelicula['director']}}
+            </p>
+            <!-- Price -->
+            <p>
+                Precio: {{pelicula['precio']}}
+            </p>
+            <!-- Category -->
+            <p>
+                Categoria: {{pelicula['categoria']}}
+            </p>
+            <!-- Year -->
+            <p>
+                Año: {{pelicula['año']}}
+            </p>
+        </div >
+
+        <!--
+        <div>
+            <iframe src="https://playdede.com/embed.php?id=4257523&amp;width=995&amp;height=540" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen="true" width="995" height="540" frameborder="0"></iframe>
+        </div>
+        -->
+        <!-- Actors -->
+        <div class="actorsDisplay" style="width:80%; float:left;">
+            {% for actor in pelicula['actores'] %}
+                <div class="container">
+                    <p class="actorCharacter">{{actor['personaje']}}</p>
+                    <img class="actor"
+                        src="{{actor['foto']}}"></a>
+                    <p class="overlay">{{actor['nombre']}}</p>
+                </div>
+            {% endfor %}
+
+
+        </div>
+    </div>
+    {% endblock %}
+    <!--
+</body>
+-->

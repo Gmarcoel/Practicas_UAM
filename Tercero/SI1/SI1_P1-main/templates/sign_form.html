@@ -1,0 +1,78 @@
+<!--
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Register</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+</head>
+
+<body style="justify-content: left; display:flex;">
+-->
+
+{% extends 'base.html'%}
+{% block content %}
+<script src="static/sign_validation.js"></script>
+<div id="registerForm">
+  <div class="container">
+    <h1 class="textoBlanco">Register</h1>
+    <br>
+    <br>
+    <br>
+    <hr>
+    <br>
+    {% if wrong == 1 %}
+    <p style="background-color: red;">Wrong password</p>
+    {% elif wrong == 2 %}
+    <p style="background-color: red;">User already exists</p>
+    {% else %}
+    <p style="background-color: red;" id="errores"></p>
+    {% endif %}
+
+    <br>
+    <form name ="registration" action="http://localhost:5000/register" method="post" onSubmit="return formValidation();">
+
+    <label class="textoBlanco" for="username"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="username" id="username" required>
+
+    <label class="textoBlanco" for="password"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="password" id="password" onChange="meter_update(this.value);" required>
+
+    <meter max="4" id="passwordStrength"></meter>
+    <p id="passwordStrengthText"></p>
+
+    <label class="textoBlanco" for="password2"><b>Repeat Password</b></label>
+    <input type="password" placeholder="Enter Password Again" name="password2" id="password2" required>
+  
+    <label class="textoBlanco" for="email"><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="email" id="email" required>
+
+    <label class="textoBlanco" for="creditCard"><b>Credit Card</b></label>
+    <input type="text" placeholder="Enter Credit Card" name="creditCard" id="creditCard" required>
+
+    <label class="textoBlanco" for="address"><b>Address</b></label>
+    <input type="text" placeholder="Enter Address" name="address" id="address" required>
+      
+
+    <button class="registerButton" type="submit" class="registerbtn" >Register</button>
+    </form>
+
+      <br>
+      <br>
+      <hr>
+      <br>
+      <br>
+    <div class="container signin">
+      <p class="textoBlanco" >Already have an account? <a href="../login">Sign in</a>.</p>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+<!--
+</body>
+
+</html>
+-->
