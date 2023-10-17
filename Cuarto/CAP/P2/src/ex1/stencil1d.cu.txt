@@ -1,0 +1,155 @@
+#include <cuda.h>
+#include <cuda_runtime.h>
+#include <stdio.h>
+#include <time.h>
+#include <sys/time.h>
+#include <stdlib.h>
+
+#define RADIUS 3
+#define BLOCK_SIZE 512 // 512
+// Generate random values for an array
+int random_ints(int *a, int N)
+{
+   int i;
+   for (i = 0; i < N; i++)
+       a[i] = rand() % 100;
+   return 0;
+}
+
+
+
+__global__ void stencil_1d_gpu(int *in, int *out)
+{
+    __shared__ int temp[BLOCK_SIZE + 2 * RADIUS];
+    int gindex = threadIdx.x + blockIdx.x * blockDim.x;
+    int lindex = threadIdx.x + RADIUS;
+
+    // Read input elements into shared memory
+    temp[lindex] = in[gindex];
+    if (threadIdx.x < RADIUS && gindex>RADIUS && gindex+BLOCK_SIZE > sizeof(in)-1)
+    {
+        temp[lindex - RADIUS] = in[gindex - RADIUS];
+        temp[lindex + BLOCK_SIZE] = in[gindex + BLOCK_SIZE];
+    }
+
+    // Synchronize (ensure all the data is available)
+    __syncthreads();
+
+    // Apply the stencil
+    int result = 0;
+    for (int offset = -RADIUS; offset <= RADIUS; offset++)
+        result += temp[lindex + offset];
+    
+    // Store the result
+    out[gindex] = result;
+}
+
+void stencil_1d_cpu(int *in, int *out, int N)
+{
+    for (int i = RADIUS; i < N + RADIUS; i++)
+    {
+        int result = 0;
+        for (int offset = -RADIUS; offset <= RADIUS; offset++)
+            result += in[i + offset];
+        out[i - RADIUS] = result;
+    }
+
+}
+
+
+
+int gpu_time(int b, int N, double * time)
+{
+    int *in;     // host copies
+    int *out;
+    int *d_in, *d_out; // device copies
+    int size = N * sizeof(int);
+    // start and end of gettimeofday
+    struct timeval  tv1, tv2;
+    double timev = 0;
+
+
+
+    // Alloc space for device copies of a, b, c
+    cudaMalloc((void **)&d_in, size);
+    cudaMalloc((void **)&d_out, size);
+
+    // Alloc space for host copies of a, b, c and setup input values
+    in = (int *)malloc(size);
+    random_ints(in, N);
+    out = (int *)malloc(size);
+
+    gettimeofday(&tv1, NULL);
+ 
+    // Copy input to device
+    cudaMemcpy(d_in, in, size, cudaMemcpyHostToDevice);
+    stencil_1d_gpu<<<b, BLOCK_SIZE>>>(d_in, d_out); // Cuantos blocks ?? Es la pregunta 3 hay que buscar el óptimo
+    // Copy result back to host
+    cudaMemcpy(d_out, out, size, cudaMemcpyHostToDevice);
+ 
+    gettimeofday(&tv2, NULL);
+ 
+    timev = (double) (tv2.tv_usec - tv1.tv_usec) / 1000000 + (double) (tv2.tv_sec - tv1.tv_sec);
+
+    // Cleanup
+    free(in);
+    free(out);
+    cudaFree(d_in);
+    cudaFree(d_out);
+
+    // Return time as out 
+    *time = timev;
+ 
+    return 0;
+}
+
+int cpu_time(int b, int N, double * time)
+{
+    int *in;     // host copies
+    int *out;
+    int size = N * sizeof(int);
+    // start and end of gettimeofday
+    struct timeval  tv1, tv2;
+    double timeval = 0;
+
+    // Alloc space for host copies of a, b, c and setup input values
+    in = (int *)malloc(size);
+    random_ints(in, N);
+    out = (int *)malloc(size);
+
+    // Launch add() kernel on GPU with N threads
+    gettimeofday(&tv1, NULL);
+ 
+    stencil_1d_cpu(in, out, N);
+ 
+    gettimeofday(&tv2, NULL);
+    timeval =  (double) (tv2.tv_usec - tv1.tv_usec) / 1000000 + (double) (tv2.tv_sec - tv1.tv_sec);
+    // Cleanup
+    free(in);
+    free(out);
+
+    // Return time as out 
+    *time = timeval;
+    return 0;
+}
+
+// #define N 512
+int main(int argc, char **argv)
+{
+    // b (number of blocks) and N (array size) as a parameter
+    int N = 512;
+    int b =(N + BLOCK_SIZE-1)/BLOCK_SIZE;
+    double gt = 0;
+    double ct = 0;
+    if (argc > 1){
+        N = atoi(argv[1]);
+        b = (N + BLOCK_SIZE-1)/BLOCK_SIZE;
+    }
+    // Get gpu time
+    gpu_time(b, N, &gt);
+    // Get cpu time
+    cpu_time(b, N, &ct);
+    // Print results
+    printf("%f %f\n", gt, ct);
+    return 0;
+}

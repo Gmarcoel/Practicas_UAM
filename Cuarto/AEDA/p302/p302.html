@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module p302</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>p302</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/guille/UAM/4.1/AEDA/P3/p302.py">/home/guille/UAM/4.1/AEDA/P3/p302.py</a></font></td></tr></table>
+    <p><tt>ALGORITMIA&nbsp;Y&nbsp;ESTRUCTURAS&nbsp;DE&nbsp;DATOS&nbsp;AVANZADAS<br>
+&nbsp;<br>
+Group&nbsp;02<br>
+&nbsp;<br>
+Practice&nbsp;3n<br>
+Authors:<br>
+&nbsp;<br>
+*Daniela&nbsp;Varela&nbsp;Sánchez*<br>
+&nbsp;<br>
+*Guillermo&nbsp;Martín-Coello&nbsp;Juárez*</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="itertools.html">itertools</a><br>
+</td><td width="25%" valign=top><a href="numpy.html">numpy</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-edit_distance"><strong>edit_distance</strong></a>(str_1: str, str_2: str) -&gt; int</dt><dd><tt>Returns&nbsp;the&nbsp;edit&nbsp;distance&nbsp;between&nbsp;the&nbsp;two&nbsp;strings&nbsp;str_1&nbsp;and&nbsp;str_2.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;param&nbsp;str_1:&nbsp;First&nbsp;string<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;param&nbsp;str_2:&nbsp;Second&nbsp;string<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return:&nbsp;Edit&nbsp;distance&nbsp;between&nbsp;str_1&nbsp;and&nbsp;str_2</tt></dd></dl>
+ <dl><dt><a name="-max_common_subsequence"><strong>max_common_subsequence</strong></a>(str_1: str, str_2: str) -&gt; str</dt><dd><tt>Returns&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;longest&nbsp;subsequence&nbsp;common&nbsp;to&nbsp;str_1&nbsp;and&nbsp;str_2,&nbsp;even&nbsp;is&nbsp;not&nbsp;contiguous.&nbsp;The&nbsp;function<br>
+should&nbsp;use&nbsp;as&nbsp;little&nbsp;memory&nbsp;as&nbsp;possible.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;param&nbsp;str_1:&nbsp;First&nbsp;string<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;param&nbsp;str_2:&nbsp;Second&nbsp;string<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return:&nbsp;Max&nbsp;common&nbsp;subsequence</tt></dd></dl>
+ <dl><dt><a name="-max_subsequence_length"><strong>max_subsequence_length</strong></a>(str_1: str, str_2: str) -&gt; int</dt><dd><tt>Returns&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;longest&nbsp;subsequence&nbsp;common&nbsp;to&nbsp;str_1&nbsp;and&nbsp;str_2,&nbsp;even&nbsp;is&nbsp;not&nbsp;contiguous.&nbsp;The&nbsp;function<br>
+should&nbsp;use&nbsp;as&nbsp;little&nbsp;memory&nbsp;as&nbsp;possible.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;param&nbsp;str_1:&nbsp;First&nbsp;string<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;param&nbsp;str_2:&nbsp;Second&nbsp;string<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return:&nbsp;Length&nbsp;of&nbsp;the&nbsp;longest&nbsp;subsequence&nbsp;common&nbsp;to&nbsp;str_1&nbsp;and&nbsp;str_2</tt></dd></dl>
+ <dl><dt><a name="-min_mult_matrix"><strong>min_mult_matrix</strong></a>(l_dims: List[int]) -&gt; int</dt><dd><tt>Returns&nbsp;the&nbsp;minimal&nbsp;number&nbsp;of&nbsp;multiplications&nbsp;necessary&nbsp;to&nbsp;multiply&nbsp;n&nbsp;matrices&nbsp;whose&nbsp;dimensions&nbsp;are&nbsp;contained<br>
+in&nbsp;the&nbsp;list&nbsp;l_dims&nbsp;with&nbsp;n+1&nbsp;elements:&nbsp;the&nbsp;first&nbsp;element&nbsp;is&nbsp;the&nbsp;number&nbsp;of&nbsp;rows&nbsp;of&nbsp;the&nbsp;first&nbsp;matrix,&nbsp;and&nbsp;the&nbsp;others&nbsp;are<br>
+the&nbsp;number&nbsp;of&nbsp;columns&nbsp;of&nbsp;the&nbsp;n&nbsp;matrices.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;param&nbsp;l_dims:&nbsp;List&nbsp;of&nbsp;dimensions&nbsp;of&nbsp;the&nbsp;matrices<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return:&nbsp;Minimal&nbsp;number&nbsp;of&nbsp;multiplications</tt></dd></dl>
+ <dl><dt><a name="-pivot5"><strong>pivot5</strong></a>(t: numpy.ndarray) -&gt; int</dt><dd><tt>that&nbsp;returns&nbsp;the&nbsp;"pivot&nbsp;5"&nbsp;of&nbsp;the&nbsp;array&nbsp;t&nbsp;according&nbsp;to&nbsp;the&nbsp;procedure&nbsp;<br>
+"median&nbsp;of&nbsp;means&nbsp;of&nbsp;5&nbsp;elements"&nbsp;and&nbsp;calling&nbsp;to&nbsp;the&nbsp;function&nbsp;qsel5_nr&nbsp;<br>
+defined&nbsp;below.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;param&nbsp;t:&nbsp;Array&nbsp;of&nbsp;elements&nbsp;to&nbsp;be&nbsp;distributed<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return:&nbsp;Index&nbsp;of&nbsp;the&nbsp;pivot</tt></dd></dl>
+ <dl><dt><a name="-qsel"><strong>qsel</strong></a>(t: numpy.ndarray, k: int) -&gt; Optional[int]</dt><dd><tt>recursively&nbsp;apply&nbsp;the&nbsp;QuickSelect&nbsp;algorithm&nbsp;using&nbsp;the&nbsp;split&nbsp;function&nbsp;above&nbsp;<br>
+and&nbsp;return&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;element&nbsp;to&nbsp;occupy&nbsp;index&nbsp;k&nbsp;in&nbsp;an&nbsp;order&nbsp;of&nbsp;t&nbsp;if&nbsp;that&nbsp;<br>
+element&nbsp;exists&nbsp;and&nbsp;None&nbsp;if&nbsp;not.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;param&nbsp;t:&nbsp;Array&nbsp;of&nbsp;elements&nbsp;to&nbsp;be&nbsp;distributed<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;param&nbsp;k:&nbsp;Index&nbsp;of&nbsp;the&nbsp;element&nbsp;to&nbsp;be&nbsp;returned<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return:&nbsp;Value&nbsp;of&nbsp;the&nbsp;element&nbsp;to&nbsp;occupy&nbsp;index&nbsp;k&nbsp;or&nbsp;None</tt></dd></dl>
+ <dl><dt><a name="-qsel5_nr"><strong>qsel5_nr</strong></a>(t: numpy.ndarray, k: int) -&gt; Optional[int]</dt><dd><tt>which&nbsp;returns&nbsp;the&nbsp;element&nbsp;in&nbsp;the&nbsp;index&nbsp;k&nbsp;of&nbsp;an&nbsp;order&nbsp;of&nbsp;t&nbsp;using&nbsp;<br>
+the&nbsp;pivot5&nbsp;functions,&nbsp;split_pivot&nbsp;above.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;param&nbsp;t:&nbsp;Array&nbsp;of&nbsp;elements&nbsp;to&nbsp;be&nbsp;distributed<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;param&nbsp;k:&nbsp;Index&nbsp;of&nbsp;the&nbsp;element&nbsp;to&nbsp;be&nbsp;returned<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return:&nbsp;Value&nbsp;of&nbsp;the&nbsp;element&nbsp;to&nbsp;occupy&nbsp;index&nbsp;k&nbsp;or&nbsp;None</tt></dd></dl>
+ <dl><dt><a name="-qsel_nr"><strong>qsel_nr</strong></a>(t: numpy.ndarray, k: int) -&gt; Optional[int]</dt><dd><tt>Apply&nbsp;the&nbsp;QuickSelect&nbsp;algorithm&nbsp;without&nbsp;recursion&nbsp;using&nbsp;the&nbsp;split&nbsp;function&nbsp;above&nbsp;<br>
+and&nbsp;return&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;element&nbsp;to&nbsp;occupy&nbsp;index&nbsp;k&nbsp;in&nbsp;an&nbsp;order&nbsp;of&nbsp;t&nbsp;if&nbsp;that&nbsp;<br>
+element&nbsp;exists&nbsp;and&nbsp;None&nbsp;if&nbsp;not.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;param&nbsp;t:&nbsp;Array&nbsp;of&nbsp;elements&nbsp;to&nbsp;be&nbsp;distributed<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;param&nbsp;k:&nbsp;Index&nbsp;of&nbsp;the&nbsp;element&nbsp;to&nbsp;be&nbsp;returned<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return:&nbsp;Value&nbsp;of&nbsp;the&nbsp;element&nbsp;to&nbsp;occupy&nbsp;index&nbsp;k&nbsp;or&nbsp;None</tt></dd></dl>
+ <dl><dt><a name="-qsort_5"><strong>qsort_5</strong></a>(t: numpy.ndarray) -&gt; numpy.ndarray</dt><dd><tt>Use&nbsp;the&nbsp;above&nbsp;functions&nbsp;split_pivot,&nbsp;pivot_5&nbsp;to&nbsp;return&nbsp;an&nbsp;order&nbsp;of&nbsp;Table&nbsp;T.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;param&nbsp;t:&nbsp;Array&nbsp;of&nbsp;elements&nbsp;to&nbsp;be&nbsp;distributed<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return:&nbsp;Ordered&nbsp;array</tt></dd></dl>
+ <dl><dt><a name="-split"><strong>split</strong></a>(t: numpy.ndarray) -&gt; Tuple[numpy.ndarray, int, numpy.ndarray]</dt><dd><tt>Distributes&nbsp;the&nbsp;elements&nbsp;of&nbsp;t&nbsp;between&nbsp;two&nbsp;arrays&nbsp;with&nbsp;the&nbsp;elements&nbsp;less&nbsp;and&nbsp;greater&nbsp;<br>
+than&nbsp;t[0]&nbsp;and&nbsp;returns&nbsp;a&nbsp;tuple&nbsp;with&nbsp;the&nbsp;minor&nbsp;elements,&nbsp;the&nbsp;element&nbsp;t[0]&nbsp;and&nbsp;the&nbsp;major&nbsp;elements<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;param&nbsp;t:&nbsp;Array&nbsp;of&nbsp;elements&nbsp;to&nbsp;be&nbsp;distributed<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return:&nbsp;Tuple&nbsp;including&nbsp;the&nbsp;minor&nbsp;elements,&nbsp;the&nbsp;element&nbsp;t[0]&nbsp;and&nbsp;the&nbsp;major&nbsp;elements</tt></dd></dl>
+ <dl><dt><a name="-split_pivot"><strong>split_pivot</strong></a>(t: numpy.ndarray, mid: int) -&gt; Tuple[numpy.ndarray, int, numpy.ndarray]</dt><dd><tt>Split&nbsp;function&nbsp;that&nbsp;uses&nbsp;the&nbsp;mid&nbsp;value&nbsp;to&nbsp;divide&nbsp;t.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;param&nbsp;t:&nbsp;Array&nbsp;of&nbsp;elements&nbsp;to&nbsp;be&nbsp;distributed<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;param&nbsp;mid:&nbsp;The&nbsp;element&nbsp;to&nbsp;be&nbsp;used&nbsp;as&nbsp;pivot<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return:&nbsp;Tuple&nbsp;including&nbsp;the&nbsp;minor&nbsp;elements,&nbsp;the&nbsp;element&nbsp;t[mid]&nbsp;and&nbsp;the&nbsp;major&nbsp;elements</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>Callable</strong> = typing.Callable<br>
+<strong>Dict</strong> = typing.Dict<br>
+<strong>Iterable</strong> = typing.Iterable<br>
+<strong>List</strong> = typing.List<br>
+<strong>Tuple</strong> = typing.Tuple<br>
+<strong>Union</strong> = typing.Union</td></tr></table>
+</body></html>

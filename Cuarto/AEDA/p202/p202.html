@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>p202 API documentation</title>
+<meta name="description" content="ALGORITMIA Y ESTRUCTURAS DE DATOS AVANZADAS …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>p202</code></h1>
+</header>
+<section id="section-intro">
+<p>ALGORITMIA Y ESTRUCTURAS DE DATOS AVANZADAS</p>
+<p>Group 02</p>
+<p>Practice 2</p>
+<p>Authors:</p>
+<p><em>Daniela Varela Sánchez</em></p>
+<p><em>Guillermo Martín-Coello Juárez</em></p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+ALGORITMIA Y ESTRUCTURAS DE DATOS AVANZADAS\n
+Group 02\n
+Practice 2\n
+Authors:\n
+\a\a\a*Daniela Varela Sánchez*\n
+\a\a\a*Guillermo Martín-Coello Juárez*\n
+&#34;&#34;&#34;
+
+import numpy as np
+import itertools
+from typing import List, Dict, Callable, Iterable
+
+# I. Disjoint sets and conected components
+########################################################################################
+def init_cd(n: int) -&gt; np.ndarray:
+    &#34;&#34;&#34;
+    Returns an array with values -1 in the positions {0,1,...,n-1}.
+    \n\tparam n: Size of array
+    \n\t
+    \n\treturn: Initialized array with values -1
+    &#34;&#34;&#34;
+    if not n or n &lt;= 0:
+        return np.full(1,-1, int)
+    return np.full(n,-1, int)
+
+
+def union(rep_1: int, rep_2: int, p_set: np.array) -&gt; int:
+    &#34;&#34;&#34;
+    Returns the representative of the set obtained with the rank-union of the sets represented by the indices rep_1
+    and rep_2 in the disjoint set structure represented by the array p_set
+    \n\tparam rep_1: Index of the representative of the first set
+    \n\tparam rep_2: Index of the representative of the second set
+    \n\tparam p_set: Disjoint set structure
+    \n\t
+    \n\treturn: Representative of the set obtained with the rank-union of the sets represented by the indices rep_1
+    &#34;&#34;&#34;
+    if p_set[rep_1] &lt; p_set[rep_2]:
+        p_set[rep_2] = rep_1
+        return rep_1
+    elif p_set[rep_1] &gt; p_set[rep_2]:
+        p_set[rep_1] = rep_2
+        return rep_2
+    else:
+        p_set[rep_2] = rep_1
+        p_set[rep_1] -= 1
+        return rep_1
+&#34;&#34;&#34;
+    if p_set[rep_1-1] &lt; p_set[rep_2-1]:
+        p_set[rep_2-1] = rep_1
+        return rep_1
+    elif p_set[rep_1-1] &gt; p_set[rep_2-1]:
+        p_set[rep_1-1] = rep_2
+        return rep_2
+    else:
+        p_set[rep_2-1] = rep_1
+        p_set[rep_1-1] -= 1
+        return rep_1
+&#34;&#34;&#34;
+
+def find(ind: int, p_set: np.ndarray) -&gt; int:
+    &#34;&#34;&#34;
+    Returns the representative of the element of index ind in the disjoint set structure p_set carrying out path
+    compression.
+    \n\tparam ind: Index of the element
+    \n\tparam p_set: Disjoint set structure
+    \n\t
+    \n\treturn: Representative of the element of index ind in the disjoint set structure p_set carrying out path
+    &#34;&#34;&#34;
+    while p_set[ind] &gt;= 0:
+        ind = p_set[ind]
+    return ind
+
+
+def cd_2_dict(p_set: np.array) -&gt; Dict:
+    &#34;&#34;&#34;
+    Returns a python dictionary in which the keys are the representatives of the sets, and where the value associated
+    to a key u is a list with the elements of the set represented by u (oncluding u itself).
+    \n\tparam p_set: Disjoint set structure
+    \n\t
+    \n\treturn: Dictionary with the connected components
+    &#34;&#34;&#34;
+    d = {}
+    for i in range(len(p_set)):
+        rep = find(i, p_set)
+        if rep in d:
+            d[rep].append(i)
+        else:
+            d[rep] = [i]
+    return d
+
+# I-B Disjoint sets and connected components
+def ccs(n: int, l: List) -&gt; Dict:
+    &#34;&#34;&#34;
+    Returns the connected components of a graph. The function will initialized a disjoint set structure with a set per
+    node, will run through the edges of the graph and if the two extrema of the edge belong to different sets will join
+    them. When all the edges have been processed, the function will convert the structure into a dictionary and return it.
+    \n\tparam n: Number of nodes
+    \n\tparam l: List of edges
+    \n\t
+    \n\treturn: Dictionary with the connected components
+    &#34;&#34;&#34;
+    # Initialize disjoint set structure
+    p_set = init_cd(n)
+    for edge in l:
+        # Join of each edge
+        union(find(edge[0],p_set), find(edge[1],p_set), p_set)
+    return cd_2_dict(p_set)
+
+
+# II. The Traveling Salesman Problem
+########################################################################################
+
+# II-A Nearest neighbors algorithm
+def dist_matrix(n_nodes: int, w_max=10)-&gt; np.ndarray:
+    &#34;&#34;&#34;
+    Generates the distance matrix for a graph of n cities; distances are integers with a maxium value w_max. Keep in
+    mind that the matrix must be symmetric and have zeros on the diagonal. For the generation you can use numpy
+    functions such as np.random.randint of fill_diagonal
+    \n\tparam n_nodes: Number of nodes
+    \n\tparam w_max: Maximum weight
+    \n\t
+    \n\treturn: Distance matrix
+    &#34;&#34;&#34;
+    # np.random.randint(low, high, (rows, columns))
+    matrix = np.random.randint(1, w_max, (n_nodes, n_nodes))
+    np.fill_diagonal(matrix, 0)
+    # make symmetric
+    matrix = (matrix + matrix.T) // 2
+
+    return matrix
+
+def greedy_tsp(dist_m: np.ndarray, node_ini=0)-&gt; List:
+    &#34;&#34;&#34;
+    Receives the distance matrix and returns the circuit given the initial node. The result must be a list of integers
+    between 0 and n-1, where n is the number of nodes.
+    \n\tparam dist_m: Distance matrix
+    \n\tparam node_ini: Initial node
+    \n\t
+    \n\treturn: Circuit
+    &#34;&#34;&#34;
+    num_cities = dist_m.shape[0]
+    circuit = [node_ini]
+    while len(circuit) &lt; num_cities:
+        current_city = circuit[-1]
+        # sort cities in ascending distance from current
+        options = list( np.argsort(dist_m[ current_city ]) )
+        # add first city in sorted list not visited yet
+        for city in options:
+            if city not in circuit:
+                circuit.append(city)
+                break
+    return circuit + [node_ini]
+
+
+def len_circuit(circuit: List, dist_m: np.ndarray)-&gt; int:
+    &#34;&#34;&#34;
+    that receives the circuit and the distance matrix and returns the length of the circuit.
+    \n\tparam circuit: Circuit
+    \n\tparam dist_m: Distance matrix
+    \n\t
+    \n\treturn: Length of the circuit
+    &#34;&#34;&#34;
+    length = 0
+    for i in range(len(circuit)-1):
+        length += dist_m[circuit[i]][circuit[i+1]]
+    return length
+
+def repeated_greedy_tsp(dist_m: np.ndarray)-&gt; List:
+    &#34;&#34;&#34;
+    Trick to improve the result of the algorithm is to apply the function greedy_tsp starting with all
+    the nodes, and return the shortest circuit. Write a function
+    \n\tparam dist_m: Distance matrix
+    \n\t
+    \n\treturn: Circuit
+    &#34;&#34;&#34;
+    circuits = []
+    for i in range(dist_m.shape[0]):
+        circuits.append(greedy_tsp(dist_m, i))
+    lengths = [len_circuit(circuit, dist_m) for circuit in circuits]
+    return circuits[np.argmin(lengths)]
+
+def exhaustive_greedy_tsp(dist_m: np.ndarray)-&gt; List:
+    &#34;&#34;&#34;
+    Implements this idea using the itertools library. Among the iteration functions of the library, there is the
+    function permutations(iterable, r=None), that returns an iterable that produces all the permutations of length r
+    in lexicographic order. By detfault, r is the length of the iterable passed as a parameter, so all the permitations are
+    generated.
+    \n\tparam dist_m: Distance matrix
+    \n\t
+    \n\treturn: Circuit
+    &#34;&#34;&#34;
+
+    circuits = []
+    for perm in itertools.permutations(range(1, dist_m.shape[0])):
+        circuits.append([0] + list(perm) + [0])
+    lengths = [len_circuit(circuit, dist_m) for circuit in circuits]
+    return circuits[np.argmin(lengths)]
+
+
+# Funciones para hacer que el test disfuncional funcione
+def connected_comps(n: int, l: List) -&gt; Dict:
+    return ccs(n, l)
+
+def exhaustive_tsp(dist_m: np.ndarray)-&gt; List:
+    return exhaustive_greedy_tsp(dist_m)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="p202.ccs"><code class="name flex">
+<span>def <span class="ident">ccs</span></span>(<span>n: int, l: List) ‑> Dict</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns the connected components of a graph. The function will initialized a disjoint set structure with a set per
+node, will run through the edges of the graph and if the two extrema of the edge belong to different sets will join
+them. When all the edges have been processed, the function will convert the structure into a dictionary and return it.</p>
+<pre><code>param n: Number of nodes
+
+param l: List of edges
+
+
+
+return: Dictionary with the connected components
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def ccs(n: int, l: List) -&gt; Dict:
+    &#34;&#34;&#34;
+    Returns the connected components of a graph. The function will initialized a disjoint set structure with a set per
+    node, will run through the edges of the graph and if the two extrema of the edge belong to different sets will join
+    them. When all the edges have been processed, the function will convert the structure into a dictionary and return it.
+    \n\tparam n: Number of nodes
+    \n\tparam l: List of edges
+    \n\t
+    \n\treturn: Dictionary with the connected components
+    &#34;&#34;&#34;
+    # Initialize disjoint set structure
+    p_set = init_cd(n)
+    for edge in l:
+        # Join of each edge
+        union(find(edge[0],p_set), find(edge[1],p_set), p_set)
+    return cd_2_dict(p_set)</code></pre>
+</details>
+</dd>
+<dt id="p202.cd_2_dict"><code class="name flex">
+<span>def <span class="ident">cd_2_dict</span></span>(<span>p_set: <built-in function array>) ‑> Dict</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns a python dictionary in which the keys are the representatives of the sets, and where the value associated
+to a key u is a list with the elements of the set represented by u (oncluding u itself).</p>
+<pre><code>param p_set: Disjoint set structure
+
+
+
+return: Dictionary with the connected components
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def cd_2_dict(p_set: np.array) -&gt; Dict:
+    &#34;&#34;&#34;
+    Returns a python dictionary in which the keys are the representatives of the sets, and where the value associated
+    to a key u is a list with the elements of the set represented by u (oncluding u itself).
+    \n\tparam p_set: Disjoint set structure
+    \n\t
+    \n\treturn: Dictionary with the connected components
+    &#34;&#34;&#34;
+    d = {}
+    for i in range(len(p_set)):
+        rep = find(i, p_set)
+        if rep in d:
+            d[rep].append(i)
+        else:
+            d[rep] = [i]
+    return d</code></pre>
+</details>
+</dd>
+<dt id="p202.connected_comps"><code class="name flex">
+<span>def <span class="ident">connected_comps</span></span>(<span>n: int, l: List) ‑> Dict</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def connected_comps(n: int, l: List) -&gt; Dict:
+    return ccs(n, l)</code></pre>
+</details>
+</dd>
+<dt id="p202.dist_matrix"><code class="name flex">
+<span>def <span class="ident">dist_matrix</span></span>(<span>n_nodes: int, w_max=10) ‑> numpy.ndarray</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generates the distance matrix for a graph of n cities; distances are integers with a maxium value w_max. Keep in
+mind that the matrix must be symmetric and have zeros on the diagonal. For the generation you can use numpy
+functions such as np.random.randint of fill_diagonal</p>
+<pre><code>param n_nodes: Number of nodes
+
+param w_max: Maximum weight
+
+
+
+return: Distance matrix
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def dist_matrix(n_nodes: int, w_max=10)-&gt; np.ndarray:
+    &#34;&#34;&#34;
+    Generates the distance matrix for a graph of n cities; distances are integers with a maxium value w_max. Keep in
+    mind that the matrix must be symmetric and have zeros on the diagonal. For the generation you can use numpy
+    functions such as np.random.randint of fill_diagonal
+    \n\tparam n_nodes: Number of nodes
+    \n\tparam w_max: Maximum weight
+    \n\t
+    \n\treturn: Distance matrix
+    &#34;&#34;&#34;
+    # np.random.randint(low, high, (rows, columns))
+    matrix = np.random.randint(1, w_max, (n_nodes, n_nodes))
+    np.fill_diagonal(matrix, 0)
+    # make symmetric
+    matrix = (matrix + matrix.T) // 2
+
+    return matrix</code></pre>
+</details>
+</dd>
+<dt id="p202.exhaustive_greedy_tsp"><code class="name flex">
+<span>def <span class="ident">exhaustive_greedy_tsp</span></span>(<span>dist_m: numpy.ndarray) ‑> List</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Implements this idea using the itertools library. Among the iteration functions of the library, there is the
+function permutations(iterable, r=None), that returns an iterable that produces all the permutations of length r
+in lexicographic order. By detfault, r is the length of the iterable passed as a parameter, so all the permitations are
+generated.</p>
+<pre><code>param dist_m: Distance matrix
+
+
+
+return: Circuit
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def exhaustive_greedy_tsp(dist_m: np.ndarray)-&gt; List:
+    &#34;&#34;&#34;
+    Implements this idea using the itertools library. Among the iteration functions of the library, there is the
+    function permutations(iterable, r=None), that returns an iterable that produces all the permutations of length r
+    in lexicographic order. By detfault, r is the length of the iterable passed as a parameter, so all the permitations are
+    generated.
+    \n\tparam dist_m: Distance matrix
+    \n\t
+    \n\treturn: Circuit
+    &#34;&#34;&#34;
+
+    circuits = []
+    for perm in itertools.permutations(range(1, dist_m.shape[0])):
+        circuits.append([0] + list(perm) + [0])
+    lengths = [len_circuit(circuit, dist_m) for circuit in circuits]
+    return circuits[np.argmin(lengths)]</code></pre>
+</details>
+</dd>
+<dt id="p202.exhaustive_tsp"><code class="name flex">
+<span>def <span class="ident">exhaustive_tsp</span></span>(<span>dist_m: numpy.ndarray) ‑> List</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def exhaustive_tsp(dist_m: np.ndarray)-&gt; List:
+    return exhaustive_greedy_tsp(dist_m)</code></pre>
+</details>
+</dd>
+<dt id="p202.find"><code class="name flex">
+<span>def <span class="ident">find</span></span>(<span>ind: int, p_set: numpy.ndarray) ‑> int</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns the representative of the element of index ind in the disjoint set structure p_set carrying out path
+compression.</p>
+<pre><code>param ind: Index of the element
+
+param p_set: Disjoint set structure
+
+
+
+return: Representative of the element of index ind in the disjoint set structure p_set carrying out path
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def find(ind: int, p_set: np.ndarray) -&gt; int:
+    &#34;&#34;&#34;
+    Returns the representative of the element of index ind in the disjoint set structure p_set carrying out path
+    compression.
+    \n\tparam ind: Index of the element
+    \n\tparam p_set: Disjoint set structure
+    \n\t
+    \n\treturn: Representative of the element of index ind in the disjoint set structure p_set carrying out path
+    &#34;&#34;&#34;
+    while p_set[ind] &gt;= 0:
+        ind = p_set[ind]
+    return ind</code></pre>
+</details>
+</dd>
+<dt id="p202.greedy_tsp"><code class="name flex">
+<span>def <span class="ident">greedy_tsp</span></span>(<span>dist_m: numpy.ndarray, node_ini=0) ‑> List</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Receives the distance matrix and returns the circuit given the initial node. The result must be a list of integers
+between 0 and n-1, where n is the number of nodes.</p>
+<pre><code>param dist_m: Distance matrix
+
+param node_ini: Initial node
+
+
+
+return: Circuit
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def greedy_tsp(dist_m: np.ndarray, node_ini=0)-&gt; List:
+    &#34;&#34;&#34;
+    Receives the distance matrix and returns the circuit given the initial node. The result must be a list of integers
+    between 0 and n-1, where n is the number of nodes.
+    \n\tparam dist_m: Distance matrix
+    \n\tparam node_ini: Initial node
+    \n\t
+    \n\treturn: Circuit
+    &#34;&#34;&#34;
+    num_cities = dist_m.shape[0]
+    circuit = [node_ini]
+    while len(circuit) &lt; num_cities:
+        current_city = circuit[-1]
+        # sort cities in ascending distance from current
+        options = list( np.argsort(dist_m[ current_city ]) )
+        # add first city in sorted list not visited yet
+        for city in options:
+            if city not in circuit:
+                circuit.append(city)
+                break
+    return circuit + [node_ini]</code></pre>
+</details>
+</dd>
+<dt id="p202.init_cd"><code class="name flex">
+<span>def <span class="ident">init_cd</span></span>(<span>n: int) ‑> numpy.ndarray</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns an array with values -1 in the positions {0,1,&hellip;,n-1}.</p>
+<pre><code>param n: Size of array
+
+
+
+return: Initialized array with values -1
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def init_cd(n: int) -&gt; np.ndarray:
+    &#34;&#34;&#34;
+    Returns an array with values -1 in the positions {0,1,...,n-1}.
+    \n\tparam n: Size of array
+    \n\t
+    \n\treturn: Initialized array with values -1
+    &#34;&#34;&#34;
+    if not n or n &lt;= 0:
+        return np.full(1,-1, int)
+    return np.full(n,-1, int)</code></pre>
+</details>
+</dd>
+<dt id="p202.len_circuit"><code class="name flex">
+<span>def <span class="ident">len_circuit</span></span>(<span>circuit: List, dist_m: numpy.ndarray) ‑> int</span>
+</code></dt>
+<dd>
+<div class="desc"><p>that receives the circuit and the distance matrix and returns the length of the circuit.</p>
+<pre><code>param circuit: Circuit
+
+param dist_m: Distance matrix
+
+
+
+return: Length of the circuit
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def len_circuit(circuit: List, dist_m: np.ndarray)-&gt; int:
+    &#34;&#34;&#34;
+    that receives the circuit and the distance matrix and returns the length of the circuit.
+    \n\tparam circuit: Circuit
+    \n\tparam dist_m: Distance matrix
+    \n\t
+    \n\treturn: Length of the circuit
+    &#34;&#34;&#34;
+    length = 0
+    for i in range(len(circuit)-1):
+        length += dist_m[circuit[i]][circuit[i+1]]
+    return length</code></pre>
+</details>
+</dd>
+<dt id="p202.repeated_greedy_tsp"><code class="name flex">
+<span>def <span class="ident">repeated_greedy_tsp</span></span>(<span>dist_m: numpy.ndarray) ‑> List</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Trick to improve the result of the algorithm is to apply the function greedy_tsp starting with all
+the nodes, and return the shortest circuit. Write a function</p>
+<pre><code>param dist_m: Distance matrix
+
+
+
+return: Circuit
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def repeated_greedy_tsp(dist_m: np.ndarray)-&gt; List:
+    &#34;&#34;&#34;
+    Trick to improve the result of the algorithm is to apply the function greedy_tsp starting with all
+    the nodes, and return the shortest circuit. Write a function
+    \n\tparam dist_m: Distance matrix
+    \n\t
+    \n\treturn: Circuit
+    &#34;&#34;&#34;
+    circuits = []
+    for i in range(dist_m.shape[0]):
+        circuits.append(greedy_tsp(dist_m, i))
+    lengths = [len_circuit(circuit, dist_m) for circuit in circuits]
+    return circuits[np.argmin(lengths)]</code></pre>
+</details>
+</dd>
+<dt id="p202.union"><code class="name flex">
+<span>def <span class="ident">union</span></span>(<span>rep_1: int, rep_2: int, p_set: <built-in function array>) ‑> int</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns the representative of the set obtained with the rank-union of the sets represented by the indices rep_1
+and rep_2 in the disjoint set structure represented by the array p_set</p>
+<pre><code>param rep_1: Index of the representative of the first set
+
+param rep_2: Index of the representative of the second set
+
+param p_set: Disjoint set structure
+
+
+
+return: Representative of the set obtained with the rank-union of the sets represented by the indices rep_1
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def union(rep_1: int, rep_2: int, p_set: np.array) -&gt; int:
+    &#34;&#34;&#34;
+    Returns the representative of the set obtained with the rank-union of the sets represented by the indices rep_1
+    and rep_2 in the disjoint set structure represented by the array p_set
+    \n\tparam rep_1: Index of the representative of the first set
+    \n\tparam rep_2: Index of the representative of the second set
+    \n\tparam p_set: Disjoint set structure
+    \n\t
+    \n\treturn: Representative of the set obtained with the rank-union of the sets represented by the indices rep_1
+    &#34;&#34;&#34;
+    if p_set[rep_1] &lt; p_set[rep_2]:
+        p_set[rep_2] = rep_1
+        return rep_1
+    elif p_set[rep_1] &gt; p_set[rep_2]:
+        p_set[rep_1] = rep_2
+        return rep_2
+    else:
+        p_set[rep_2] = rep_1
+        p_set[rep_1] -= 1
+        return rep_1</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="p202.ccs" href="#p202.ccs">ccs</a></code></li>
+<li><code><a title="p202.cd_2_dict" href="#p202.cd_2_dict">cd_2_dict</a></code></li>
+<li><code><a title="p202.connected_comps" href="#p202.connected_comps">connected_comps</a></code></li>
+<li><code><a title="p202.dist_matrix" href="#p202.dist_matrix">dist_matrix</a></code></li>
+<li><code><a title="p202.exhaustive_greedy_tsp" href="#p202.exhaustive_greedy_tsp">exhaustive_greedy_tsp</a></code></li>
+<li><code><a title="p202.exhaustive_tsp" href="#p202.exhaustive_tsp">exhaustive_tsp</a></code></li>
+<li><code><a title="p202.find" href="#p202.find">find</a></code></li>
+<li><code><a title="p202.greedy_tsp" href="#p202.greedy_tsp">greedy_tsp</a></code></li>
+<li><code><a title="p202.init_cd" href="#p202.init_cd">init_cd</a></code></li>
+<li><code><a title="p202.len_circuit" href="#p202.len_circuit">len_circuit</a></code></li>
+<li><code><a title="p202.repeated_greedy_tsp" href="#p202.repeated_greedy_tsp">repeated_greedy_tsp</a></code></li>
+<li><code><a title="p202.union" href="#p202.union">union</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

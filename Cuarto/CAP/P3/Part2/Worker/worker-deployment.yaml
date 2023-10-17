@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: master-deployment
+  labels:
+    app: master
+spec:
+  replicas: 3 # Multiple replicas for multiple workers
+  selector:
+    matchLabels:
+      app: master
+  template:
+    metadata:
+      labels:
+        app: master
+    spec:
+      containers: # Dockerfile master container
+      - name: worker
+        image: worker
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 7077 
