@@ -1,0 +1,146 @@
+<!DOCTYPE HTML> 
+<!--
+ Ejemplo de MongoDB
+-->
+<HTML> 
+  <HEAD> 
+	  <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8"> 
+	  <TITLE>Ejemplo de MongoDB</TITLE>
+  </HEAD> 
+
+  <BODY>
+ 
+    <h2> Ejemplo de MongoDB</h2>
+
+    <!-- TODO: tabla de películas SciFi -->
+    <h3>Películas SciFi</h3>
+    <!-- Create a table with the movies inside the index 0 of "movies" with jinja2 -->
+    <table border="1">
+      <tr>
+        <th>Título</th>
+        <th>Directores</th>
+        <th>Actores</th>
+        <th>Año</th>
+      </tr>
+      {% for movie in movies[0] %}
+        <tr>
+          <td>{{ movie.title }}</td>
+          {% if movie.directors %}
+          <td>
+            <table border="1">
+            {% for director in movie.directors %}
+              <p>{{ director }}</p>
+            {% endfor %}
+            </table>
+          </td>
+          {% else %}
+            <td>No disponible</td>
+          {% endif %}
+          {% if movie.actors %}
+          <td>
+            <table border="1">
+              <details>
+              <summary>Show actors</summary>
+                {% for actor in movie.actors %}
+                  <p>{{ actor }}</p>
+                {% endfor %}
+              </details>
+            </table>
+          </td>
+          {% else %}
+            <td>No disponible</td>
+          {% endif %}
+          <td>{{ movie.year }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+
+    <!-- TODO: tabla de películas Drama -->
+    <h3>Películas Drama</h3>
+    <!-- Create a table with the movies inside the index 1 of "movies" with jinja2 -->
+    <table border="1">
+      <tr>
+        <th>Título</th>
+        <th>Director</th>
+        <th>Actores</th>
+        <th>Año</th>
+      </tr>
+      {% for movie in movies[1] %}
+        <tr>
+          <td>{{ movie.title }}</td>
+          {% if movie.directors %}
+          <td>
+            <table border="1">
+            {% for director in movie.directors %}
+              <p>{{ director }}</p>
+            {% endfor %}
+            </table>
+          </td>
+          {% else %}
+            <td>No disponible</td>
+          {% endif %}
+          {% if movie.actors %}
+          <td>
+            <table border="1">
+              <details>
+              <summary>Show actors</summary>
+            {% for actor in movie.actors %}
+              <p>{{ actor }}</p>
+            {% endfor %}
+              </details>
+            </table>
+          </td>
+          {% else %}
+            <td>No disponible</td>
+          {% endif %}
+          
+          <td>{{ movie.year }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+
+    <!-- TODO: tabla de películas JR y AB -->
+    <h3>Películas JR y AB</h3>
+    <!-- Create a table with the movies inside the index 2 of "movies" with jinja2 -->
+    <table border="1">
+      <tr>
+        <th>Título</th>
+        <th>Director</th>
+        <th>Año</th>
+      </tr>
+      {% for movie in movies[2] %}
+        <tr>
+          <td>{{ movie.title }}</td>
+          {% if movie.directors %}
+          <td>
+            <table border="1">
+            {% for director in movie.directors %}
+              <p>{{ director }}</p>
+            {% endfor %}
+            </table>
+          </td>
+          {% else %}
+            <td>No disponible</td>
+          {% endif %}
+          {% if movie.actors %}
+          <td>
+            <table border="1">
+              <details>
+              <summary>Show actors</summary>
+            {% for actor in movie.actors %}
+              <p>{{ actor }}</p>
+            {% endfor %}
+              </details>
+            </table>
+          </td>
+          {% else %}
+            <td>No disponible</td>
+          {% endif %}
+          <td>{{ movie.year }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+
+
+  </BODY>
+</HTML>

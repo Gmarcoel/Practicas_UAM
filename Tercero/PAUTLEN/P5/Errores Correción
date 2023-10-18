@@ -1,0 +1,39 @@
+ 	
+
+PRÁCTICA DE PROCESADORES DE LENGUAJE:
+
+*JAVIER WANG:  7 (-1 for each major error in the compilation of the correct alfa files)
+
+- The compilation of two if’s or two if-else does not work. (when the files are correct) (-1)
+
+-Logic operations do not work well. Please, try:  (-1)
+
+            printf a || b && c;
+
+            printf ( a || b) && c;
+
+            printf !a && b && !c;
+
+-Vectors do not work well neither (-1).
+
+Try this:
+
+            array int[3] vector1;
+
+           
+
+            vector1[0]=10;
+
+            vector1[1]=20;
+
+            vector1[2]=30;
+
+           
+
+            printf vector1[0];
+
+            printf vector1[1];
+
+            printf vector1[2];
+
+-All the errors are properly detected. 

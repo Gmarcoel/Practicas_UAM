@@ -1,0 +1,70 @@
+main
+{
+    int size, valorArray;
+	array int[5] miArray;
+	int i;
+
+	function int victoria(int arg)
+		{
+			miArray[4] = 1;
+			return arg + 1;
+		}
+	
+	i = 0;
+	size = 5;
+	
+	miArray[0] = 99;  
+	miArray[1] = 4; 
+	miArray[2] = 6;  
+	miArray[3] = 73;
+	miArray[4] = 55;
+	
+	// operando
+	i = 0;
+	
+	while((i<5)) {
+		valorArray = miArray[i];
+		miArray[i] = victoria(valorArray); 
+		i = i + 1; 
+	}
+
+	// printeando
+	i = 0;
+	while((i<size)) {
+		printf miArray[i];
+		i = i + 1; 
+	}
+
+
+
+	
+}
+
+//
+//main
+//{
+//    boolean resultado;
+//	array boolean[3] vector; 
+//
+//	function boolean or (boolean b1; boolean b2; boolean b3)
+//	{
+//	    boolean a;
+//        printf 4;
+//		a  = b1 || b2 || b3;
+//        printf 5;
+//		return a;
+//	}
+//
+//	vector[0] = false;
+//	vector[1] = true;
+//	vector[2] = false;
+//
+//	printf 2;
+//	// printf vector[0];
+//	printf 555;
+//	
+//	// resultado = or (vector[0], vector [1], vector [2]);
+//	resultado = or (false, true, false);
+//	printf resultado;	
+//	
+//}
